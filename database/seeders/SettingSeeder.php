@@ -14,11 +14,11 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         Setting::create([
-            'key'=>"brand_name",
+            'key'=>"site_name",
             'value'=>'Freshia',
         ]);
         Setting::create([
-            'key'=>"brand_logo",
+            'key'=>"site_logo",
             'value'=>'/images/logo.jpeg',
         ]);
         
