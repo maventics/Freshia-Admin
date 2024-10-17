@@ -40,7 +40,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#">
+                    <a class="nav-link menu-link" href="{{route('admin.sale.index')}}">
                         <i class="ri-price-tag-3-fill"></i> <span data-key="t-apps">Sales </span>
                     </a>
                 </li>
@@ -52,13 +52,13 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="/admin/catalog">
+                    <a class="nav-link menu-link" href="{{route('admin.catelog.index')}}">
                         <i class="ri-book-open-fill"></i> <span data-key="t-apps">Catalog </span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#">
+                    <a class="nav-link menu-link" href="{{route('admin.team.index')}}">
                         <i class="ri-team-fill"></i> <span data-key="t-apps">Team </span>
                     </a>
                 </li>

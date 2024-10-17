@@ -8,9 +8,11 @@ use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SalesController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\TeamController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -46,8 +48,24 @@ Route::middleware(['auth'])->group(function(){
     Route::post('admin/smtp-setting/store',[SettingController::class,'storeSmtpSettings'])->name('admin.smtp-setting.store');
 
     // Catalog Route
-    Route::get('admin/catalog',[CatalogController::class,'index']);
+    Route::get('admin/catalogs',[CatalogController::class,'index'])->name('admin.catelog.index');
 
-    // Category Route
-    Route::post('/admin/category/store',[CategoryController::class,'store']);
+
+    Route::controller(SalesController::class)->group(function(){
+        Route::get('admin/sales','index')->name('admin.sale.index');
+        Route::get('admin/create/sale','create')->name('admin.sale.create');
+        Route::post('admin/store/sale','store')->name('admin.sale.store');
+        Route::get('admin/edit/sale/{id}','edit')->name('admin.sale.edit');
+        Route::post('admin/update/sale/{id}','update')->name('admin.sale.update');
+        Route::delete('admin/update/sale/{id}','destroy')->name('admin.sale.destroy');
+    });
+
+    Route::controller(TeamController::class)->group(function(){
+        Route::get('admin/team','index')->name('admin.team.index');
+        Route::get('admin/create/team','create')->name('admin.team.create');
+        Route::post('admin/store/team','store')->name('admin.team.store');
+        Route::get('admin/edit/team/{id}','edit')->name('admin.team.edit');
+        Route::post('admin/update/team/{id}','update')->name('admin.team.update');
+        Route::delete('admin/update/team/{id}','destroy')->name('admin.team.destroy');
+    });
 });
