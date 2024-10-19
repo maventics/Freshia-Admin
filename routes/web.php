@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SalesController;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,9 @@ Route::middleware(['auth'])->group(function(){
 
     // Catalog Route
     Route::get('admin/catalogs',[CatalogController::class,'index'])->name('admin.catelog.index');
+    Route::get('admin/create/service',[CatalogController::class,'createService'])->name('admin.service.create');
+    Route::get('admin/create/package',[PackageController::class,'create'])->name('admin.package.create');
+    Route::get('admin/create/category',[CategoryController::class,'create'])->name('admin.category.create');
 
 
     Route::controller(SalesController::class)->group(function(){

@@ -158,14 +158,14 @@ input[type="file"] {
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="card-title mb-0">Add team member</h2>
+                            <h2 class="mb-0">Add team member</h2>
                         </div><!-- end card header -->
                         <div class="card-body form-steps">
                             <form class="vertical-navs-step">
                                 <div class="row gy-5">
                                     <div class="col-lg-4">
                                         <div class="nav flex-column custom-nav nav-pills" role="tablist" aria-orientation="vertical">
-                                            <button class="nav-link active" id="v-pills-bill-info-tab" data-bs-toggle="pill" data-bs-target="#v-pills-bill-info" type="button" role="tab" aria-controls="v-pills-bill-info" aria-selected="true">
+                                            <button class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="true">
                                                 <span class="step-title me-2">
                                                     <i class="ri-close-circle-fill step-icon me-2"></i>
                                                 </span>
@@ -177,7 +177,7 @@ input[type="file"] {
                                                 </span>
                                                 Addresses
                                             </button>
-                                            <button class="nav-link" id="v-pills-payment-tab" data-bs-toggle="pill" data-bs-target="#v-pills-payment" type="button" role="tab" aria-controls="v-pills-payment" aria-selected="false">
+                                            <button class="nav-link" id="v-pills-emergency-contacts-tab" data-bs-toggle="pill" data-bs-target="#v-pills-emergency-contacts" type="button" role="tab" aria-controls="v-pills-emergency-contacts" aria-selected="false">
                                                 <span class="step-title me-2">
                                                     <i class="ri-close-circle-fill step-icon me-2"></i>
                                                 </span>
@@ -197,7 +197,7 @@ input[type="file"] {
                                                 </span>
                                                 Location
                                             </button>
-                                            <button class="nav-link" id="v-pills-finish-tab" data-bs-toggle="pill" data-bs-target="#v-pills-finish" type="button" role="tab" aria-controls="v-pills-finish" aria-selected="false">
+                                            <button class="nav-link" id="v-pills-setting-tab" data-bs-toggle="pill" data-bs-target="#v-pills-setting" type="button" role="tab" aria-controls="v-pills-setting" aria-selected="false">
                                                 <span class="step-title me-2">
                                                     <i class="ri-close-circle-fill step-icon me-2"></i>
                                                 </span>
@@ -217,7 +217,7 @@ input[type="file"] {
                                     <div class="col-lg-8">
                                         <div class="px-lg-4">
                                             <div class="tab-content">
-                                                <div class="tab-pane fade show active" id="v-pills-bill-info" role="tabpanel" aria-labelledby="v-pills-bill-info-tab">
+                                                <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                                     <div>
                                                         <h5>Profile</h5>
                                                         <p>Manage your team members personal profile</p>
@@ -272,20 +272,28 @@ input[type="file"] {
                                                                 <input type="text" class="form-control" id="phone" placeholder="123-456-7890" required>
                                                             </div>
 
-                                                            <div class="col-6">
+                                                            {{-- <div class="col-6">
                                                                 <label for="email" class="form-label">Birth <span class="text-muted">(Optional)</span></label>
                                                                 <input type="date" class="form-control" id="email" placeholder="Enter Email">
                                                             </div>
                                                             <div class="col-6">
                                                                 <label for="email" class="form-label">Year <span class="text-muted">(Optional)</span></label>
                                                                 <input type="date" class="form-control" id="email" placeholder="Enter Email">
+                                                            </div> --}}
+                                                            <div class="col-6">
+                                                                <label for="email" class="form-label">Date of birth</label>
+                                                                <div class="input-group" style="border-radius: 40px !important;">
+                                                                    <input type="text" id="event-start-date" class="form-control flatpickr flatpickr-input" placeholder="Select date" readonly required>
+                                                                    <span class="input-group-text"><i class="ri-calendar-event-line"></i></span>
+                                                                </div>
                                                             </div>
                                                             <div class="col-12">
                                                                 <label for="email" class="form-label">Job Title</label>
                                                                 <input type="text" class="form-control" id="email" placeholder="Visible to client online">
                                                             </div>
+                                                            <hr>
                                                             <div class="col-12 mt-4">
-                                                            <h1>Employment details</h1>
+                                                            <h3>Employment details</h3>
 
                                                               <p>Manage your team members start date, and employment details</p>
                                                             </div>
@@ -425,12 +433,12 @@ input[type="file"] {
                                                             
                                                     </div>
                                                     <div class="d-flex align-items-start gap-3 mt-4">
-                                                        <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-bill-info-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to profile</button>
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-payment-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue</button>
+                                                        <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-profile-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to profile</button>
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-emergency-contacts-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue</button>
                                                     </div>
                                                 </div>
                                                 <!-- end tab pane -->
-                                                <div class="tab-pane fade" id="v-pills-payment" role="tabpanel" aria-labelledby="v-pills-payment-tab">
+                                                <div class="tab-pane fade" id="v-pills-emergency-contacts" role="tabpanel" aria-labelledby="v-pills-emergency-contacts-tab">
                                                     <div>
                                                         <h5>Emergency contacts</h5>
                                                         <p class="text-muted">Manage your client’s emergency contacts.</p>
@@ -563,8 +571,8 @@ input[type="file"] {
                                                     </div>
 
                                                     <div class="d-flex align-items-start gap-3 mt-4">
-                                                        <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-bill-address-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Emergency Contact</button>
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Location</button>
+                                                        <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-emergency-contacts-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Emergency Contact</button>
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-location-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Location</button>
                                                     </div>
                                                 </div>
 
@@ -593,13 +601,13 @@ input[type="file"] {
                                                     </div>
 
                                                     <div class="d-flex align-items-start gap-3 mt-4">
-                                                        <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-bill-address-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Services</button>
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Settings</button>
+                                                        <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-services-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Services</button>
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-location-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Settings</button>
                                                     </div>
                                                 </div>
                                                 <!-- end tab pane -->
 
-                                                <div class="tab-pane fade" id="v-pills-finish" role="tabpanel" aria-labelledby="v-pills-finish-tab">
+                                                <div class="tab-pane fade" id="v-pills-setting" role="tabpanel" aria-labelledby="v-pills-setting-tab">
                                                     {{-- <div class="text-center pt-4 pb-2">
                                                         <div>
                                                             <h5>Notifications</h5>
@@ -646,6 +654,10 @@ input[type="file"] {
 
                                                         
 
+                                                    </div>
+                                                    <div class="d-flex align-items-start gap-3 mt-4">
+                                                        <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-location-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Location</button>
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-commissions-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Commision</button>
                                                     </div>
                                                 </div>
 
@@ -708,8 +720,10 @@ input[type="file"] {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
-                                                    
+                                                    <div class="d-flex align-items-start gap-3 mt-4">
+                                                        <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-setting-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Services</button>
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Finish</button>
+                                                    </div>
                                                     
                                                 </div>
                                             </div>

@@ -114,7 +114,7 @@
                                                                         <div class="dropdown-menu">
                                                                             <a class="dropdown-item" href="{{route('admin.service.create')}}">Single serive</a>
                                                                             <a class="dropdown-item" href="{{route('admin.package.create')}}">Package</a>
-                                                                            <a class="dropdown-item" href="{{route('admin.category.create')}}">Category</a>
+                                                                            <a class="dropdown-item" href="#">Category</a>
                                                                         </div>
                                                                     </div><!-- /btn-group -->
                                                                 </div>

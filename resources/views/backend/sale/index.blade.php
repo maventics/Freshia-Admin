@@ -370,7 +370,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-2">
+                                        <div class="col-md-2" style="font-size: 12px">
                                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                                 <a class="nav-link mb-2 active" id="v-pills-daily-sales-summary-tab" data-bs-toggle="pill" href="#v-pills-daily-sales-summary" role="tab" aria-controls="v-pills-daily-sales-summary" aria-selected="true">Daily sales summary</a>
                                                 <a class="nav-link mb-2" id="v-pills-appointments-tab" data-bs-toggle="pill" href="#v-pills-appointments" role="tab" aria-controls="v-pills-appointments" aria-selected="false">Appointments</a>

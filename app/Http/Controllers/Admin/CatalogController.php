@@ -15,12 +15,10 @@ class CatalogController extends Controller
         return view('backend.catalog.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+   
+    public function createService()
     {
-        //
+        return view('backend.catalog.create-service');
     }
 
     /**
