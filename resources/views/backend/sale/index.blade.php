@@ -6,7 +6,7 @@
 
 .nav-pills {
     --vz-nav-pills-border-radius: var(--vz-border-radius);
-    --vz-nav-pills-link-active-color: #fff;
+    --vz-nav-pills-link-active-color: #292828;
     --vz-nav-pills-link-active-bg: #cad3f0;
 }
 </style>

@@ -8,6 +8,12 @@ use App\Models\Setting;
 
 class SettingController extends Controller
 {
+
+    public function index()
+    {
+        return view('backend.setting.index');
+    }
+
     public function generalSettings()
     {
         $siteName = Setting::where('key', 'site_name')->value('value');
@@ -146,4 +152,6 @@ class SettingController extends Controller
 
         return back();
     }
+
+    
 }

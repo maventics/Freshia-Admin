@@ -69,6 +69,12 @@
                     </a>
                 </li>
 
+                {{-- <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{route('admin.setting.index')}}">
+                        <i class="ri-settings-4-fill"></i> <span data-key="t-apps">Settings </span>
+                    </a>
+                </li> --}}
+
                 
                 
                 <li class="nav-item">
@@ -77,6 +83,10 @@
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarApps">
                         <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{route('admin.setting.index')}}" class="nav-link" data-key="t-calendar"> Admin Settings </a>
+                            </li>
+                            <hr class="text-light">
                             <li class="nav-item">
                                 <a href="{{route('admin.setting.general')}}" class="nav-link" data-key="t-calendar"> General Settings </a>
                             </li>

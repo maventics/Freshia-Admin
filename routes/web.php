@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SalesController;
+use App\Http\Controllers\Admin\ServiceTypeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\SettingController;
@@ -39,20 +40,37 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('admin/calendar',[CalendarController::class,'index'])->name('admin.calendar.index');
 
-    Route::get('admin/general-settings',[SettingController::class,'generalSettings'])->name('admin.setting.general');
-    Route::get('admin/privacy-policy',[SettingController::class,'PrivacyPolicy'])->name('admin.privacy-policy');
-    Route::post('admin/privacy-policy/store',[SettingController::class,'storePrivacyPolicy'])->name('admin.privacy_policy.store');
-    Route::get('admin/terms-and-conditions',[SettingController::class,'TermsAndConditions'])->name('admin.terms-and-conditions');
-    Route::post('admin/terms-and-conditions/store',[SettingController::class,'storeTermsAndConditions'])->name('admin.terms_and_conditions.store');
+    Route::controller(SettingController::class)->group(function(){
+    Route::get('admin/settings','index')->name('admin.setting.index');
+    Route::get('admin/general-settings','generalSettings')->name('admin.setting.general');
+    Route::get('admin/privacy-policy','PrivacyPolicy')->name('admin.privacy-policy');
+    Route::post('admin/privacy-policy/store','storePrivacyPolicy')->name('admin.privacy_policy.store');
+    Route::get('admin/terms-and-conditions','TermsAndConditions')->name('admin.terms-and-conditions');
+    Route::post('admin/terms-and-conditions/store','storeTermsAndConditions')->name('admin.terms_and_conditions.store');
+    Route::post('admin/site-setting/store','storeSiteSettings')->name('admin.site-setting.store');
+    Route::post('admin/smtp-setting/store','storeSmtpSettings')->name('admin.smtp-setting.store');
 
-    Route::post('admin/site-setting/store',[SettingController::class,'storeSiteSettings'])->name('admin.site-setting.store');
-    Route::post('admin/smtp-setting/store',[SettingController::class,'storeSmtpSettings'])->name('admin.smtp-setting.store');
+    
+    });
+
+    Route::controller(ServiceTypeController::class)->group(function(){
+         Route::get('admin/service-types','index')->name('admin.service-type.index');
+         Route::get('admin/create/service-type','create')->name('admin.service-type.create');
+         Route::post('admin/store/service-type','store');
+
+          Route::post('admin/store/sub-service-type','SubServiceStore')->name('admin.sub-service.store');
+        });
+        
+    
 
     // Catalog Route
     Route::get('admin/catalogs',[CatalogController::class,'index'])->name('admin.catelog.index');
     Route::get('admin/create/service',[CatalogController::class,'createService'])->name('admin.service.create');
     Route::get('admin/create/package',[PackageController::class,'create'])->name('admin.package.create');
+
+
     Route::get('admin/create/category',[CategoryController::class,'create'])->name('admin.category.create');
+    Route::post('admin/store/category',[CategoryController::class,'store'])->name('admin.category.store');
 
 
     Route::controller(SalesController::class)->group(function(){

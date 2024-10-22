@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ServiceType;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CatalogController extends Controller
 {
@@ -18,7 +20,10 @@ class CatalogController extends Controller
    
     public function createService()
     {
-        return view('backend.catalog.create-service');
+        $serviceTypes = ServiceType::with('subServiceTypes')->get();
+        $categories = Category::all();
+
+        return view('backend.catalog.create-service',compact('serviceTypes','categories'));
     }
 
     /**

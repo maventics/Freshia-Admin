@@ -174,10 +174,12 @@ input[type="file"] {
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="mb-0">New Service</h2>
+                            <h2 class="mb-0">New Service
+                                <a class="btn btn-danger float-end" href="{{route('admin.catelog.index')}}">Back</a>
+                            </h2>
                         </div><!-- end card header -->
                         <div class="card-body form-steps">
-                            <form class="vertical-navs-step">
+                            <form class="vertical-navs-step" >
                                 <div class="row gy-5">
                                     <div class="col-lg-4">
                                         <div class="nav flex-column custom-nav nav-pills" role="tablist" aria-orientation="vertical">
@@ -244,16 +246,32 @@ input[type="file"] {
                                                             </div>
 
                                                             <div class="col-sm-6">
-                                                                <label for="lastName" class="form-label">Service type</label>
-                                                                <select name="service_type" id="" class="form-select">
-                                                                    <option value=""  >Select service type</option>
+                                                                <label for="service_type" class="form-label">Service Type</label>
+                                                                <select name="service_type" class="form-select" style="margin-bottom: 20px;">
+                                                                    <option value="">Select service type</option>
+                                                                    @forelse ($serviceTypes as $service)
+                                                                        <option value="{{ $service->id }}" disabled style="font-weight: bold; font-size: 17px;">{{ $service->service_type }}</option>
+                                                                        @foreach ($service->subServiceTypes as $subService)
+                                                                            <option value="{{ $subService->id }}" style="font-size: 15px;" >{{ $subService->sub_service }}</option>
+                                                                        @endforeach
+                                                                    @empty
+                                                                        <option value="">No service types available</option>
+                                                                    @endforelse
                                                                 </select>
                                                             </div>
+                                                            
+                                                            
 
                                                             <div class="col-sm-6">
                                                                 <label for="lastName" class="form-label">Menu category</label>
                                                                 <select name="menu_category" id="" class="form-select">
                                                                     <option value=""  >Select menu category</option>
+                                                                    @forelse ($categories as $category)
+                                                                    <option value="{{ $category->id }}" style="font-size: 15px;"  >{{ $category->category }}</option>
+                                                                   
+                                                                    @empty
+                                                                        <option value="">No category available</option>
+                                                                    @endforelse
                                                                 </select>
                                                             </div>
                                                             
@@ -315,7 +333,7 @@ input[type="file"] {
                                                     </div>
 
                                                     <div class="d-flex align-items-start gap-3 mt-4">
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-team-members-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue</button>
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-team-members-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Go to Team member</button>
                                                     </div>
                                                 </div>
                                                 <!-- end tab pane -->
