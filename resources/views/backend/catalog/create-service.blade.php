@@ -179,7 +179,8 @@ input[type="file"] {
                             </h2>
                         </div><!-- end card header -->
                         <div class="card-body form-steps">
-                            <form class="vertical-navs-step" >
+                            <form class="vertical-navs-step" method="POST" action="{{route('admin.service.store')}}" enctype="multipart/form-data">
+                                @csrf
                                 <div class="row gy-5">
                                     <div class="col-lg-4">
                                         <div class="nav flex-column custom-nav nav-pills" role="tablist" aria-orientation="vertical">
@@ -227,6 +228,12 @@ input[type="file"] {
                                                 </span>
                                                 Setting
                                             </button>
+                                            <button class="nav-link" id="v-pills-finish-tab" data-bs-toggle="pill" data-bs-target="#v-pills-finish" type="button" role="tab" aria-controls="v-pills-finish" aria-selected="false">
+                                                <span class="step-title me-2">
+                                                    <i class="ri-close-circle-fill step-icon me-2"></i> Step 4
+                                                </span>
+                                                Finish
+                                            </button>
                                         </div>
                                         <!-- end nav -->
                                     </div> <!-- end col-->
@@ -235,14 +242,25 @@ input[type="file"] {
                                             <div class="tab-content">
                                                 <div class="tab-pane fade show active" id="v-pills-bill-info" role="tabpanel" aria-labelledby="v-pills-bill-info-tab">
                                                     <div class="mb-4">
+                                                        
                                                         <h3>Basic details</h3>
+                                                            <p>
+                                                                @if ($errors->any())
+                                                                    <ul>
+                                                                        @foreach ($errors->all() as $error)
+                                                                            <li class="text-danger" >{{ $error }}</li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                @endif
+                                                            </p>
+                                                            
                                                     </div>
                                                     
                                                     <div>
                                                         <div class="row g-3">
                                                             <div class="col-sm-12">
-                                                                <label for="firstName" class="form-label">Service name</label>
-                                                                <input type="text" class="form-control" id="firstName" name="service_name" placeholder="Add a service name, e.g. Men's haircut" value="">
+                                                                <label for="servicename" class="form-label">Service name</label>
+                                                                <input type="text" name="servicename" class="form-control" placeholder="Add a service name, e.g. Men's haircut">
                                                             </div>
 
                                                             <div class="col-sm-6">
@@ -264,14 +282,11 @@ input[type="file"] {
 
                                                             <div class="col-sm-6">
                                                                 <label for="lastName" class="form-label">Menu category</label>
-                                                                <select name="menu_category" id="" class="form-select">
-                                                                    <option value=""  >Select menu category</option>
-                                                                    @forelse ($categories as $category)
-                                                                    <option value="{{ $category->id }}" style="font-size: 15px;"  >{{ $category->category }}</option>
-                                                                   
-                                                                    @empty
-                                                                        <option value="">No category available</option>
-                                                                    @endforelse
+                                                                <select name="menucategory"  class="form-select">
+                                                                    <option value="" disabled selected>Select menu category</option>
+                                                                    @foreach ($categories as $category)
+                                                                    <option value="{{ $category->id }}" style="font-size: 15px;">{{ $category->category }}</option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                             
@@ -299,17 +314,21 @@ input[type="file"] {
                                                             </div> --}}
                                                             <div class="col-md-4">
                                                                 <label for="phone" class="form-label">Duration</label>
-                                                                <select name="" class="form-select" id="">
-                                                                    <option value="" >1h</option>
-                                                                    <option value="" >1.5</option>
+                                                                <select name="duration_hr" class="form-select" id="">
+                                                                    <option value=""  >Duration hours</option>
+                                                                    @forelse ($durationHours as $durationHour)
+                                                                        <option value="{{ $durationHour->duration_hr }}" style="font-size: 15px;" >{{ $durationHour->duration_hr }}</option>
+                                                                @empty
+                                                                    <option value="">No duration hours available</option>
+                                                                @endforelse
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label for="phone" class="form-label">Price type</label>
-                                                                <select name="" class="form-select" id="">
-                                                                    <option value="" >Fixed</option>
-                                                                    <option value="" >Free</option>
-                                                                    <option value="" >From</option>
+                                                                <select name="price_type" class="form-select" id="">
+                                                                    <option value="fixed" >Fixed</option>
+                                                                    <option value="free" >Free</option>
+                                                                    <option value="from" >From</option>
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-4">
@@ -317,7 +336,7 @@ input[type="file"] {
                                                                 <input type="text" class="form-control" name="price" placeholder="USD 0.00">
                                                             </div>
                                                             <hr>
-                                                            <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
+                                                            {{-- <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
                                                                 <div class="d-flex flex-column">
                                                                     <div class="d-flex align-items-center">
                                                                         <h3 class="mb-0 me-2">Extra Time</h3>
@@ -329,11 +348,94 @@ input[type="file"] {
                                                                     <input type="checkbox" class="form-check-input" id="customSwitchsizelg">
                                                                 </div>
                                                             </div>
+
+                                                            <div class="extra-time-fields">
+                                                            <div class="col-md-6">
+                                                                <label for="price" class="form-label">Type</label>
+                                                                <input type="text" class="form-control" name="price" placeholder="USD 0.00">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="duration" class="form-label">Duration</label>
+                                                                <select name="" class="form-select" id="">
+                                                                    <option value="" >1h</option>
+                                                                    <option value="" >1.5</option>
+                                                                </select>
+                                                            </div>
+                                                        </div> --}}
+                                                        {{-- <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
+                                                            <div class="d-flex flex-column">
+                                                                <div class="d-flex align-items-center">
+                                                                    <h3 class="mb-0 me-2">Extra Time</h3>
+                                                                    <span class="badge bg-dark">Off</span>
+                                                                </div>
+                                                                <p class="text-muted mb-0" style="font-size: 14px;">Automatically add blocked time or processing time after each appointment</p>
+                                                            </div>
+                                                            <div class="form-check form-switch" style="font-size: x-large">
+                                                                <input type="checkbox" class="form-check-input" id="customSwitchsizelg">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="extra-time-fields" style="display: none;">
+                                                            <div class="col-md-6">
+                                                                <label for="price" class="form-label">Type</label>
+                                                                <input type="text" class="form-control" name="price" placeholder="USD 0.00">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="duration" class="form-label">Duration</label>
+                                                                <select name="" class="form-select" id="">
+                                                                    <option value="">1h</option>
+                                                                    <option value="">1.5h</option>
+                                                                </select>
+                                                            </div>
+                                                        </div> --}}
+
+                                                        <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
+                                                            <div class="d-flex flex-column">
+                                                                <div class="d-flex align-items-center">
+                                                                    <h3 class="mb-0 me-2">Extra Time</h3>
+                                                                    <span class="badge bg-dark" id="extraTimeBadge">Off</span>
+                                                                </div>
+                                                                <p class="text-muted mb-0" style="font-size: 14px;">Automatically add blocked time or processing time after each appointment</p>
+                                                            </div>
+                                                            <div class="form-check form-switch" style="font-size: x-large">
+                                                                <input type="checkbox" name="extra_time" class="form-check-input" id="customSwitchsizelg">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="extra-time-fields" style="display: none;">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="price" class="form-label">Type</label>
+                                                                    <select name="extra_time_type" class="form-select" id="">
+                                                                        <option value="" style="font-size: 15px;" >Select Type</option>
+                                                                        <option value="Processing time after" style="font-size: 15px;" >Processing time after</option>
+                                                                        <option value="Processing time before" style="font-size: 15px;" >Processing time before</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label for="duration" class="form-label">Duration</label>
+                                                                    <select name="extra_time_duration" class="form-select" id="">
+                                                                        <option value=""  >Duration hours</option>
+                                                                        @forelse ($durationHours as $durationHour)
+                                                                            <option value="{{ $durationHour->duration_hr }}" style="font-size: 15px;" >{{ $durationHour->duration_hr }}</option>
+                                                                        @empty
+                                                                        <option value="">No duration hours available</option>
+                                                                        @endforelse
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                      
                                                         </div>
                                                     </div>
 
                                                     <div class="d-flex align-items-start gap-3 mt-4">
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-team-members-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Go to Team member</button>
+                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-team-members-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Go to Team Member</button> --}}
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto" 
+                                                            onclick="changeTab('v-pills-team-members-tab')">
+                                                        <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue
+                                                    </button>
                                                     </div>
                                                 </div>
                                                 <!-- end tab pane -->
@@ -540,16 +642,18 @@ input[type="file"] {
                                                     </div>
                                                     <div class="d-flex align-items-start gap-3 mt-4">
                                                         <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-bill-info-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Basic info</button>
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-payment-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue</button>
+                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-payment-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue</button> --}}
+
+                                                        {{-- <button type="button" class="btn btn-light previestab" onclick="changeTab('v-pills-bill-info-tab')">Back to Basic Info</button> --}}
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto" onclick="changeTab('v-pills-resources-tab')">
+                                                            <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue
+                                                        </button>
                                                     </div>
                                                 </div>
                                                 <!-- end tab pane -->
                                                 <div class="tab-pane fade" id="v-pills-resources" role="tabpanel" aria-labelledby="v-pills-resources-tab">
-                                                   
-
                                                     <div>
                                                         <div class="row gy-3">
-                                                           
                                                             <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
                                                                 <div class="d-flex flex-column">
                                                                     <div class="d-flex align-items-center">
@@ -572,7 +676,10 @@ input[type="file"] {
 
                                                     <div class="d-flex align-items-start gap-3 mt-4">
                                                         <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-team-members-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Team members</button>
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Continue</button>
+                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Continue</button> --}}
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto" onclick="changeTab('v-pills-online-booking-tab')">
+                                                            <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue
+                                                        </button>
                                                     </div>
                                                 </div>
                                                 <!-- end tab pane -->
@@ -643,7 +750,11 @@ input[type="file"] {
 
                                                     <div class="d-flex align-items-start gap-3 mt-4">
                                                         <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-resources-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Resources</button>
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Continue</button>
+                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Continue</button> --}}
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto" 
+                                                        onclick="changeTab('v-pills-forms-tab')">
+                                                    <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue
+                                                </button>
                                                     </div>
                                                 </div>
 
@@ -674,8 +785,12 @@ input[type="file"] {
                                                     </div>
 
                                                     <div class="d-flex align-items-start gap-3 mt-4">
-                                                        <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-online-booking-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Online bookins</button>
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Continue</button>
+                                                        <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-online-booking-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Online booking</button>
+                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Continue</button> --}}
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto" 
+                                                        onclick="changeTab('v-pills-commision-tab')">
+                                                    <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue
+                                                </button>
                                                     </div>
                                                 </div>
                                                 <!-- end tab pane -->
@@ -728,6 +843,14 @@ input[type="file"] {
                                                             </div>
                                                         </div>
                                                         
+                                                    </div>
+                                                    <div class="d-flex align-items-start gap-3 mt-4">
+                                                        <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-forms-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Resources</button>
+                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Continue</button> --}}
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto" 
+                                                        onclick="changeTab('v-pills-setting-tab')">
+                                                    <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue
+                                                </button>
                                                     </div>
                                                 </div>
 
@@ -804,20 +927,22 @@ input[type="file"] {
                                                     
                                                     <div class="d-flex align-items-start gap-3 mt-4">
                                                         <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-commision-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Commision</button>
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-success-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Finish</button>
+                                                        <button type="submit" class="btn btn-success right ms-auto"> Finish</button>
+                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto" 
+                                                            onclick="changeTab('v-pills-finish-tab')">
+                                                            <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Finish
+                                                    </button> --}}
                                                     </div>
                                                 </div>
 
-                                                <div class="tab-pane fade" id="pills-success" role="tabpanel" aria-labelledby="pills-success-tab">
-                                                    <div>
-                                                        <div class="text-center">
-    
-                                                            <div class="mb-4">
-                                                                <lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon>
-                                                            </div>
-                                                            <h5>Well Done !</h5>
-                                                            <p class="text-muted">You have Successfully Signed Up</p>
+                                                <div class="tab-pane fade" id="v-pills-finish" role="tabpanel" aria-labelledby="v-pills-finish-tab">
+                                                    <div class="text-center pt-4 pb-2">
+
+                                                        <div class="mb-4">
+                                                            <lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon>
                                                         </div>
+                                                        <h5>Service Added Successfully !</h5>
+                                                        {{-- <p class="text-muted">You Will receive an order confirmation email with details of your order.</p> --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -875,6 +1000,42 @@ document.getElementById('selectAll').addEventListener('change', function() {
     });
 });
 
+
+
+///////////////////// nexttab tabs code 
+
+
+function changeTab(tabId) {
+        var tabTrigger = new bootstrap.Tab(document.getElementById(tabId));
+        tabTrigger.show();
+    }
+
+
+   /////////////// extra time off filds code in basic info
+$(document).ready(function() {
+    // Hide fields by default
+    $('.extra-time-fields').hide();
+
+    // Toggle visibility when checkbox state changes
+    $('#customSwitchsizelg').change(function() {
+        if ($(this).is(':checked')) {
+                $('.extra-time-fields').slideDown(); // Show the fields with animation
+                $('#extraTimeBadge').text('On').removeClass('bg-dark').addClass('bg-success'); // Change badge to On and bg-success
+            } else {
+                $('.extra-time-fields').slideUp(); // Hide the fields with animation
+                $('#extraTimeBadge').text('Off').removeClass('bg-success').addClass('bg-dark'); // Change badge back to Off and bg-dark
+            }
+    });
+});
+
+
+
+document.querySelector('form').addEventListener('submit', function (e) {
+    console.log({
+        service_name: document.querySelector('input[name="service_name"]').value,
+        menu_category: document.querySelector('select[name="menu_category"]').value
+    });
+});
 
 </script>
 @endpush

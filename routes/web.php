@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SalesController;
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ServiceTypeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -49,9 +50,14 @@ Route::middleware(['auth'])->group(function(){
     Route::post('admin/terms-and-conditions/store','storeTermsAndConditions')->name('admin.terms_and_conditions.store');
     Route::post('admin/site-setting/store','storeSiteSettings')->name('admin.site-setting.store');
     Route::post('admin/smtp-setting/store','storeSmtpSettings')->name('admin.smtp-setting.store');
+    Route::get('admin/duration-hours','durationHours')->name('admin.duration-hours.index');
+    Route::post('admin/store/duration-hours','durationHoursStore')->name('admin.duration-hour.store');
+    
 
     
     });
+
+    Route::post('admin/service/store',[ServiceController::class,'ServiceStore'])->name('admin.service.store');
 
     Route::controller(ServiceTypeController::class)->group(function(){
          Route::get('admin/service-types','index')->name('admin.service-type.index');

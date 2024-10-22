@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\DurationHour;
 use Illuminate\Http\Request;
 use App\Models\Setting;
+use Yajra\DataTables\DataTables;
+
 
 class SettingController extends Controller
 {
@@ -153,5 +156,56 @@ class SettingController extends Controller
         return back();
     }
 
+
+    public function durationHours(Request $request)
+    {
+        $title = 'Delete Duration Hour!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        if ($request->ajax()) {
+            $data = DurationHour::all();
     
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('created_at', function($row){
+                    return  $row->created_at->format('d-m-Y');
+                })
+               
+                ->addColumn('action', function($row){
+                    // $editUrl = route('admin.client.edit', $row->id);
+                    // <li><a class="dropdown-item" href="'.$editUrl.'"><i class="bi bi-pencil-square"></i> Edit</a></li>
+
+                    $deleteUrl = route('admin.client.destroy', $row->id);
+    
+                    return '
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton'.$row->id.'" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton'.$row->id.'">
+                                <li><a class="dropdown-item" href="'.$deleteUrl.'" data-confirm-delete="true"><i class="bi bi-trash3"></i> Delete</a></li>
+                                
+                            </ul>
+                        </div>';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('backend.setting.duration.index');
+    }
+    
+    public function durationHoursStore(Request $request)
+    {
+        $request->validate([
+            'duration_hour'=>'required'
+        ]);
+
+        DurationHour::create([
+            'duration_hr'=>$request->duration_hour
+        ]);
+
+        toast('Duration Hr added succesfully','success');
+        return redirect()->back();
+    }
 }

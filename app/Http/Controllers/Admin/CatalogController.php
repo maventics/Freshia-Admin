@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\ServiceType;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\DurationHour;
+use App\Models\Service;
 
 class CatalogController extends Controller
 {
@@ -14,7 +16,8 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        return view('backend.catalog.index');
+        $services = Service::all();
+        return view('backend.catalog.index',compact('services'));
     }
 
    
@@ -22,8 +25,9 @@ class CatalogController extends Controller
     {
         $serviceTypes = ServiceType::with('subServiceTypes')->get();
         $categories = Category::all();
+        $durationHours = DurationHour::all();
 
-        return view('backend.catalog.create-service',compact('serviceTypes','categories'));
+        return view('backend.catalog.create-service',compact('serviceTypes','categories','durationHours'));
     }
 
     /**

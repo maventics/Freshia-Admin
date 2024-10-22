@@ -46,25 +46,34 @@
                                 </li>
                             </ul>
                             <!-- Tab panes -->
-                            <div class="tab-content text-muted">
+                            {{-- <div class="tab-content text-muted">
                                 <div class="tab-pane active" id="catalog-1" role="tabpanel">
                                     <div class="row">
                                         <a href="{{route('admin.service-type.index')}}">
-                                        <div class="col-12">
-                                            <div class="row row-cols-xxl-5 row-cols-lg-3 row-cols-1">
-                                                <div class="col">
-                                                    <div class="card card-body w-50 bg-light">
-                                                        <div class="d-flex mb-4 align-items-center">
-                                                            <div class="flex-grow-1 ms-2">
-                                                                <h5 class="card-title mb-1">Service Type</h5>
-                                                                <p class="text-muted mb-0">Add service type here</p>
-                                                            </div>
-                                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card card-body w-50 bg-light">
+                                                <div class="d-flex mb-4 align-items-center">
+                                                    <div class="flex-grow-1 ms-2">
+                                                        <h5 class="card-title mb-1">Service Type</h5>
+                                                        <p class="text-muted mb-0">Add service type here</p>
                                                     </div>
-                                                </div><!-- end col -->
-                                            </div><!-- end row -->
+                                                </div>
+                                            </div>
                                         </div><!-- end col -->
                                     </a>
+                                    <a href="{{route('admin.service-type.index')}}">
+                                        <div class="col-md-4">
+                                            <div class="card card-body w-50 bg-light">
+                                                <div class="d-flex mb-4 align-items-center">
+                                                    <div class="flex-grow-1 ms-2">
+                                                        <h5 class="card-title mb-1">Service Type</h5>
+                                                        <p class="text-muted mb-0">Add service type here</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- end col -->
+                                    </a>
+                                    
                                     </div><!-- end row -->
                                 </div>
                                 <div class="tab-pane" id="profile-1" role="tabpanel">
@@ -121,7 +130,138 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div> --}}
+                            {{-- <div class="tab-content text-muted">
+                                <div class="tab-pane active" id="catalog-1" role="tabpanel">
+                                    <div class="row">
+                                        <a href="{{route('admin.service-type.index')}}">
+                                            <div class="col-md-3"> <!-- Change col-md-4 to col-md-3 to fit more cards in one row -->
+                                                <div class="card card-body bg-light">
+                                                    <div class="d-flex mb-4 align-items-center">
+                                                        <div class="flex-grow-1 ms-2">
+                                                            <h5 class="card-title mb-1">Service Type</h5>
+                                                            <p class="text-muted mb-0">Add service type here</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end col -->
+                                        </a>
+                                        <a href="{{route('admin.service-type.index')}}">
+                                            <div class="col-md-3"> <!-- Change col-md-4 to col-md-3 -->
+                                                <div class="card card-body bg-light">
+                                                    <div class="d-flex mb-4 align-items-center">
+                                                        <div class="flex-grow-1 ms-2">
+                                                            <h5 class="card-title mb-1">Service Type</h5>
+                                                            <p class="text-muted mb-0">Add service type here</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end col -->
+                                        </a>
+                                        <!-- Add more cards as needed -->
+                                        <a href="{{route('admin.service-type.index')}}">
+                                            <div class="col-md-3"> <!-- Ensure all cards are col-md-3 -->
+                                                <div class="card card-body bg-light">
+                                                    <div class="d-flex mb-4 align-items-center">
+                                                        <div class="flex-grow-1 ms-2">
+                                                            <h5 class="card-title mb-1">Service Type</h5>
+                                                            <p class="text-muted mb-0">Add service type here</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end col -->
+                                        </a>
+                                        <a href="{{route('admin.service-type.index')}}">
+                                            <div class="col-md-3"> <!-- Ensure all cards are col-md-3 -->
+                                                <div class="card card-body bg-light">
+                                                    <div class="d-flex mb-4 align-items-center">
+                                                        <div class="flex-grow-1 ms-2">
+                                                            <h5 class="card-title mb-1">Service Type</h5>
+                                                            <p class="text-muted mb-0">Add service type here</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end col -->
+                                        </a>
+                                    </div><!-- end row -->
+                                </div>
+                                <div class="tab-pane" id="profile-1" role="tabpanel">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0">
+                                            <i class="ri-checkbox-circle-fill text-success"></i>
+                                        </div>
+                                        <div class="flex-grow-1 ms-2">
+                                            In some designs, you might adjust your tracking to create a certain artistic effect...
+                                        </div>
+                                    </div>
+                                    <!-- More content... -->
+                                </div>
+                                <!-- Other tab panes... -->
+                            </div> --}}
+                            <div class="tab-content text-muted">
+                                <div class="tab-pane active" id="catalog-1" role="tabpanel">
+                                    <div class="row">
+                                        <a href="{{route('admin.service-type.index')}}" class="col-md-3 mb-4"> <!-- Add mb-4 for spacing -->
+                                            <div class="card card-body bg-light">
+                                                <div class="d-flex mb-4 align-items-center">
+                                                    <div class="flex-grow-1 ms-2">
+                                                        <h5 class="card-title mb-1">Service Type</h5>
+                                                        <p class="text-muted mb-0">Add service type here</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                            
+                                        <a href="{{route('admin.duration-hours.index')}}" class="col-md-3 mb-4">
+                                            <div class="card card-body bg-light">
+                                                <div class="d-flex mb-4 align-items-center">
+                                                    <div class="flex-grow-1 ms-2">
+                                                        <h5 class="card-title mb-1">Duration Hours</h5>
+                                                        <p class="text-muted mb-0">Add Duration Hours here</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                            
+                                        <a href="{{route('admin.service-type.index')}}" class="col-md-3 mb-4">
+                                            <div class="card card-body bg-light">
+                                                <div class="d-flex mb-4 align-items-center">
+                                                    <div class="flex-grow-1 ms-2">
+                                                        <h5 class="card-title mb-1">Service Type</h5>
+                                                        <p class="text-muted mb-0">Add service type here</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                            
+                                        <a href="{{route('admin.service-type.index')}}" class="col-md-3 mb-4">
+                                            <div class="card card-body bg-light">
+                                                <div class="d-flex mb-4 align-items-center">
+                                                    <div class="flex-grow-1 ms-2">
+                                                        <h5 class="card-title mb-1">Service Type</h5>
+                                                        <p class="text-muted mb-0">Add service type here</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div><!-- end row -->
+                                </div>
+                            
+                                <div class="tab-pane" id="profile-1" role="tabpanel">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0">
+                                            <i class="ri-checkbox-circle-fill text-success"></i>
+                                        </div>
+                                        <div class="flex-grow-1 ms-2">
+                                            In some designs, you might adjust your tracking to create a certain artistic effect...
+                                        </div>
+                                    </div>
+                                    <!-- More content... -->
+                                </div>
+                                <!-- Other tab panes... -->
                             </div>
+                            
+                            
                         </div><!-- end card-body -->
                     </div><!-- end card -->
                 </div>
