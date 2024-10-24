@@ -78,7 +78,7 @@
                                             <a class="nav-link mb-2 active" id="v-pills-team-members-tab" data-bs-toggle="pill" href="#v-pills-team-members" role="tab" aria-controls="v-pills-team-members" aria-selected="true">Service Menu</a>
                                             <a class="nav-link mb-2" id="v-pills-memberships-tab" data-bs-toggle="pill" href="#v-pills-memberships" role="tab" aria-controls="v-pills-memberships" aria-selected="false">Memberships</a>
                                             <a class="nav-link mb-2" id="v-pills-products-tab" data-bs-toggle="pill" href="#v-pills-products" role="tab" aria-controls="v-pills-products" aria-selected="false">Products</a>
-                                            <h3 class="mt-4 mb-4" >Inventory</h3>
+                                            <h4 class="mt-4 mb-4" >Inventory</h4>
                                             <a class="nav-link mb-2" id="v-pills-stocktakes-tab" data-bs-toggle="pill" href="#v-pills-stocktakes" role="tab" aria-controls="v-pills-stocktakes" aria-selected="false">Stocktakes</a>
                                             <a class="nav-link mb-2" id="v-pills-stock-orders-tab" data-bs-toggle="pill" href="#v-pills-stock-orders" role="tab" aria-controls="v-pills-stock-orders" aria-selected="false">Stock orders</a>
                                             <a class="nav-link mb-2" id="v-pills-suppliers-tab" data-bs-toggle="pill" href="#v-pills-suppliers" role="tab" aria-controls="v-pills-suppliers" aria-selected="false">Suppliers</a>

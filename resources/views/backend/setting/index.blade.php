@@ -36,7 +36,7 @@
                                     <a class="nav-link active" data-bs-toggle="tab" href="#catalog-1" role="tab">Catalog Settings</a>
                                 </li>
                                 <li class="nav-item waves-effect waves-light">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#profile-1" role="tab">Profile</a>
+                                    <a class="nav-link" data-bs-toggle="tab" href="#branches-1" role="tab">Branches</a>
                                 </li>
                                 <li class="nav-item waves-effect waves-light">
                                     <a class="nav-link" data-bs-toggle="tab" href="#messages-1" role="tab">Messages</a>
@@ -223,7 +223,7 @@
                                             </div>
                                         </a>
                             
-                                        <a href="{{route('admin.service-type.index')}}" class="col-md-3 mb-4">
+                                        {{-- <a href="{{route('admin.service-type.index')}}" class="col-md-3 mb-4">
                                             <div class="card card-body bg-light">
                                                 <div class="d-flex mb-4 align-items-center">
                                                     <div class="flex-grow-1 ms-2">
@@ -243,19 +243,56 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </a>
+                                        </a> --}}
                                     </div><!-- end row -->
                                 </div>
                             
-                                <div class="tab-pane" id="profile-1" role="tabpanel">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0">
-                                            <i class="ri-checkbox-circle-fill text-success"></i>
-                                        </div>
-                                        <div class="flex-grow-1 ms-2">
-                                            In some designs, you might adjust your tracking to create a certain artistic effect...
-                                        </div>
-                                    </div>
+                                <div class="tab-pane" id="branches-1" role="tabpanel">
+                                    <div class="row">
+                                        <a href="{{route('admin.branche-address.index')}}" class="col-md-3 mb-4"> <!-- Add mb-4 for spacing -->
+                                            <div class="card card-body bg-light">
+                                                <div class="d-flex mb-4 align-items-center">
+                                                    <div class="flex-grow-1 ms-2">
+                                                        <h5 class="card-title mb-1">Branch address</h5>
+                                                        <p class="text-muted mb-0">Add branch addresses here</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                            
+                                        {{-- <a href="{{route('admin.duration-hours.index')}}" class="col-md-3 mb-4">
+                                            <div class="card card-body bg-light">
+                                                <div class="d-flex mb-4 align-items-center">
+                                                    <div class="flex-grow-1 ms-2">
+                                                        <h5 class="card-title mb-1">Branch address 2</h5>
+                                                        <p class="text-muted mb-0">Add Branch adrres 2 here</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a> --}}
+                            
+                                        {{-- <a href="{{route('admin.service-type.index')}}" class="col-md-3 mb-4">
+                                            <div class="card card-body bg-light">
+                                                <div class="d-flex mb-4 align-items-center">
+                                                    <div class="flex-grow-1 ms-2">
+                                                        <h5 class="card-title mb-1">Service Type</h5>
+                                                        <p class="text-muted mb-0">Add service type here</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a> --}}
+                            
+                                        {{-- <a href="{{route('admin.service-type.index')}}" class="col-md-3 mb-4">
+                                            <div class="card card-body bg-light">
+                                                <div class="d-flex mb-4 align-items-center">
+                                                    <div class="flex-grow-1 ms-2">
+                                                        <h5 class="card-title mb-1">Service Type</h5>
+                                                        <p class="text-muted mb-0">Add service type here</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a> --}}
+                                    </div><!-- end row -->
                                     <!-- More content... -->
                                 </div>
                                 <!-- Other tab panes... -->

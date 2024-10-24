@@ -52,12 +52,16 @@ Route::middleware(['auth'])->group(function(){
     Route::post('admin/smtp-setting/store','storeSmtpSettings')->name('admin.smtp-setting.store');
     Route::get('admin/duration-hours','durationHours')->name('admin.duration-hours.index');
     Route::post('admin/store/duration-hours','durationHoursStore')->name('admin.duration-hour.store');
+    Route::get('admin/branche-address','brancheAddressIndex')->name('admin.branche-address.index');
+    Route::post('admin/store/branche-address','brancheAddressStore')->name('admin.branche-address.store');
     
 
     
     });
 
     Route::post('admin/service/store',[ServiceController::class,'ServiceStore'])->name('admin.service.store');
+    Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
+
 
     Route::controller(ServiceTypeController::class)->group(function(){
          Route::get('admin/service-types','index')->name('admin.service-type.index');
@@ -94,6 +98,8 @@ Route::middleware(['auth'])->group(function(){
         Route::post('admin/store/team','store')->name('admin.team.store');
         Route::get('admin/edit/team/{id}','edit')->name('admin.team.edit');
         Route::post('admin/update/team/{id}','update')->name('admin.team.update');
-        Route::delete('admin/update/team/{id}','destroy')->name('admin.team.destroy');
+        // Route::delete('admin/update/team/{id}','destroy')->name('admin.team.destroy');
+        Route::delete('/users/{id}', 'destroy')->name('users.destroy');
+
     });
 });

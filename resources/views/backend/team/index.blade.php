@@ -1,6 +1,8 @@
 @extends('backend.layouts.admin-master')
 @section('title','Teams')
 @push('styles')
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"> --}}
+
 <style>
 
 
@@ -167,7 +169,7 @@
                                                                                         <th>Actions</th>
                                                                                     </tr>
                                                                                 </thead>
-                                                                                <tbody>
+                                                                                {{-- <tbody>
                                                                                     <tr>
                                                                                         <td>
                                                                                             <div class="user-icon" style="display: flex; align-items: center;">
@@ -187,7 +189,7 @@
                                                                                         <td>No Rating</td>
                                                                                         <td>
                                                                                             <div class="dropdown">
-                                                                                                <button class="btn btn-dark dropdown-toggle" type="button" id="actionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                                <button class="btn btn-light rounded-pill dropdown-toggle" type="button" id="actionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                                                                                     Actions
                                                                                                 </button>
                                                                                                 <ul class="dropdown-menu" aria-labelledby="actionsDropdown">
@@ -217,7 +219,7 @@
                                                                                         <td>No Rating</td>
                                                                                         <td>
                                                                                             <div class="dropdown">
-                                                                                                <button class="btn btn-dark dropdown-toggle" type="button" id="actionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                                <button class="btn btn-light rounded-pill  dropdown-toggle" type="button" id="actionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                                                                                     Actions
                                                                                                 </button>
                                                                                                 <ul class="dropdown-menu" aria-labelledby="actionsDropdown">
@@ -229,7 +231,74 @@
                                                                                         </td>
                                                                                     </tr>
                                                                                     <!-- More rows can be added here -->
-                                                                                </tbody>
+                                                                                </tbody> --}}
+                                                                                {{-- <tbody>
+                                                                                    @foreach($users as $user)
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <div class="user-icon" style="display: flex; align-items: center;">
+                                                                                                    <!-- User Image -->
+                                                                                                    <img src="{{ $user->profile_image ?? 'path/to/default/image.jpg' }}" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
+                                                                                                    <!-- Placeholder for Initial -->
+                                                                                                    <div class="placeholder rounded-circle" style="width: 40px; height: 40px; background-color: #007bff; color: white; display: none; align-items: center; justify-content: center; font-weight: bold;">
+                                                                                                        {{ strtoupper(substr($user->fname, 0, 1)) }}   <!-- First letter of the name -->
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <span>{{ $user->fname }} {{ $user->lname }} </span>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div>Email: {{ $user->email }}</div>
+                                                                                                <div>Phone: {{ $user->phone }}</div>
+                                                                                            </td>
+                                                                                            <td>No Rating</td>
+                                                                                            <td>
+                                                                                                <div class="dropdown">
+                                                                                                    <button class="btn btn-light rounded-pill dropdown-toggle" type="button" id="actionsDropdown{{ $user->id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                                        Actions
+                                                                                                    </button>
+                                                                                                    <ul class="dropdown-menu" aria-labelledby="actionsDropdown{{ $user->id }}">
+                                                                                                        <li><a class="dropdown-item" href="#">View</a></li>
+                                                                                                        <li><a class="dropdown-item" href="#">Edit</a></li>
+                                                                                                        <li><a class="dropdown-item text-danger" href="#" onclick="deleteUser({{ $user->id }})">Delete</a></li>
+                                                                                                    </ul>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    @endforeach
+                                                                                </tbody> --}}
+
+                                                                                @foreach($users as $user)
+<tr>
+    <td>
+        <div class="user-icon" style="display: flex; align-items: center;">
+            <img src="{{ $user->profile_image ?? 'path/to/default/image.jpg' }}" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
+            <div class="placeholder rounded-circle" style="width: 40px; height: 40px; background-color: #007bff; color: white; display: none; align-items: center; justify-content: center; font-weight: bold;">
+                {{ strtoupper(substr($user->fname, 0, 1)) }}
+            </div>
+        </div>
+        <span>{{ $user->fname }} {{ $user->lname }}</span>
+    </td>
+    <td>
+        <div>Email: {{ $user->email }}</div>
+        <div>Phone: {{ $user->phone }}</div>
+    </td>
+    <td>No Rating</td>
+    <td>
+        <div class="dropdown">
+            <button class="btn btn-light rounded-pill dropdown-toggle" type="button" id="actionsDropdown{{ $user->id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                Actions
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="actionsDropdown{{ $user->id }}">
+                <li><a class="dropdown-item" href="#">View</a></li>
+                <li><a class="dropdown-item" href="#">Edit</a></li>
+                <li><a class="dropdown-item text-danger" href="#" onclick="deleteUser({{ $user->id }}, this.closest('tr'))">Delete</a></li>
+            </ul>
+        </div>
+    </td>
+</tr>
+@endforeach
+
+                                                                                
                                                                             </table>
                                                                         </div><!-- end card-body -->
                                                                         
@@ -276,25 +345,40 @@
         
    
 @endsection
-    
+
 
 @push('scripts')
-<script>
-    $(document).ready(function() {
-        $('.category-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '{{ route('admin.sale.index') }}',
-            columns: [
-                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-                { data: 'name', name: 'name' },
-                { data: 'image', name: 'image' },
-                { data: 'created_at', name: 'created_at' },
-                { data: 'action', name: 'action', orderable: false, searchable: false },
-            ]
-        });
-    });
-    </script>
+
+<!-- Include SweetAlert CSS -->
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
+<!-- Include jQuery (if not already included) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include SweetAlert JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script> --}}
+
+
+
+<!-- Include SweetAlert JS -->
+
+
+{{-- <script>
+    // $(document).ready(function() {
+    //     $('.category-table').DataTable({
+    //         processing: true,
+    //         serverSide: true,
+    //         ajax: '{{ route('admin.sale.index') }}',
+    //         columns: [
+    //             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+    //             { data: 'name', name: 'name' },
+    //             { data: 'image', name: 'image' },
+    //             { data: 'created_at', name: 'created_at' },
+    //             { data: 'action', name: 'action', orderable: false, searchable: false },
+    //         ]
+    //     });
+    // });
+    </script> --}}
 
 
 <script>
@@ -303,6 +387,90 @@
     const firstLetter = name.charAt(0).toUpperCase(); // Get the first letter
     icon.querySelector('.placeholder').textContent = firstLetter; // Set it to the placeholder
 });
+
+
+
+
+////////////delete user
+
+// $(document).on('click', '.delete-user', function(e) {
+//     $.ajaxSetup({
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         }
+//     });
+//     e.preventDefault();
+//     var userId = $(this).data('id');
+//     var row = $(this).closest('tr'); // Get the closest table row
+
+//     // Show SweetAlert confirmation
+//     swal.fire({
+//         title: "Are you sure?",
+//         text: "You will not be able to recover this user!",
+//         icon: "warning",
+//         buttons: true,
+//         dangerMode: true,
+//     }).then((willDelete) => {
+//         if (willDelete) {
+//             // Perform the AJAX request to delete the user
+//             $.ajax({
+//                 url: '/users/' + userId,
+//                 type: 'DELETE',
+//                 success: function(response) {
+//                     swal("Poof! Your user has been deleted!", {
+//                         icon: "success",
+//                     }).then(() => {
+//                         // Remove the row from the table
+//                         row.remove();
+//                     });
+//                 },
+//                 error: function(xhr) {
+//                     swal("Error!", "There was an issue deleting the user.", "error");
+//                 }
+//             });
+//         } else {
+//             swal("Your user is safe!");
+//         }
+//     });
+// });
+
+
+$(document).ready(function() {
+    // Set the CSRF token for all AJAX requests
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+});
+
+
+function deleteUser(userId, row) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You won\'t be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '/users/' + userId, // Make sure this matches your route
+                type: 'DELETE',
+                success: function(response) {
+                    // Remove the user row from the table
+                    row.remove();
+                    Swal.fire('Deleted!', 'Your user has been deleted.', 'success');
+                },
+                error: function(xhr) {
+                    Swal.fire('Error!', 'Error deleting user: ' + xhr.responseText, 'error');
+                }
+            });
+        }
+    });
+}
 
 </script>
 @endpush 

@@ -132,6 +132,10 @@ input[type="file"] {
 
 }
 
+
+.form-check-input {
+    font-size: 25px;
+}
 </style>
 @endpush
 @section('content')
@@ -161,7 +165,8 @@ input[type="file"] {
                             <h2 class="mb-0">Add team member</h2>
                         </div><!-- end card header -->
                         <div class="card-body form-steps">
-                            <form class="vertical-navs-step">
+                            <form class="vertical-navs-step" method="POST" action="{{route('admin.team.store')}}" enctype="multipart/form-data">
+                                @csrf
                                 <div class="row gy-5">
                                     <div class="col-lg-4">
                                         <div class="nav flex-column custom-nav nav-pills" role="tablist" aria-orientation="vertical">
@@ -221,8 +226,17 @@ input[type="file"] {
                                                     <div>
                                                         <h5>Profile</h5>
                                                         <p>Manage your team members personal profile</p>
+                                                        <p>
+                                                            @if ($errors->any())
+                                                                <ul>
+                                                                    @foreach ($errors->all() as $error)
+                                                                        <li class="text-danger" >{{ $error }}</li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            @endif
+                                                        </p>
                                                         <div class="upload-container">
-                                                            <input type="file" id="file-upload" accept="image/*" onchange="handleFileUpload(event)" />
+                                                            <input type="file" id="file-upload" name="image" accept="image/*" onchange="handleFileUpload(event)" />
                                                             <label for="file-upload" class="upload-icon">
                                                                 <img id="uploaded-image" src="" alt="Uploaded Image" class="uploaded-img" />
                                                                 <i class="ri-camera-fill"></i>
@@ -239,37 +253,34 @@ input[type="file"] {
                                                     <div>
                                                         <div class="row g-3">
                                                             <div class="col-sm-6">
-                                                                <label for="firstName" class="form-label">First name</label>
-                                                                <input type="text" class="form-control" id="firstName" placeholder="Enter First Name" value="">
+                                                                <label for="fname" class="form-label">First name</label>
+                                                                <input type="text" class="form-control" name="fname" id="fname" placeholder="Enter First Name" value="">
                                                             </div>
 
                                                             <div class="col-sm-6">
-                                                                <label for="lastName" class="form-label">Last name</label>
-                                                                <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" value="">
+                                                                <label for="lname" class="form-label">Last name</label>
+                                                                <input type="text" class="form-control" name="lname" id="lastName" placeholder="Enter Last Name" value="">
                                                             </div>
 
                                                             <div class="col-6">
-                                                                <label for="username" class="form-label">Email</label>
-                                                                <div class="input-group">
-                                                                    <input type="email" class="form-control" id="email" placeholder="Enter Email">
+                                                                <label for="email" class="form-label">Email</label>
+                                                                <div class="">
+                                                                    <input type="email" name="email" class="form-control" placeholder="Enter Email">
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-2">
                                                                 <label for="country-code" class="form-label"> Code</label>
-                                                                <select class="form-select" id="country-code" required>
-                                                                    <option value="" disabled selected>+1</option>
-                                                                    <option value="+1">United States (+1)</option>
-                                                                    <option value="+44">United Kingdom (+44)</option>
-                                                                    <option value="+91">India (+91)</option>
-                                                                    <option value="+61">Australia (+61)</option>
-                                                                    <option value="+81">Japan (+81)</option>
-                                                                    <!-- Add more country options as needed -->
+                                                                <select class="form-select" name="phone_code">
+                                                                    {{-- <option value="" disabled selected>+1</option> --}}
+                                                                    @foreach($phoneCodes as $code)
+                                                                    <option value="{{ $code->phone_code }}">{{ $code->phone_code }}</option>
+                                                                @endforeach
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label for="phone" class="form-label">Phone</label>
-                                                                <input type="text" class="form-control" id="phone" placeholder="123-456-7890" required>
+                                                                <input type="number" class="form-control" name="phone" placeholder="1234567890">
                                                             </div>
 
                                                             {{-- <div class="col-6">
@@ -280,16 +291,32 @@ input[type="file"] {
                                                                 <label for="email" class="form-label">Year <span class="text-muted">(Optional)</span></label>
                                                                 <input type="date" class="form-control" id="email" placeholder="Enter Email">
                                                             </div> --}}
+                                                            {{-- <div class="col-6">
+                                                                <label for="email" class="form-label">Date of birth</label>
+                                                                <div class="input-group" style="border-radius: 40px !important;">
+                                                                    <input type="text" name="dob" id="event-start-date"  class="form-control flatpickr flatpickr-input" placeholder="Select date"  required>
+                                                                    <span class="input-group-text"><i class="ri-calendar-event-line"></i></span>
+                                                                </div>
+                                                            </div> --}}
                                                             <div class="col-6">
                                                                 <label for="email" class="form-label">Date of birth</label>
                                                                 <div class="input-group" style="border-radius: 40px !important;">
-                                                                    <input type="text" id="event-start-date" class="form-control flatpickr flatpickr-input" placeholder="Select date" readonly required>
-                                                                    <span class="input-group-text"><i class="ri-calendar-event-line"></i></span>
+                                                                    <input type="date" name="dob" class="form-control" >
+                                                                    {{-- <span class="input-group-text"><i class="ri-calendar-event-line"></i></span> --}}
                                                                 </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <label for="email" class="form-label">Country</label>
+                                                                   <select name="country" id="" class="form-select" >
+                                                                    <option value="" disabled >Select Country</option>
+                                                                    @foreach($countries as $country)
+                                                                     <option value="{{ $country->country }}">{{ $country->country }}</option>
+                                                                     @endforeach
+                                                                   </select>
                                                             </div>
                                                             <div class="col-12">
                                                                 <label for="email" class="form-label">Job Title</label>
-                                                                <input type="text" class="form-control" id="email" placeholder="Visible to client online">
+                                                                <input type="text" name="job_title" class="form-control" placeholder="Visible to client online">
                                                             </div>
                                                             <hr>
                                                             <div class="col-12 mt-4">
@@ -297,42 +324,53 @@ input[type="file"] {
 
                                                               <p>Manage your team members start date, and employment details</p>
                                                             </div>
+                                                            {{-- <div class="col-6">
+                                                                <label for="email" class="form-label">Start Date</label>
+                                                                <div class="input-group" style="border-radius: 40px !important;">
+                                                                    <input type="text"  id="event-start-date" class="form-control flatpickr flatpickr-input" placeholder="Select date"  required>
+                                                                    <span class="input-group-text"><i class="ri-calendar-event-line"></i></span>
+                                                                </div>
+                                                            </div> --}}
                                                             <div class="col-6">
                                                                 <label for="email" class="form-label">Start Date</label>
                                                                 <div class="input-group" style="border-radius: 40px !important;">
-                                                                    <input type="text" id="event-start-date" class="form-control flatpickr flatpickr-input" placeholder="Select date" readonly required>
-                                                                    <span class="input-group-text"><i class="ri-calendar-event-line"></i></span>
+                                                                    <input type="date"  name="start_date" class="form-control"  >
+                                                                    {{-- <span class="input-group-text"><i class="ri-calendar-event-line"></i></span> --}}
                                                                 </div>
                                                             </div>
                                                             <div class="col-6">
                                                                 <label for="email" class="form-label">End Date</label>
                                                                 <div class="input-group" style="border-radius: 40px !important;">
-                                                                    <input type="text" id="event-start-date" class="form-control flatpickr flatpickr-input" placeholder="Select date" readonly required>
-                                                                    <span class="input-group-text"><i class="ri-calendar-event-line"></i></span>
+                                                                    <input type="date" name="end_date" class="form-control" >
+                                                                    {{-- <span class="input-group-text"><i class="ri-calendar-event-line"></i></span> --}}
                                                                 </div>   
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label for="phone" class="form-label">Employment type</label>
-                                                                <select name="" class="form-select" id="">
+                                                                <select name="employment_type" class="form-select" id="">
                                                                     <option value="" @readonly(true) >Select an option</option>
-                                                                    <option value="" >Employee</option>
-                                                                    <option value="" >Self-employed</option>
+                                                                    <option value="Employee" >Employee</option>
+                                                                    <option value="Self-employed" >Self-employed</option>
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label for="phone" class="form-label">Employment type</label>
-                                                                <input type="text" class="form-control" id="email" placeholder="Enter Employment type">
+                                                                <label for="phone" class="form-label">Team Member ID</label>
+                                                                <input type="text" class="form-control" name="team_member_id" placeholder="Team Member ID">
                                                                 <span class="text-muted" style="font-size:11px; ">An identifier used for external systems like payroll</span>
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <label for="phone" class="form-label">Notes</label>
-                                                                <textarea class="form-control" id="email" rows="6" placeholder="Add a private note only viewable in the team member list"></textarea>
+                                                                <textarea class="form-control" id="note" name="note" rows="6" placeholder="Add a private note only viewable in the team member list"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <div class="d-flex align-items-start gap-3 mt-4">
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-bill-address-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Go to Addresses</button>
+                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-bill-address-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue</button> --}}
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto" 
+                                                            onclick="changeTab('v-pills-bill-address-tab')">
+                                                        <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue
+                                                    </button>
                                                     </div>
                                                 </div>
                                                 <!-- end tab pane -->
@@ -391,38 +429,38 @@ input[type="file"] {
                                                                 <div class="row g-3">
                                                                     <div class="col-12">
                                                                         <label for="selectedAddressType" class="form-label">Selected Address Type</label>
-                                                                        <input type="text" class="form-control" id="selectedAddressType" placeholder="Selected Address Type" readonly>
+                                                                        <input type="text" class="form-control"  placeholder="Selected Address Type" readonly>
                                                                     </div>
                                                                     <div class="col-12">
                                                                         <label for="address" class="form-label">Address</label>
-                                                                        <input type="text" class="form-control" id="address" placeholder="1234 Main St">
+                                                                        <input type="text" class="form-control"  placeholder="1234 Main St">
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <label for="address2" class="form-label">Apt/Suite<span class="text-muted">(Optional)</span></label>
-                                                                        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                                                                        <input type="text" class="form-control"  placeholder="Apartment or suite">
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <label for="district" class="form-label">District<span class="text-muted">(Optional)</span></label>
-                                                                        <input type="text" class="form-control" id="district" placeholder="District">
+                                                                        <input type="text" class="form-control"  placeholder="District">
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <label for="city" class="form-label">City<span class="text-muted">(Optional)</span></label>
-                                                                        <input type="text" class="form-control" id="city" placeholder="City">
+                                                                        <input type="text" class="form-control"  placeholder="City">
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <label for="region" class="form-label">Region<span class="text-muted">(Optional)</span></label>
-                                                                        <input type="text" class="form-control" id="region" placeholder="Region">
+                                                                        <input type="text" class="form-control"  placeholder="Region">
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <label for="state" class="form-label">Postcode</label>
-                                                                        <select class="form-select" id="state">
+                                                                        <select class="form-select" >
                                                                             <option value="">Choose...</option>
                                                                             <option>California</option>
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <label for="country" class="form-label">Country</label>
-                                                                        <select class="form-select" id="country">
+                                                                        <select class="form-select" >
                                                                             <option value="">Choose...</option>
                                                                             <option>United States</option>
                                                                         </select>
@@ -434,7 +472,11 @@ input[type="file"] {
                                                     </div>
                                                     <div class="d-flex align-items-start gap-3 mt-4">
                                                         <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-profile-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to profile</button>
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-emergency-contacts-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue</button>
+                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-emergency-contacts-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue</button> --}}
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto" 
+                                                        onclick="changeTab('v-pills-emergency-contacts-tab')">
+                                                    <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue
+                                                </button>
                                                     </div>
                                                 </div>
                                                 <!-- end tab pane -->
@@ -448,23 +490,23 @@ input[type="file"] {
                                                         <div class="row gy-3">
                                                             <div class="col-sm-6">
                                                                 <label for="firstName" class="form-label">Full name</label>
-                                                                <input type="text" class="form-control" id="firstName" placeholder="Enter First Name" value="">
+                                                                <input type="text" class="form-control" placeholder="Enter First Name" value="">
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <label for="lastName" class="form-label">Relationship</label>
-                                                                <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" value="">
+                                                                <input type="text" class="form-control"  placeholder="Enter Last Name" value="">
                                                             </div>
 
                                                             <div class="col-md-6">
-                                                                <label for="cc-number" class="form-label">Email</label>
-                                                                <input type="email" class="form-control" id="cc-number" placeholder="Enter Email" required>
+                                                                <label for="email" class="form-label">Email</label>
+                                                                <input type="email" class="form-control" name="emergency_email" placeholder="Enter Email">
                                                                 
                                                             </div>
 
                                                             <div class="col-md-2">
                                                                 <label for="country-code" class="form-label"> Code</label>
-                                                                <select class="form-select" id="country-code" required>
+                                                                <select class="form-select">
                                                                     <option value="" disabled selected>+1</option>
                                                                     <option value="+1">United States (+1)</option>
                                                                     <option value="+44">United Kingdom (+44)</option>
@@ -476,7 +518,7 @@ input[type="file"] {
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label for="phone" class="form-label">Phone</label>
-                                                                <input type="text" class="form-control" id="phone" placeholder="123-456-7890" required>
+                                                                <input type="text" class="form-control" name="emergency_phone" placeholder="1234567890">
                                                             </div>
                                                             
                                                             
@@ -486,7 +528,11 @@ input[type="file"] {
 
                                                     <div class="d-flex align-items-start gap-3 mt-4">
                                                         <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-bill-address-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Address</button>
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Settings</button>
+                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Settings</button> --}}
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto" 
+                                                            onclick="changeTab('v-pills-services-tab')">
+                                                            <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue
+                                                        </button>
                                                     </div>
                                                 </div>
                                                 <!-- end tab pane -->
@@ -508,7 +554,6 @@ input[type="file"] {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        
                                                         
                                                         {{-- <div class="row gy-3 mt-4">
                                                             <div class="col-12">
@@ -540,39 +585,38 @@ input[type="file"] {
                                                         <div class="row gy-3 mt-4">
                                                             <div class="col-12">
                                                                 <!-- Select All Checkbox -->
-                                                                <div class="form-check mb-4 ml-2">
-                                                                    <input class="form-check-input" type="checkbox" id="selectAll" style="transform: scale(1.5);">
-                                                                    <label class="form-check-label" for="selectAll">Select All</label>
+                                                                <div class="form-check mb-4 ml-2" style="margin-left: 21px;">
+                                                                    <input class="form-check-input" type="checkbox" id="selectAll">
+                                                                    <label class="form-check-label" for="selectAll" style="font-size: 16px;margin-top: 6px;" >Select All</label>
                                                                 </div>
                                                                 
                                                                 <!-- Service Items with Checkboxes -->
                                                                 <div class="service-item d-flex align-items-center border p-4 mb-2">
-                                                                    <input class="form-check-input me-3" type="checkbox" id="service1" style="transform: scale(1.5);">
+                                                                    <input class="form-check-input me-3" type="checkbox" id="service1">
                                                                     <label class="form-check-label" for="service1">Hair and Styling</label>
                                                                     <span class="ms-auto">PKR 12</span>
                                                                 </div>
                                                                 <div class="service-item d-flex align-items-center border p-4 mb-2">
-                                                                    <input class="form-check-input me-3" type="checkbox" id="service2" style="transform: scale(1.5);">
+                                                                    <input class="form-check-input me-3" type="checkbox" id="service2">
                                                                     <label class="form-check-label" for="service2">Facial</label>
                                                                     <span class="ms-auto">PKR 12</span>
                                                                 </div>
                                                                 <div class="service-item d-flex align-items-center border p-4 mb-2">
-                                                                    <input class="form-check-input me-3" type="checkbox" id="service3" style="transform: scale(1.5);">
+                                                                    <input class="form-check-input me-3" type="checkbox" id="service3">
                                                                     <label class="form-check-label" for="service3">Haircut</label>
                                                                     <span class="ms-auto">PKR 12</span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         
-                                                        
-                                                        
-                                                        
-                                                        
                                                     </div>
-
                                                     <div class="d-flex align-items-start gap-3 mt-4">
                                                         <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-emergency-contacts-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Emergency Contact</button>
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-location-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Location</button>
+                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-location-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Location</button> --}}
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto" 
+                                                            onclick="changeTab('v-pills-location-tab')">
+                                                            <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue
+                                                        </button>
                                                     </div>
                                                 </div>
 
@@ -593,16 +637,17 @@ input[type="file"] {
                                                             </div>
                                                             <p>No business address added</p>
                                                             
-                                                            
-                                                            
-                                                            
                                                         </div>
                                                         
                                                     </div>
 
                                                     <div class="d-flex align-items-start gap-3 mt-4">
                                                         <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-services-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Services</button>
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-location-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Settings</button>
+                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-location-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Settings</button> --}}
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto" 
+                                                        onclick="changeTab('v-pills-setting-tab')">
+                                                    <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue
+                                                </button>
                                                     </div>
                                                 </div>
                                                 <!-- end tab pane -->
@@ -643,7 +688,7 @@ input[type="file"] {
                                                             
                                                         </div>
                                                         <div class="col-md-12">
-                                                            <select class="form-select" id="country-code" required>
+                                                            <select class="form-select">
                                                                 <option value="low">Low</option>
                                                                 <option value="basic">Basic</option>
                                                                 <option value="medium">Medium</option>
@@ -657,7 +702,11 @@ input[type="file"] {
                                                     </div>
                                                     <div class="d-flex align-items-start gap-3 mt-4">
                                                         <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-location-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Location</button>
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-commissions-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Commision</button>
+                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-commissions-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Commision</button> --}}
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto" 
+                                                            onclick="changeTab('v-pills-commissions-tab')">
+                                                            <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue
+                                                        </button>
                                                     </div>
                                                 </div>
 
@@ -668,10 +717,10 @@ input[type="file"] {
                                                         <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
                                                             <div class="d-flex flex-column">
                                                                 <div class="d-flex align-items-center">
-                                                                    <h3 class="mb-0 me-2">Services Commission</h3>
+                                                                    <h4 class="mb-0 me-2">Services Commission</h4>
                                                                     <span class="badge bg-secondary">Off</span>
                                                                 </div>
-                                                                <p class="text-muted mb-0" style="font-size: 16px;">Commission earned on services provided. Learn more</p>
+                                                                <p class="text-muted mb-0" style="font-size: 14px;">Commission earned on services provided. Learn more</p>
                                                             </div>
                                                             <div class="form-check form-switch">
                                                                 <input type="checkbox" class="form-check-input" id="customSwitchsizelg">
@@ -680,12 +729,12 @@ input[type="file"] {
                                                         <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
                                                             <div class="d-flex flex-column">
                                                                 <div class="d-flex align-items-center">
-                                                                    <h3 class="mb-0 me-2">Products commission
+                                                                    <h4 class="mb-0 me-2">Products commission
 
-                                                                    </h3>
+                                                                    </h4>
                                                                     <span class="badge bg-secondary">Off</span>
                                                                 </div>
-                                                                <p class="text-muted mb-0" style="font-size: 16px;">Commission earned on products sold. Learn more</p>
+                                                                <p class="text-muted mb-0" style="font-size: 14px;">Commission earned on products sold. Learn more</p>
                                                             </div>
                                                             <div class="form-check form-switch">
                                                                 <input type="checkbox" class="form-check-input" id="customSwitchsizelg">
@@ -694,12 +743,12 @@ input[type="file"] {
                                                         <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
                                                             <div class="d-flex flex-column">
                                                                 <div class="d-flex align-items-center">
-                                                                    <h3 class="mb-0 me-2">Memberships commission
+                                                                    <h4 class="mb-0 me-2">Memberships commission
 
-                                                                    </h3>
+                                                                    </h4>
                                                                     <span class="badge bg-secondary">Off</span>
                                                                 </div>
-                                                                <p class="text-muted mb-0" style="font-size: 16px;">Commission earned on memberships sold. Learn more</p>
+                                                                <p class="text-muted mb-0" style="font-size: 14px;">Commission earned on memberships sold. Learn more</p>
                                                             </div>
                                                             <div class="form-check form-switch">
                                                                 <input type="checkbox" class="form-check-input" id="customSwitchsizelg">
@@ -708,12 +757,12 @@ input[type="file"] {
                                                         <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
                                                             <div class="d-flex flex-column">
                                                                 <div class="d-flex align-items-center">
-                                                                    <h3 class="mb-0 me-2">Gift cards commission
+                                                                    <h4 class="mb-0 me-2">Gift cards commission
 
-                                                                    </h3>
+                                                                    </h4>
                                                                     <span class="badge bg-secondary">Off</span>
                                                                 </div>
-                                                                <p class="text-muted mb-0" style="font-size: 16px;">Commission earned on gift cards sold. Learn more</p>
+                                                                <p class="text-muted mb-0" style="font-size: 14px;">Commission earned on gift cards sold. Learn more</p>
                                                             </div>
                                                             <div class="form-check form-switch">
                                                                 <input type="checkbox" class="form-check-input" id="customSwitchsizelg">
@@ -722,7 +771,7 @@ input[type="file"] {
                                                     </div>
                                                     <div class="d-flex align-items-start gap-3 mt-4">
                                                         <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-setting-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Services</button>
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Finish</button>
+                                                        <button type="submit" class="btn btn-success right ms-auto"> Finish</button>
                                                     </div>
                                                     
                                                 </div>
@@ -836,6 +885,15 @@ document.getElementById('selectAll').addEventListener('change', function() {
         checkbox.checked = checked;
     });
 });
+
+
+
+///////////////////// nexttab tabs code 
+
+function changeTab(tabId) {
+    var tabTrigger = new bootstrap.Tab(document.getElementById(tabId));
+    tabTrigger.show();
+}
 
 
 </script>

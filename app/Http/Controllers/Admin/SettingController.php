@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BranchAddress;
 use App\Models\DurationHour;
 use Illuminate\Http\Request;
 use App\Models\Setting;
@@ -206,6 +207,30 @@ class SettingController extends Controller
         ]);
 
         toast('Duration Hr added succesfully','success');
+        return redirect()->back();
+    }
+
+
+    public function brancheAddressIndex()
+    {
+        $branchesAddresses = BranchAddress::all();
+
+        return view('backend.setting.branch.index',compact('branchesAddresses'));     
+    }
+
+    public function brancheAddressStore(Request $request)
+    {
+        $request->validate([
+           'branch_name' => 'required',
+           'branch_address'=>'required'
+        ]);
+
+        BranchAddress::create([
+            'branch_name'=>$request->branch_name,
+            'branch_address'=>$request->branch_address,
+        ]);
+
+        toast('Branch address added successfully','success');
         return redirect()->back();
     }
 }

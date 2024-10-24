@@ -206,7 +206,7 @@
                                                                                                             </tbody> --}}
                                                                                                             <tbody>
                                                                                                                 @forelse ($services as $service)
-                                                                                                                    <tr>
+                                                                                                                    <tr id="service-row-{{ $service->id }}">
                                                                                                                         <td>
                                                                                                                             <div class="d-flex align-items-center">
                                                                                                                                 <div>
@@ -444,21 +444,120 @@
 
 @push('scripts')
 <script>
+    // $(document).ready(function() {
+    //     $('.category-table').DataTable({
+    //         processing: true,
+    //         serverSide: true,
+    //         ajax: '{{ route('admin.sale.index') }}',
+    //         columns: [
+    //             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+    //             { data: 'name', name: 'name' },
+    //             { data: 'image', name: 'image' },
+    //             { data: 'created_at', name: 'created_at' },
+    //             { data: 'action', name: 'action', orderable: false, searchable: false },
+    //         ]
+    //     });
+    // });
+
+
+
+
+    //////////////delete service code
+    // $(document).ready(function() {
+    // // Set the CSRF token for all AJAX requests
+    // $.ajaxSetup({
+    //     headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //     }
+    // });
+    // })
+    // function deleteService(serviceId) {
+    //     console.log(serviceId);
+    // if (confirm('Are you sure you want to delete this service?')) {
+    //     $.ajax({
+    //         url: '/services/' + serviceId,
+            
+    //         type: 'DELETE',
+    //         success: function(response) {
+    //             // Remove the service row from the table
+    //             $('#service-row-' + serviceId).remove();
+    //             alert('Service deleted successfully.');
+    //         },
+    //         error: function(xhr) {
+    //             alert('Error deleting service: ' + xhr.responseText);
+    //             }
+    //         });
+    //     }
+    // }
+
+
+
     $(document).ready(function() {
-        $('.category-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '{{ route('admin.sale.index') }}',
-            columns: [
-                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-                { data: 'name', name: 'name' },
-                { data: 'image', name: 'image' },
-                { data: 'created_at', name: 'created_at' },
-                { data: 'action', name: 'action', orderable: false, searchable: false },
-            ]
-        });
+    // Set the CSRF token for all AJAX requests
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
-    </script>
+});
+
+// Define deleteService in the global scope
+// function deleteService(serviceId) {
+//     console.log(serviceId);
+//     if (confirm('Are you sure you want to delete this service?')) {
+//         $.ajax({
+//             url: '/services/' + serviceId, // Adjust this URL based on your routing
+//             type: 'DELETE',
+//             success: function(response) {
+//                 // Remove the service row from the table
+//                 $('#service-row-' + serviceId).remove();
+//                 alert('Service deleted successfully.');
+//             },
+//             error: function(xhr) {
+//                 alert('Error deleting service: ' + xhr.responseText);
+//             }
+//         });
+//     }
+// }
+
+
+function deleteService(serviceId) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You won\'t be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '/services/' + serviceId,
+                type: 'DELETE',
+                success: function(response) {
+                    // Remove the service row from the table
+                    $('#service-row-' + serviceId).remove();
+                    Swal.fire(
+                        'Deleted!',
+                        'Your service has been deleted.',
+                        'success'
+                    );
+                },
+                error: function(xhr) {
+                    Swal.fire(
+                        'Error!',
+                        'Error deleting service: ' + xhr.responseText,
+                        'error'
+                    );
+                }
+            });
+        }
+    });
+}
+
+
+</script>
 
 
 @endpush 

@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class BranchAddress extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'country',
-        'country_code',
-        'phone_code',
+        'branch_name',
+        'branch_address',
     ];
 }

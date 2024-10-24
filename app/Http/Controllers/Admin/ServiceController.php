@@ -43,4 +43,17 @@ class ServiceController extends Controller
         toast('Service added successfully','success');
         return redirect()->route('admin.catelog.index');
     }
+
+    public function destroy($id)
+    {
+        $service = Service::find($id);
+
+        if (!$service) {
+            return response()->json(['message' => 'Service not found'], 404);
+        }
+
+        $service->delete();
+        return response()->json(['message' => 'Service deleted successfully']);
+    }
+
 }

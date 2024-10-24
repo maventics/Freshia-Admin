@@ -969,24 +969,14 @@ input[type="file"] {
 
 @push('scripts')
 <script src="{{asset('assets/backend/js/pages/form-wizard.init.js')}}"></script>
-    
-
 
 <script>
-
-
-
-
-
-
-
-    document.querySelectorAll('.user-icon').forEach(icon => {
-    const name = icon.nextElementSibling.textContent; // Get the name from the span
-    const firstLetter = name.charAt(0).toUpperCase(); // Get the first letter
-    icon.querySelector('.placeholder').textContent = firstLetter; // Set it to the placeholder
+///////// user icon
+document.querySelectorAll('.user-icon').forEach(icon => {
+const name = icon.nextElementSibling.textContent; // Get the name from the span
+const firstLetter = name.charAt(0).toUpperCase(); // Get the first letter
+icon.querySelector('.placeholder').textContent = firstLetter; // Set it to the placeholder
 });
-
-
 
 
 
@@ -1003,7 +993,6 @@ document.getElementById('selectAll').addEventListener('change', function() {
 
 
 ///////////////////// nexttab tabs code 
-
 
 function changeTab(tabId) {
         var tabTrigger = new bootstrap.Tab(document.getElementById(tabId));
