@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Str;
@@ -54,29 +55,46 @@ class ClientController extends Controller
 
     public function create()
     {
-        return view('backend.client.create');
+        $countries = Country::select('id', 'country')->get();
+        $phoneCodes = Country::select('id', 'phone_code')->get();
+        return view('backend.client.create',compact('countries','phoneCodes'));
     }
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
-            'name'=> 'required',
-            'image'=> 'required',
-            'description'=>'required'
+            'fname'=> 'required',
+            'lname'=> 'required',
+            'email'=>'required|email|unique:clients,email'
         ]);
+
+        $image = null;
 
         if($request->has('image')){
             $file =  $request->file('image');
-            $ext = $file->getClientOriginalExtension();
-            $fileName = time().'.'.$ext;
-            $file->move('assets/backend/uploads/category',$fileName);
+            $fileName = time().'.'. $file->getClientOriginalExtension();
+            $file->move('assets/backend/uploads/client',$fileName);
+            $image = 'assets/backend/uploads/client/'.$fileName;
         }
-        $slug = Str::slug($request->name);
         Client::create([
-            'name'=>$request->name,
-            'slug'=>$slug,
-            'image'=>$fileName,
-            'description'=>$request->description,
+            'fname'=>$request->fname,
+            'lname'=>$request->lname,
+            'image'=>$image,
+            'email'=>$request->email,
+            'country_code'=>$request->country_code,
+            'phone'=>$request->phone,
+            'dob'=>$request->dob,
+            'gender'=>$request->gender,
+            'pronouns'=>$request->pronouns,
+            'language'=>$request->preferred_language,
+            'client_source'=>$request->client_source,
+            'occupation'=>$request->occupation,
+            'country'=>$request->country,
+            'additional_email'=>$request->additional_email,
+            'additional_country_code'=>$request->additional_country_code,
+            'additional_phone'=>$request->additional_phone,
+           
         ]);
 
         toast('Client added successfully','success');

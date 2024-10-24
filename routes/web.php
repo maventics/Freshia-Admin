@@ -30,6 +30,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('admin/profile',[ProfileController::class,'index'])->name('admin.profile.index');
     Route::get('admin/profile/edit',[ProfileController::class,'edit'])->name('admin.profile.edit');
     Route::post('admin/profile/update/{id}',[ProfileController::class,'update'])->name('admin.profile.update');
+
+    
     Route::controller(ClientController::class)->group(function(){
         Route::get('admin/clients','index')->name('admin.client.index');
         Route::get('admin/create/client','create')->name('admin.client.create');
@@ -55,12 +57,15 @@ Route::middleware(['auth'])->group(function(){
     Route::get('admin/branche-address','brancheAddressIndex')->name('admin.branche-address.index');
     Route::post('admin/store/branche-address','brancheAddressStore')->name('admin.branche-address.store');
     
-
-    
     });
 
-    Route::post('admin/service/store',[ServiceController::class,'ServiceStore'])->name('admin.service.store');
-    Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
+
+    Route::controller(ServiceController::class)->group(function(){
+        Route::post('admin/service/store','ServiceStore')->name('admin.service.store');
+        Route::get('admin/create/service','createService')->name('admin.service.create');
+
+        Route::delete('/services/{id}',  'destroy');
+    });
 
 
     Route::controller(ServiceTypeController::class)->group(function(){
@@ -75,7 +80,6 @@ Route::middleware(['auth'])->group(function(){
 
     // Catalog Route
     Route::get('admin/catalogs',[CatalogController::class,'index'])->name('admin.catelog.index');
-    Route::get('admin/create/service',[CatalogController::class,'createService'])->name('admin.service.create');
     Route::get('admin/create/package',[PackageController::class,'create'])->name('admin.package.create');
 
 

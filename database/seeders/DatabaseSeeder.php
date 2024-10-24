@@ -23,6 +23,12 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SettingSeeder::class,
             CountrySeeder::class,
+            ServiceTypeSeeder::class,
+            SubServiceTypeSeeder::class,
+            DurationHourSeeder::class,
+            CategorySeeder::class,
+            ServiceSeeder::class,
+            BranchAddressSeeder::class
         ]);
     }
 }

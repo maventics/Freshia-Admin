@@ -162,7 +162,9 @@ input[type="file"] {
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="mb-0">Add team member</h2>
+                            <h2 class="mb-0">Add team member
+                                <a class="btn btn-danger float-end" href="{{route('admin.team.index')}}">Back</a>
+                            </h2>
                         </div><!-- end card header -->
                         <div class="card-body form-steps">
                             <form class="vertical-navs-step" method="POST" action="{{route('admin.team.store')}}" enctype="multipart/form-data">
@@ -254,18 +256,18 @@ input[type="file"] {
                                                         <div class="row g-3">
                                                             <div class="col-sm-6">
                                                                 <label for="fname" class="form-label">First name</label>
-                                                                <input type="text" class="form-control" name="fname" id="fname" placeholder="Enter First Name" value="">
+                                                                <input type="text" class="form-control" name="fname" id="fname" placeholder="Enter First Name" value="{{old('fname')}}">
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <label for="lname" class="form-label">Last name</label>
-                                                                <input type="text" class="form-control" name="lname" id="lastName" placeholder="Enter Last Name" value="">
+                                                                <input type="text" class="form-control" name="lname" id="lastName" placeholder="Enter Last Name" value="{{old('lname')}}">
                                                             </div>
 
                                                             <div class="col-6">
-                                                                <label for="email" class="form-label">Email</label>
+                                                                <label for="basicemail" class="form-label">Email</label>
                                                                 <div class="">
-                                                                    <input type="email" name="email" class="form-control" placeholder="Enter Email">
+                                                                    <input type="email" name="email" class="form-control" placeholder="Enter Email" value="{{old('email')}}">
                                                                 </div>
                                                             </div>
 
@@ -274,13 +276,13 @@ input[type="file"] {
                                                                 <select class="form-select" name="phone_code">
                                                                     {{-- <option value="" disabled selected>+1</option> --}}
                                                                     @foreach($phoneCodes as $code)
-                                                                    <option value="{{ $code->phone_code }}">{{ $code->phone_code }}</option>
-                                                                @endforeach
+                                                                        <option value="{{ $code->phone_code }}">{{ $code->phone_code }}</option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label for="phone" class="form-label">Phone</label>
-                                                                <input type="number" class="form-control" name="phone" placeholder="1234567890">
+                                                                <input type="number" class="form-control" name="phone" placeholder="1234567890" value="{{old('phone')}}">
                                                             </div>
 
                                                             {{-- <div class="col-6">
@@ -316,7 +318,7 @@ input[type="file"] {
                                                             </div>
                                                             <div class="col-12">
                                                                 <label for="email" class="form-label">Job Title</label>
-                                                                <input type="text" name="job_title" class="form-control" placeholder="Visible to client online">
+                                                                <input type="text" name="job_title" class="form-control" placeholder="Visible to client online" value="{{old('job_title')}}">
                                                             </div>
                                                             <hr>
                                                             <div class="col-12 mt-4">
@@ -355,12 +357,12 @@ input[type="file"] {
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label for="phone" class="form-label">Team Member ID</label>
-                                                                <input type="text" class="form-control" name="team_member_id" placeholder="Team Member ID">
+                                                                <input type="text" class="form-control" name="team_member_id" placeholder="Team Member ID" value="{{old('team_member_id')}}">
                                                                 <span class="text-muted" style="font-size:11px; ">An identifier used for external systems like payroll</span>
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <label for="phone" class="form-label">Notes</label>
-                                                                <textarea class="form-control" id="note" name="note" rows="6" placeholder="Add a private note only viewable in the team member list"></textarea>
+                                                                <textarea class="form-control" id="note" name="note" rows="6" placeholder="Add a private note only viewable in the team member list">{{old('note')}}</textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -381,94 +383,90 @@ input[type="file"] {
                                                     </div>
 
                                                     <div>
-                                                        
-                                                              <h5 type="button" class="text-primary" data-bs-toggle="modal" data-bs-target="#exampleModalgrid">
-                                                                + Add New Address
-                                                            </h5>
+                                                        <h5 type="button" class="text-primary" data-bs-toggle="modal" data-bs-target="#exampleModalgrid">
+                                                        + Add New Address
+                                                        </h5>
 
-                                                                <div class="modal fade" id="exampleModalgrid" tabindex="-1" aria-labelledby="exampleModalgridLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-dialog-centered">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalgridLabel">New Address</h5>
-                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <div class="modal fade" id="exampleModalgrid" tabindex="-1" aria-labelledby="exampleModalgridLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalgridLabel">New Address</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="d-flex justify-content-between gap-3 align-items-center">
+                                                                            <div class="home-address text-center border rounded py-3 flex-fill" onclick="selectAddressType('Home')">
+                                                                                <span><i class="ri-home-line"></i></span>
+                                                                                <p>Home</p>
                                                                             </div>
-                                                                            <div class="modal-body">
-                                                                                <div class="d-flex justify-content-between gap-3 align-items-center">
-                                                                                    <div class="home-address text-center border rounded py-3 flex-fill" onclick="selectAddressType('Home')">
-                                                                                        <span><i class="ri-home-line"></i></span>
-                                                                                        <p>Home</p>
-                                                                                    </div>
-                                                                                    <div class="home-address text-center border rounded py-3 flex-fill" onclick="selectAddressType('Work')">
-                                                                                        <span><i class="ri-briefcase-4-fill"></i></span>
-                                                                                        <p>Work</p>
-                                                                                    </div>
-                                                                                    <div class="home-address text-center border rounded py-3 flex-fill" onclick="selectAddressType('Other')">
-                                                                                        <span><i class="ri-more-fill"></i></span>
-                                                                                        <p>Other</p>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="mt-3">
-                                                                                    <label for="selectedAddressTypeModal" class="form-label">Selected Address Type</label>
-                                                                                    <input type="text" class="form-control" id="selectedAddressTypeModal" value="Home" readonly>
-                                                                                </div>
-
-                                                                                <div class="d-flex justify-content-end mt-3">
-                                                                                    <button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Close</button>
-                                                                                    <button type="button" class="btn btn-primary" id="submitAddressType">Submit</button>
-                                                                                </div>
+                                                                            <div class="home-address text-center border rounded py-3 flex-fill" onclick="selectAddressType('Work')">
+                                                                                <span><i class="ri-briefcase-4-fill"></i></span>
+                                                                                <p>Work</p>
                                                                             </div>
+                                                                            <div class="home-address text-center border rounded py-3 flex-fill" onclick="selectAddressType('Other')">
+                                                                                <span><i class="ri-more-fill"></i></span>
+                                                                                <p>Other</p>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="mt-3">
+                                                                            <label for="selectedAddressTypeModal" class="form-label">Selected Address Type</label>
+                                                                            <input type="text" class="form-control" id="selectedAddressTypeModal" value="Home" readonly>
+                                                                        </div>
+
+                                                                        <div class="d-flex justify-content-end mt-3">
+                                                                            <button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Close</button>
+                                                                            <button type="button" class="btn btn-primary" id="submitAddressType">Submit</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                            </div>
+                                                        </div>
 
-                                                            
-
-                                                            <div class="mt-4 d-none" id="addressFields">
-                                                                <div class="row g-3">
-                                                                    <div class="col-12">
-                                                                        <label for="selectedAddressType" class="form-label">Selected Address Type</label>
-                                                                        <input type="text" class="form-control"  placeholder="Selected Address Type" readonly>
-                                                                    </div>
-                                                                    <div class="col-12">
-                                                                        <label for="address" class="form-label">Address</label>
-                                                                        <input type="text" class="form-control"  placeholder="1234 Main St">
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <label for="address2" class="form-label">Apt/Suite<span class="text-muted">(Optional)</span></label>
-                                                                        <input type="text" class="form-control"  placeholder="Apartment or suite">
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <label for="district" class="form-label">District<span class="text-muted">(Optional)</span></label>
-                                                                        <input type="text" class="form-control"  placeholder="District">
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <label for="city" class="form-label">City<span class="text-muted">(Optional)</span></label>
-                                                                        <input type="text" class="form-control"  placeholder="City">
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <label for="region" class="form-label">Region<span class="text-muted">(Optional)</span></label>
-                                                                        <input type="text" class="form-control"  placeholder="Region">
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <label for="state" class="form-label">Postcode</label>
-                                                                        <select class="form-select" >
-                                                                            <option value="">Choose...</option>
-                                                                            <option>California</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <label for="country" class="form-label">Country</label>
-                                                                        <select class="form-select" >
-                                                                            <option value="">Choose...</option>
-                                                                            <option>United States</option>
-                                                                        </select>
-                                                                    </div>
+                                                        <div class="mt-4 d-none" id="addressFields">
+                                                            <div class="row g-3">
+                                                                <div class="col-12">
+                                                                    <label for="selectedAddressType" class="form-label">Selected Address Type</label>
+                                                                    <input type="text" class="form-control" id="selectedAddressType" placeholder="Selected Address Type" readonly>
+                                                                </div>
+                                                                
+                                                                <div class="col-12">
+                                                                    <label for="address" class="form-label">Address</label>
+                                                                    <input type="text" name="address" class="form-control"  placeholder="1234 Main St">
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <label for="address2" class="form-label">Apt/Suite<span class="text-muted">(Optional)</span></label>
+                                                                    <input type="text" class="form-control" name="apt_suit"  placeholder="Apartment or suite">
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <label for="district" class="form-label">District<span class="text-muted">(Optional)</span></label>
+                                                                    <input type="text" class="form-control" name="district" placeholder="District">
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <label for="city" class="form-label">City<span class="text-muted">(Optional)</span></label>
+                                                                    <input type="text" class="form-control" name="city"  placeholder="City">
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <label for="region" class="form-label">Region<span class="text-muted">(Optional)</span></label>
+                                                                    <input type="text" class="form-control" name="region"  placeholder="Region">
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <label for="state" class="form-label">Postcode</label>
+                                                                    <input type="text" class="form-control" name="postcode"  placeholder="Postcode">
+                                                                    
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <label for="country" class="form-label">Country</label>
+                                                                    <select class="form-select" >
+                                                                        <option value="">Choose...</option>
+                                                                        @foreach($countries as $country)
+                                                                        <option value="{{ $country->country }}">{{ $country->country }}</option>
+                                                                        @endforeach
+                                                                    </select>
                                                                 </div>
                                                             </div>
-                                                            
-                                                            
+                                                        </div>
                                                     </div>
                                                     <div class="d-flex align-items-start gap-3 mt-4">
                                                         <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-profile-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to profile</button>
@@ -490,35 +488,31 @@ input[type="file"] {
                                                         <div class="row gy-3">
                                                             <div class="col-sm-6">
                                                                 <label for="firstName" class="form-label">Full name</label>
-                                                                <input type="text" class="form-control" placeholder="Enter First Name" value="">
+                                                                <input type="text" class="form-control" name="emergency_fullname" placeholder="Enter Full Name" value="">
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <label for="lastName" class="form-label">Relationship</label>
-                                                                <input type="text" class="form-control"  placeholder="Enter Last Name" value="">
+                                                                <input type="text" class="form-control" name="emergency_relationship"  placeholder="Enter Relationship" value="">
                                                             </div>
 
                                                             <div class="col-md-6">
-                                                                <label for="email" class="form-label">Email</label>
-                                                                <input type="email" class="form-control" name="emergency_email" placeholder="Enter Email">
+                                                                <label for="emergency_email" class="form-label">Email</label>
+                                                                <input type="email" class="form-control" name="emergency_email" placeholder="Enter Emergency Email">
                                                                 
                                                             </div>
 
                                                             <div class="col-md-2">
                                                                 <label for="country-code" class="form-label"> Code</label>
-                                                                <select class="form-select">
-                                                                    <option value="" disabled selected>+1</option>
-                                                                    <option value="+1">United States (+1)</option>
-                                                                    <option value="+44">United Kingdom (+44)</option>
-                                                                    <option value="+91">India (+91)</option>
-                                                                    <option value="+61">Australia (+61)</option>
-                                                                    <option value="+81">Japan (+81)</option>
-                                                                    <!-- Add more country options as needed -->
+                                                                <select class="form-select" name="emergency_phone_code">
+                                                                    @foreach($phoneCodes as $code)
+                                                                    <option value="{{ $code->phone_code }}">{{ $code->phone_code }}</option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label for="phone" class="form-label">Phone</label>
-                                                                <input type="text" class="form-control" name="emergency_phone" placeholder="1234567890">
+                                                                <input type="number" class="form-control" name="emergency_phone" placeholder="1234567890">
                                                             </div>
                                                             
                                                             
@@ -582,7 +576,7 @@ input[type="file"] {
                                                             </div>
                                                         </div> --}}
 
-                                                        <div class="row gy-3 mt-4">
+                                                        {{-- <div class="row gy-3 mt-4">
                                                             <div class="col-12">
                                                                 <!-- Select All Checkbox -->
                                                                 <div class="form-check mb-4 ml-2" style="margin-left: 21px;">
@@ -607,7 +601,44 @@ input[type="file"] {
                                                                     <span class="ms-auto">PKR 12</span>
                                                                 </div>
                                                             </div>
+                                                        </div> --}}
+
+                                                        <div class="row gy-3 mt-4">
+                                                            <div class="col-12">
+                                                                <!-- Select All Checkbox -->
+                                                                <div class="form-check mb-4 ml-2" style="margin-left: 21px;">
+                                                                    <input class="form-check-input" type="checkbox" id="selectAll">
+                                                                    <label class="form-check-label" for="selectAll" style="font-size: 16px; margin-top: 6px;">Select All</label>
+                                                                </div>
+                                                                
+                                                                <!-- Service Items with Checkboxes -->
+                                                                {{-- @forelse($servicesses as $service)
+                                                                    <div class="service-item d-flex align-items-center border p-4 mb-2">
+                                                                        <input class="form-check-input me-3" type="checkbox"  id="service{{ $service->id }}">
+                                                                        <label class="form-check-label" for="service{{ $service->id }}">{{ $service->service_name }}</label>
+                                                                        <span class="ms-auto">$ {{ $service->price }}</span>
+                                                                    </div>
+                                                                    @empty
+                                                                    <div>
+                                                                        <p>No Services available</p>
+                                                                    </div>
+                                                                @endforelse --}}
+
+                                                                @forelse($servicesses as $service)
+                                                                    <div class="service-item d-flex align-items-center border p-4 mb-2">
+                                                                        <input class="form-check-input me-3" type="checkbox" name="service_ids[]" value="{{ $service->id }}" id="service{{ $service->id }}">
+                                                                        <label class="form-check-label" for="service{{ $service->id }}">{{ $service->service_name }}</label>
+                                                                        <span class="ms-auto">$ {{ $service->price }}</span>
+                                                                    </div>
+                                                                @empty
+                                                                    <div>
+                                                                        <p>No Services available</p>
+                                                                    </div>
+                                                                @endforelse
+                                                                
+                                                            </div>
                                                         </div>
+                                                        
                                                         
                                                     </div>
                                                     <div class="d-flex align-items-start gap-3 mt-4">
@@ -628,16 +659,20 @@ input[type="file"] {
 
                                                     <div>
                                                         <div class="row gy-3">
-                                                            
-                                                            <div class="col-md-12 d-flex align-items-center">
-                                                                <div  class="location-icon">
-                                                                    <i class="ri-store-2-line" style="font-size: 40px; color:#007bff"></i>
+                                                            @foreach($branchAddresses as $address)
+                                                                <div class="col-12">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" name="branch_location_id" value="{{ $address->id }}" id="address{{ $address->id }}">
+                                                                        <label class="form-check-label" for="address{{ $address->id }}">
+                                                                            {{ $address->branch_name }}
+                                                                        </label>
+                                                                        
+                                                                        <p>{{ $address->branch_address }}</p>
+                                                                    </div>
                                                                 </div>
-                                                                <h1 class="mb-0">Maven</h1>
-                                                            </div>
-                                                            <p>No business address added</p>
-                                                            
+                                                            @endforeach
                                                         </div>
+                                                        
                                                         
                                                     </div>
 
@@ -858,19 +893,59 @@ function openModal() {
     modalInstance.show();
 }
 
-// Handle submission of the selected address type
-document.getElementById('submitAddressType').addEventListener('click', function () {
-    // Update the main form input field with the selected address type
-    document.getElementById('selectedAddressType').value = selectedAddressType; 
 
-    // Show the address fields
-    document.getElementById('addressFields').classList.remove('d-none');
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('submitAddressType').addEventListener('click', function () {
+        // Ensure the input field exists before setting its value
+        const selectedAddressInput = document.getElementById('selectedAddressType');
+        if (selectedAddressInput) {
+            selectedAddressInput.value = selectedAddressType; // Set the selected address type
+        }
+        
+        // Show the address fields
+        document.getElementById('addressFields').classList.remove('d-none');
 
-    // Close the modal programmatically
-    const modalElement = document.getElementById('exampleModalgrid');
-    const modalInstance = bootstrap.Modal.getInstance(modalElement);
-    modalInstance.hide();
+        // Close the modal programmatically
+        const modalElement = document.getElementById('exampleModalgrid');
+        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+        modalInstance.hide();
+    });
 });
+
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     document.getElementById('submitAddressType').addEventListener('click', function () {
+//         // Ensure the input field exists before setting its value
+//         const selectedAddressInput = document.getElementById('selectedAddressType');
+//         if (selectedAddressInput) {
+//             selectedAddressInput.value = selectedAddressType;
+//         }
+//         // Show the address fields
+//         document.getElementById('addressFields').classList.remove('d-none');
+
+//         // Close the modal programmatically
+//         const modalElement = document.getElementById('exampleModalgrid');
+//         const modalInstance = bootstrap.Modal.getInstance(modalElement);
+//         modalInstance.hide();
+//     });
+// });
+
+// Handle submission of the selected address type
+// document.getElementById('submitAddressType').addEventListener('click', function () {
+//     // Update the main form input field with the selected address type
+//     document.getElementById('selectedAddressType').value = selectedAddressType; 
+
+//     // Show the address fields
+//     document.getElementById('addressFields').classList.remove('d-none');
+
+//     // Close the modal programmatically
+//     const modalElement = document.getElementById('exampleModalgrid');
+//     const modalInstance = bootstrap.Modal.getInstance(modalElement);
+//     modalInstance.hide();
+// });
+
+
+
 
 
 

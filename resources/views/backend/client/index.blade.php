@@ -80,7 +80,7 @@
             ajax: '{{ route('admin.client.index') }}',
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-                { data: 'name', name: 'name' },
+                { data: 'fname', name: 'fname' },
                 { data: 'image', name: 'image' },
                 { data: 'created_at', name: 'created_at' },
                 { data: 'action', name: 'action', orderable: false, searchable: false },

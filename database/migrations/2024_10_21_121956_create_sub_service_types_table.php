@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('service_type_id');
             $table->string('sub_service');
+            $table->string('slug');
             $table->timestamps();
         });
     }

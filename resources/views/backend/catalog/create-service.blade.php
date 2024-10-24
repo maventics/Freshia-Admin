@@ -447,198 +447,44 @@ input[type="file"] {
 
                                                     <div>
     
-                                                            <div class="row gy-3 mt-4">
-                                                                <div class="col-12">
-                                                                    <!-- Select All Checkbox -->
-                                                                    <div class="form-check d-flex align-items-center p-4 mb-2">
-                                                                        <input class="form-check-input" type="checkbox" id="selectAll" style="transform: scale(1.5);">
-                                                                        <label class="form-check-label" for="selectAll" style="margin-left: 10px"> All team members</label>
-                                                                    </div>
-                                                                    
-                                                                    
-                                                                    
-                                                                    {{-- <div class="col-md-12">
-                                                                        <div class="card">
-                                                                            <div class="card-header">
-                                                                                <h4>Team members
-                                                                                </h4>
-                                                                            </div>
-                                                                            <div class="card-body">
-                                                                                <table class="table">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th>Name</th>
-                                                                                            <th>Contact</th>
-                                                                                            <th>Rating</th>
-                                                                                            <th>Actions</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <div class="user-icon" style="display: flex; align-items: center;">
-                                                                                                    <!-- User Image -->
-                                                                                                    <img src="path/to/image.jpg" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
-                                                                                                    <!-- Placeholder for Initial -->
-                                                                                                    <div class="placeholder rounded-circle" style="width: 40px; height: 40px; background-color: #007bff; color: white; display: none; align-items: center; justify-content: center; font-weight: bold;">
-                                                                                                        J
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <span>John Doe</span>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <div>Email: johndoe@example.com</div>
-                                                                                                <div>Phone: +1234567890</div>
-                                                                                            </td>
-                                                                                            <td>No Rating</td>
-                                                                                            <td>
-                                                                                                <div class="dropdown">
-                                                                                                    <button class="btn btn-dark dropdown-toggle" type="button" id="actionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                                                        Actions
-                                                                                                    </button>
-                                                                                                    <ul class="dropdown-menu" aria-labelledby="actionsDropdown">
-                                                                                                        <li><a class="dropdown-item" href="#">View</a></li>
-                                                                                                        <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                                                                        <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
-                                                                                                    </ul>
-                                                                                                </div>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <div class="user-icon" style="display: flex; align-items: center;">
-                                                                                                    <!-- User Image -->
-                                                                                                    <img src="path/to/image.jpg" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
-                                                                                                    <!-- Placeholder for Initial -->
-                                                                                                    <div class="placeholder rounded-circle" style="width: 40px; height: 40px; background-color: #007bff; color: white; display: none; align-items: center; justify-content: center; font-weight: bold;">
-                                                                                                        J
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <span>Will Jack </span>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <div>Email: willjack@example.com</div>
-                                                                                                <div>Phone: +1234567890</div>
-                                                                                            </td>
-                                                                                            <td>No Rating</td>
-                                                                                            <td>
-                                                                                                <div class="dropdown">
-                                                                                                    <button class="btn btn-dark dropdown-toggle" type="button" id="actionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                                                        Actions
-                                                                                                    </button>
-                                                                                                    <ul class="dropdown-menu" aria-labelledby="actionsDropdown">
-                                                                                                        <li><a class="dropdown-item" href="#">View</a></li>
-                                                                                                        <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                                                                        <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
-                                                                                                    </ul>
-                                                                                                </div>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <!-- More rows can be added here -->
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div><!-- end card-body -->
-                                                                            
-                                                                            
-                                                                            
-                                                                        </div><!-- end card -->
-                                                                    </div><!-- end col --> --}}
-                                                                    {{-- <div class="col-md-12">
-                                                                        <div class="card">
-                                                                            <div class="card-header">
-                                                                                <h4>Team members</h4>
-                                                                            </div>
-                                                                            <div class="card-body">
-                                                                                <table class="table">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th>Select</th>
-                                                                                            <th>Name</th>
-                                                                                            <th>Image</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <input type="checkbox" name="user-select" value="johndoe">
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <div class="user-icon" style="display: flex; align-items: center;">
-                                                                                                    <img src="path/to/image.jpg" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
-                                                                                                    <div class="placeholder rounded-circle" style="width: 40px; height: 40px; background-color: #007bff; color: white; display: none; align-items: center; justify-content: center; font-weight: bold;">
-                                                                                                        J
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <span>John Doe</span>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <input type="checkbox" name="user-select" value="willjack">
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <div class="user-icon" style="display: flex; align-items: center;">
-                                                                                                    <img src="path/to/image.jpg" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
-                                                                                                    <div class="placeholder rounded-circle" style="width: 40px; height: 40px; background-color: #007bff; color: white; display: none; align-items: center; justify-content: center; font-weight: bold;">
-                                                                                                        W
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <span>Will Jack</span>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <!-- More rows can be added here -->
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div><!-- end card-body -->
-                                                                        </div><!-- end card -->
-                                                                    </div><!-- end col --> --}}
-                                                                    <h4>Team members</h4>
-
-                                                                    <div class="col-md-12">
-                                                                        <div class="card">
-                                                                            
-                                                                            <div class="card-body">
-                                                                                <div class="user-list">
+                                                        <div class="row gy-3 mt-4">
+                                                            <div class="col-12">
+                                                                <!-- Select All Checkbox -->
+                                                                <div class="form-check d-flex align-items-center p-4 mb-2">
+                                                                    <input class="form-check-input" type="checkbox" id="selectAll" style="transform: scale(1.5);">
+                                                                    <label class="form-check-label" for="selectAll" style="margin-left: 10px"> All team members</label>
+                                                                </div>
+                                                               
+                                                                <h4>Team members</h4>
+                                                        
+                                                                <div class="col-md-12">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="user-list">
+                                                                                @forelse($teamMembers as $member)
                                                                                     <div class="user-item" style="display: flex; align-items: center;">
-                                                                                        <input class="form-check-input me-3" type="checkbox" id="johndoe" style="transform: scale(1.5);">
-
+                                                                                        <input class="form-check-input me-3" type="checkbox" id="member{{ $member->id }}" style="transform: scale(1.5);" value="{{ $member->id }}">
+                                                        
                                                                                         <div class="user-icon" style="display: flex; align-items: center;">
-                                                                                            <img src="path/to/image.jpg" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
+                                                                                            <img src="{{ $member->image ?? 'path/to/default/image.jpg' }}" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
                                                                                             <div class="placeholder rounded-circle" style="width: 40px; height: 40px; background-color: #007bff; color: white; display: none; align-items: center; justify-content: center; font-weight: bold;">
-                                                                                                J
+                                                                                                {{ strtoupper(substr($member->fname, 0, 1)) }}
                                                                                             </div>
                                                                                         </div>
-                                                                                        <span style="margin-left: 10px;">John Doe</span>
+                                                                                        <span style="margin-left: 10px;">{{ $member->fname }} {{ $member->lname }}</span>
                                                                                     </div>
-                                                                                </div>
+                                                                                    @empty
+                                                                                    <div>
+                                                                                        <p>No Team memebr is available</p>
+                                                                                    </div>
+                                                                                @endforelse
                                                                             </div>
                                                                         </div>
-                                                                        <div class="card">
-
-                                                                                    <div class="card-body">
-                                                                                        <div class="user-list">
-                                                                    
-                                                                                    <div class="user-item" style="display: flex; align-items: center;">
-                                                                                        <input class="form-check-input me-3" type="checkbox" id="willjack" style="transform: scale(1.5);">
-                                                                                        
-                                                                                        <div class="user-icon" style="display: flex; align-items: center;">
-                                                                                            <img src="path/to/image.jpg" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
-                                                                                            <div class="placeholder rounded-circle" style="width: 40px; height: 40px; background-color: #007bff; color: white; display: none; align-items: center; justify-content: center; font-weight: bold;">
-                                                                                                W
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <span style="margin-left: 10px;">Will Jack</span>
-                                                                                    </div>
-                                                                                    
-                                                                                    <!-- More user items can be added here -->
-                                                                                </div>
-                                                                            </div><!-- end card-body -->
-                                                                        </div><!-- end card -->
-                                                                    </div><!-- end col -->
-                                                                    
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            
+                                                        </div>
+                                                        
                                                     </div>
                                                     <div class="d-flex align-items-start gap-3 mt-4">
                                                         <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-bill-info-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Basic info</button>

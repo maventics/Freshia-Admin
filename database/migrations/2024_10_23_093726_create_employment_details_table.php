@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('employment_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Cascade delete
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->string('employment_type');
-            $table->string('team_member_id');
-            $table->text('note');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->string('employment_type')->nullable();
+            $table->string('team_member_id')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

@@ -7,9 +7,24 @@ use App\Models\Service;
 use App\Models\TeamService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Models\ServiceType;
+use App\Models\Category;
+use App\Models\DurationHour;
+use App\Models\User;
 
 class ServiceController extends Controller
 {
+
+    public function createService()
+    {
+        $serviceTypes = ServiceType::with('subServiceTypes')->get();
+        $categories = Category::all();
+        $durationHours = DurationHour::all();
+        $teamMembers = User::where('role','!=','1')->get();
+
+        return view('backend.catalog.create-service',compact('serviceTypes','categories','durationHours','teamMembers'));
+    }
+
     public function ServiceStore(Request $request)
     {
         $request->validate([
@@ -37,7 +52,7 @@ class ServiceController extends Controller
 
         TeamService::create([
             'service_id'=>$service->id,
-            'team_id' => '1'
+            'user_id' => '1'
         ]);
 
         toast('Service added successfully','success');

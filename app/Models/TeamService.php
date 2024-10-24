@@ -9,5 +9,5 @@ class TeamService extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['team_id','service_id'];
+    protected $fillable = ['user_id','service_id'];
 }

@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ClientEmergencyContact extends Model
+
+class ClientEmergencyContactSecondary extends Model
 {
     use HasFactory;
 

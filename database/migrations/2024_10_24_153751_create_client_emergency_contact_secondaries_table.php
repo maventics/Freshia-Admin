@@ -11,18 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('client_addresses', function (Blueprint $table) {
+        Schema::create('client_emergency_contact_secondaries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
-            $table->string('type');
-            $table->text('address');
-            $table->string('apt/suite')->nullable();
-            $table->string('district')->nullable();
-            $table->string('city')->nullable();
-            $table->string('region')->nullable();
-            $table->string('postcode')->nullable();
-            $table->string('country')->nullable();
+            $table->string('fullname')->nullable();
+            $table->string('relationship')->nullable();
+            $table->string('email')->nullable();
+            $table->string('country_code')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('client_addresses');
+        Schema::dropIfExists('client_emergency_contact_secondaries');
     }
 };

@@ -12,6 +12,7 @@ class SubServiceType extends Model
     protected $fillable = [
         'service_type_id',
         'sub_service',
+        'slug',
     ];
 
 

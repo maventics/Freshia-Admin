@@ -11,18 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('client_addresses', function (Blueprint $table) {
+        Schema::create('team_addresses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('client_id');
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
-            $table->string('type');
-            $table->text('address');
-            $table->string('apt/suite')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Cascade delete
+            $table->string('address')->nullable();
+            $table->string('apt_suit')->nullable();
             $table->string('district')->nullable();
             $table->string('city')->nullable();
             $table->string('region')->nullable();
             $table->string('postcode')->nullable();
             $table->string('country')->nullable();
+            $table->string('address_type')->nullable();
+
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('client_addresses');
+        Schema::dropIfExists('team_addresses');
     }
 };

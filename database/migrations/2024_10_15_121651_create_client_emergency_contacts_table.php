@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('client_emergency_contacts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->string('fullname')->nullable();
             $table->string('relationship')->nullable();
             $table->string('email')->nullable();
             $table->string('country_code')->nullable();
             $table->string('phone')->nullable();
-            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

@@ -21,14 +21,7 @@ class CatalogController extends Controller
     }
 
    
-    public function createService()
-    {
-        $serviceTypes = ServiceType::with('subServiceTypes')->get();
-        $categories = Category::all();
-        $durationHours = DurationHour::all();
-
-        return view('backend.catalog.create-service',compact('serviceTypes','categories','durationHours'));
-    }
+    
 
     /**
      * Store a newly created resource in storage.
