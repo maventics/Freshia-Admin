@@ -69,7 +69,7 @@
                 <!-- end page title -->
 
                 <div class="row">
-                    <div class="col-xxl-6 col-lg-12 col-md-12">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
@@ -177,33 +177,7 @@
                                                                                                 <div class="card-body">
                                                                                                     <div class="table-responsive table-card">
                                                                                                         <table class="table table-hover table-centered align-middle table-nowrap mb-0">
-                                                                                                            {{-- <tbody>
-                                                                                                                @forelse ($services as $service)
-                                                                                                                <tr>
-                                                                                                                    <td>
-                                                                                                                        <div class="d-flex align-items-center">
-                                                                                                                            
-                                                                                                                            <div>
-                                                                                                                                <h5 class="mt-2 mx-2">{{$service->service_name}}</h5>
-                                                                                                                                <h5 class="mx-2 fs-14 my-1 text-muted">{{$service->duration}}</h5>
-                                                            
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    </td>
-                                                                                                                    
-                                                                                                                    <td>
-                                                                                                                        <h4 class="float-end">${{$service->price}}</h4>
-                                                                                                                    </td>
-                                                                                                                    
-                                                                                                                </tr>
-                                                                                                                @empty
-                                                                                                                    <tr>
-                                                                                                                        <td>No Service available</td>
-                                                                                                                    </tr>
-                                                                                                                @endforelse
-                                                                                                                
-                                                                                                                
-                                                                                                            </tbody> --}}
+                                                                                                           
                                                                                                             <tbody>
                                                                                                                 @forelse ($services as $service)
                                                                                                                     <tr id="service-row-{{ $service->id }}">

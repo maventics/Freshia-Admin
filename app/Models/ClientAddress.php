@@ -10,10 +10,10 @@ class ClientAddress extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'client_id',
         'type',
         'address',
-        'apt/suite',
+        'apt_suite',
         'district',
         'district',
         'city',

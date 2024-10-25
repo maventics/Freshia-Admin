@@ -315,7 +315,7 @@
 
                 </div> <!-- end col -->
 
-                <div class="col-auto layout-rightside-col">
+                {{-- <div class="col-auto layout-rightside-col">
                     <div class="overlay"></div>
                     <div class="layout-rightside">
                         <div class="card h-100 rounded-0">
@@ -742,7 +742,7 @@
                         </div> <!-- end card-->
                     </div> <!-- end .rightbar-->
 
-                </div> <!-- end col -->
+                </div> <!-- end col --> --}}
             </div>
 
         </div>

@@ -148,8 +148,22 @@ input[type="file"] {
     background: #f9f9f9; /* Darker background on hover */
 }
 
+.add-variant-button {
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+.add-variant-button:hover {
+    background-color: #f0f0f0; /* Light gray background on hover */
+    color: #007bff; /* Change text color on hover */
+    border-color: #007bff; /* Change border color on hover */
+}
+
 </style>
 @endpush
+
+
+
 @section('content')
 
 <div class="main-content">
@@ -230,7 +244,7 @@ input[type="file"] {
                                             </button>
                                             <button class="nav-link" id="v-pills-finish-tab" data-bs-toggle="pill" data-bs-target="#v-pills-finish" type="button" role="tab" aria-controls="v-pills-finish" aria-selected="false">
                                                 <span class="step-title me-2">
-                                                    <i class="ri-close-circle-fill step-icon me-2"></i> Step 4
+                                                    <i class="ri-close-circle-fill step-icon me-2"></i>
                                                 </span>
                                                 Finish
                                             </button>
@@ -294,100 +308,66 @@ input[type="file"] {
                                                                 <label for="email" class="form-label">Description <span class="text-muted" >(Optional)</span> </label>
                                                                 <textarea class="form-control" id="description" rows="6" name="description" placeholder="Add a short description"></textarea>
                                                             </div>
+                                                            <p></p>
+                                                            <hr>
                                                             <div class="col-12 mt-4">
                                                             <h3>Pricing and duration</h3>
 
                                                             </div>
-                                                            {{-- <div class="col-6">
-                                                                <label for="email" class="form-label">Start Date</label>
-                                                                <div class="input-group" style="border-radius: 40px !important;">
-                                                                    <input type="text" id="event-start-date" class="form-control flatpickr flatpickr-input" placeholder="Select date" readonly required>
-                                                                    <span class="input-group-text"><i class="ri-calendar-event-line"></i></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <label for="email" class="form-label">End Date</label>
-                                                                <div class="input-group" style="border-radius: 40px !important;">
-                                                                    <input type="text" id="event-start-date" class="form-control flatpickr flatpickr-input" placeholder="Select date" readonly required>
-                                                                    <span class="input-group-text"><i class="ri-calendar-event-line"></i></span>
-                                                                </div>   
-                                                            </div> --}}
+                                                            
                                                             <div class="col-md-4">
                                                                 <label for="phone" class="form-label">Duration</label>
                                                                 <select name="duration_hr" class="form-select" id="">
                                                                     <option value=""  >Duration hours</option>
                                                                     @forelse ($durationHours as $durationHour)
                                                                         <option value="{{ $durationHour->duration_hr }}" style="font-size: 15px;" >{{ $durationHour->duration_hr }}</option>
-                                                                @empty
-                                                                    <option value="">No duration hours available</option>
-                                                                @endforelse
+                                                                    @empty
+                                                                        <option value="">No duration hours available</option>
+                                                                    @endforelse
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <label for="phone" class="form-label">Price type</label>
-                                                                <select name="price_type" class="form-select" id="">
-                                                                    <option value="fixed" >Fixed</option>
-                                                                    <option value="free" >Free</option>
-                                                                    <option value="from" >From</option>
+                                                                <label for="priceType" class="form-label">Price type</label>
+                                                                <select name="price_type" class="form-select" id="priceType">
+                                                                    <option value="fixed">Fixed</option>
+                                                                    <option value="free">Free</option>
+                                                                    <option value="from">From</option>
                                                                 </select>
                                                             </div>
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-4" id="priceContainer">
                                                                 <label for="price" class="form-label">Price</label>
-                                                                <input type="text" class="form-control" name="price" placeholder="USD 0.00">
+                                                                <input type="text" class="form-control" name="price" id="price" placeholder="USD 0.00">
                                                             </div>
-                                                            <hr>
+            
+                                                            <!-- Add Variant Button -->
                                                             {{-- <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
                                                                 <div class="d-flex flex-column">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <h3 class="mb-0 me-2">Extra Time</h3>
-                                                                        <span class="badge bg-dark">Off</span>
+                                                                    <div class="d-flex align-items-center rounded-pill bordered">
+                                                                        <button type="button" style="border: 1px solid; border-radius: 40px" class="p-2 mt-2 add-variant-button" data-bs-toggle="modal" data-bs-target="#addVariantModal">+ Add Variant</button>
                                                                     </div>
-                                                                    <p class="text-muted mb-0" style="font-size: 14px;">Automatically add blocked time or processing time after each appointment</p>
                                                                 </div>
-                                                                <div class="form-check form-switch" style="font-size: x-large">
-                                                                    <input type="checkbox" class="form-check-input" id="customSwitchsizelg">
-                                                                </div>
-                                                            </div>
+                                                                <h5 class="mb-0 me-2 mt-2 p-2" style="color: #007bff">Advanced Options</h5>
+                                                            </div> --}}
 
-                                                            <div class="extra-time-fields">
-                                                            <div class="col-md-6">
-                                                                <label for="price" class="form-label">Type</label>
-                                                                <input type="text" class="form-control" name="price" placeholder="USD 0.00">
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <label for="duration" class="form-label">Duration</label>
-                                                                <select name="" class="form-select" id="">
-                                                                    <option value="" >1h</option>
-                                                                    <option value="" >1.5</option>
-                                                                </select>
-                                                            </div>
-                                                        </div> --}}
-                                                        {{-- <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
-                                                            <div class="d-flex flex-column">
-                                                                <div class="d-flex align-items-center">
-                                                                    <h3 class="mb-0 me-2">Extra Time</h3>
-                                                                    <span class="badge bg-dark">Off</span>
+                                                            <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
+                                                                <div class="d-flex flex-column">
+                                                                    <div class="d-flex align-items-center rounded-pill bordered">
+                                                                        <button type="button" style="border: 1px solid; border-radius: 40px" class="p-2 mt-2 add-variant-button" data-bs-toggle="modal" data-bs-target="#addVariantModal">+ Add Variant</button>
+                                                                    </div>
                                                                 </div>
-                                                                <p class="text-muted mb-0" style="font-size: 14px;">Automatically add blocked time or processing time after each appointment</p>
+                                                                <h5 class="mb-0 me-2 mt-2 p-2" style="color: #007bff">Advanced Options</h5>
                                                             </div>
-                                                            <div class="form-check form-switch" style="font-size: x-large">
-                                                                <input type="checkbox" class="form-check-input" id="customSwitchsizelg">
+                                                            
+                                                            <!-- Container to display added variants -->
+                                                            <div class="col-md-12">
+
+                                                                <div id="variantList" class="mt-3"></div>
                                                             </div>
-                                                        </div>
-                                                        
-                                                        <div class="extra-time-fields" style="display: none;">
-                                                            <div class="col-md-6">
-                                                                <label for="price" class="form-label">Type</label>
-                                                                <input type="text" class="form-control" name="price" placeholder="USD 0.00">
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <label for="duration" class="form-label">Duration</label>
-                                                                <select name="" class="form-select" id="">
-                                                                    <option value="">1h</option>
-                                                                    <option value="">1.5h</option>
-                                                                </select>
-                                                            </div>
-                                                        </div> --}}
+                                                            
+
+                                                            <p></p>
+                                                            <hr>
+                                                           
 
                                                         <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
                                                             <div class="d-flex flex-column">
@@ -403,15 +383,33 @@ input[type="file"] {
                                                         </div>
                                                         
                                                         <div class="extra-time-fields" style="display: none;">
-                                                            <div class="row">
+                                                            {{-- <div class="row">
                                                                 <div class="col-md-6">
                                                                     <label for="price" class="form-label">Type</label>
                                                                     <select name="extra_time_type" class="form-select" id="">
                                                                         <option value="" style="font-size: 15px;" >Select Type</option>
-                                                                        <option value="Processing time after" style="font-size: 15px;" >Processing time after</option>
+                                                                        <option value="Processing time after" style="font-size: 15px;" > Processing time after </option>
+                                                                        <option value=""> <span class="text-muted text-wrap " style="font-size: 10px !important:width: 6rem;">The client remains occupied and the team member becomes available. Included in durations shown to clients.</span> </option>
                                                                         <option value="Processing time before" style="font-size: 15px;" >Processing time before</option>
+                                                                        <option value=""> <span class="text-muted text-wrap " style="font-size: 10px !important:width: 6rem;">The client is not present and the team member becomes occupied. Excluded from durations shown to clients.</span> </option>
+
                                                                     </select>
-                                                                </div>
+                                                                </div> --}}
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <label for="extraTimeType" class="form-label">Type</label>
+                                                                        <select name="extra_time_type" class="form-select" id="extraTimeType">
+                                                                            <option value="">Select Type</option>
+                                                                            <option value="processing_time_after" title="The client remains occupied and the team member becomes available. Included in durations shown to clients.">
+                                                                                Processing time after
+                                                                            </option>
+                                                                            <option value="processing_time_before" title="The client is not present and the team member becomes occupied. Excluded from durations shown to clients.">
+                                                                                Processing time before
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                
+                                                                
                                                                 <div class="col-md-6">
                                                                     <label for="duration" class="form-label">Duration</label>
                                                                     <select name="extra_time_duration" class="form-select" id="">
@@ -811,6 +809,134 @@ input[type="file"] {
     </div><!-- End Page-content -->
 </div><!-- end main content -->
 
+
+
+{{-- add varient modal --}}
+
+{{-- <div id="addVariantModal" class="modal fade" tabindex="-1" aria-labelledby="addVariantModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addVariantModalLabel">Add Variant</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="variantName" class="form-label">Variant Name</label>
+                        <input type="text" class="form-control" id="variantName" placeholder="Enter Variant Name">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="variantDescription" class="form-label">Variant Description</label>
+                        <input type="text" class="form-control" id="variantDescription" placeholder="Enter Variant Description">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="duration" class="form-label">Duration</label>
+                        <select name="duration_hr" class="form-select">
+                            <option value="">Duration hours</option>
+                            @forelse ($durationHours as $durationHour)
+                                <option value="{{ $durationHour->duration_hr }}">{{ $durationHour->duration_hr }}</option>
+                            @empty
+                                <option value="">No duration hours available</option>
+                            @endforelse
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="priceType" class="form-label">Price Type</label>
+                        <select name="price_type" class="form-select" id="priceTypes">
+                            <option value="variation_fixed">Fixed</option>
+                            <option value="variation_free">Free</option>
+                            <option value="variation__from">From</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="text" class="form-control" name="price" id="variation_free" placeholder="USD 0.00">
+                    </div>
+                    <!-- JavaScript to handle price input -->
+                        <script>
+                            document.getElementById('priceTypes').addEventListener('change', function() {
+                                const priceInput = document.getElementById('variation_free');
+
+                                console.log
+                            
+                                if (this.value === 'variation_free') {
+                                    priceInput.style.display = 'none'; // Hide the price input if "Free" is selected
+                                } else {
+                                    priceInput.style.display = 'block'; // Show the price input for other options
+                                }
+                            });
+                            </script>
+                    <div class="col-md-12 mb-3">
+                        <label for="sku" class="form-label">SKU</label>
+                        <input type="text" class="form-control" id="sku" placeholder="Enter SKU">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveVariantButton">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+<div id="addVariantModal" class="modal fade" tabindex="-1" aria-labelledby="addVariantModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addVariantModalLabel">Add Variant</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="variantName" class="form-label">Variant Name</label>
+                        <input type="text" class="form-control" id="variantName" placeholder="Enter Variant Name">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="variantDescription" class="form-label">Variant Description</label>
+                        <input type="text" class="form-control" id="variantDescription" placeholder="Enter Variant Description">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="duration" class="form-label">Duration</label>
+                        <select id="durationSelect" class="form-select">
+                            <option value="">Duration hours</option>
+                            @forelse ($durationHours as $durationHour)
+                                <option value="{{ $durationHour->duration_hr }}">{{ $durationHour->duration_hr }}</option>
+                            @empty
+                                <option value="">No duration hours available</option>
+                            @endforelse
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="priceType" class="form-label">Price Type</label>
+                        <select name="price_type" class="form-select" id="priceTypes">
+                            <option value="variation_fixed">Fixed</option>
+                            <option value="variation_free">Free</option>
+                            <option value="variation__from">From</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="text" class="form-control" name="price" id="variation_free" placeholder="USD 0.00">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="sku" class="form-label">SKU</label>
+                        <input type="text" class="form-control" id="sku" placeholder="Enter SKU">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveVariantButton">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 @endsection
 
 @push('scripts')
@@ -872,5 +998,300 @@ document.querySelector('form').addEventListener('submit', function (e) {
     });
 });
 
+
+
+//////////// disable the price input when free is selected 
+
+document.getElementById('priceType').addEventListener('change', function() {
+    const priceInput = document.getElementById('priceContainer');
+
+    if (this.value === 'free') {
+        priceInput.style.display = 'none'; // Hide the price input if "Free" is selected
+    } else {
+        priceInput.style.display = 'block'; // Show the price input for other options
+    }
+});
+
+
+//////////show variant form
+
+// document.getElementById('addVariantButton').addEventListener('click', function() {
+//     const variantFields = document.getElementById('variantFields');
+//     variantFields.classList.toggle('d-none'); // Toggle visibility
+// });
+
+
+
+
+
+
+document.getElementById('addVariantButton').addEventListener('click', function() {
+    const variantFields = document.getElementById('variantFields');
+    const buttonText = this.textContent.trim(); // Get the current button text
+
+    variantFields.classList.toggle('d-none'); // Toggle visibility
+
+    // Change button text based on visibility
+    if (variantFields.classList.contains('d-none')) {
+        this.textContent = '+ Add Variant'; // Change back to Add Variant
+    } else {
+        this.textContent = '- Close Variant'; // Change to Close Variant
+    }
+});
+
+
 </script>
+
+
+
+
+<!-- Modal for Adding Variant -->
+
+
+<script>
+    // document.getElementById('priceTypes').addEventListener('change', function() {
+    //     const priceInput = document.getElementById('variation_free');
+    
+    //     if (this.value === 'variation_free') {
+    //         priceInput.style.display = 'none'; // Hide the price input if "Free" is selected
+    //         priceInput.value = ''; // Clear the value
+    //     } else {
+    //         priceInput.style.display = 'block'; // Show the price input for other options
+    //     }
+    // });
+    
+    // // Handle saving the variant
+    // document.getElementById('saveVariantButton').addEventListener('click', function() {
+    //     const variantName = document.getElementById('variantName').value;
+    //     const variantDescription = document.getElementById('variantDescription').value;
+    //     const duration = document.querySelector('select[name="duration_hr"]').value;
+    //     const priceType = document.getElementById('priceTypes').value;
+    //     const price = document.getElementById('variation_free').style.display !== 'none' ? document.getElementById('variation_free').value : 'Free';
+    //     const sku = document.getElementById('sku').value;
+    
+    //     // Create a new div to display the variant
+    //     const variantDiv = document.createElement('div');
+    //     variantDiv.className = 'variant-item mb-2';
+    //     variantDiv.innerHTML = `
+    //         <strong>${variantName}</strong><br>
+    //         Description: ${variantDescription}<br>
+    //         Duration: ${duration} hours<br>
+    //         Price Type: ${priceType}<br>
+    //         Price: ${price}<br>
+    //         SKU: ${sku}
+    //     `;
+    
+    //     // Append the new variant to the list
+    //     document.getElementById('variantList').appendChild(variantDiv);
+    
+    //     // Clear the inputs in the modal
+    //     document.getElementById('variantName').value = '';
+    //     document.getElementById('variantDescription').value = '';
+    //     document.querySelector('select[name="duration_hr"]').value = '';
+    //     document.getElementById('priceTypes').value = 'variation_fixed';
+    //     document.getElementById('variation_free').value = '';
+    //     document.getElementById('variation_free').style.display = 'block'; // Reset display style
+    // });
+
+
+
+document.getElementById('priceTypes').addEventListener('change', function() {
+    const priceInput = document.getElementById('variation_free');
+
+    if (this.value === 'variation_free') {
+        priceInput.style.display = 'none'; // Hide the price input if "Free" is selected
+        priceInput.value = ''; // Clear the value
+    } else {
+        priceInput.style.display = 'block'; // Show the price input for other options
+    }
+});
+
+// Handle saving the variant
+// document.getElementById('saveVariantButton').addEventListener('click', function() {
+//     const variantName = document.getElementById('variantName').value;
+//     const duration = document.querySelector('select[name="duration_hr"]').value;
+//     const priceType = document.getElementById('priceTypes').value;
+//     const price = document.getElementById('variation_free').style.display !== 'none' ? document.getElementById('variation_free').value : 'Free';
+//     const sku = document.getElementById('sku').value; // Assuming you still want to capture SKU for future use
+
+//     // Create a new card to display the variant
+//     const variantCard = document.createElement('div');
+//     variantCard.className = 'card col-md-4 mb-3'; // Adjust the column size as needed
+//     variantCard.innerHTML = `
+//         <div class="card-body">
+//             <h5 class="card-title">${variantName}</h5>
+//             <p class="card-text">Duration: ${duration} hours</p>
+//             <p class="card-text">Price: ${price}</p>
+//         </div>
+//     `;
+
+//     // Append the new card to the list
+//     document.getElementById('variantList').appendChild(variantCard);
+
+//     // Clear the inputs in the modal
+//     document.getElementById('variantName').value = '';
+//     document.getElementById('variantDescription').value = '';
+//     document.querySelector('select[name="duration_hr"]').value = '';
+//     document.getElementById('priceTypes').value = 'variation_fixed';
+//     document.getElementById('variation_free').value = '';
+//     document.getElementById('variation_free').style.display = 'block'; // Reset display style
+// });
+
+
+
+
+// document.getElementById('saveVariantButton').addEventListener('click', function() {
+//     const variantName = document.getElementById('variantName').value;
+//     const duration = document.getElementById('durationSelect').value; // Get the value from the select element
+//     const priceType = document.getElementById('priceTypes').value;
+//     const price = document.getElementById('variation_free').style.display !== 'none' ? document.getElementById('variation_free').value : 'Free';
+//     const sku = document.getElementById('sku').value;
+
+//     // Create a new card to display the variant
+//     const variantCard = document.createElement('div');
+//     variantCard.className = 'card col-md-4 mb-3'; // Adjust the column size as needed
+//     variantCard.innerHTML = `
+//         <div class="card-body">
+//             <h5 class="card-title">${variantName}</h5>
+//             <p class="card-text">${duration}</p>
+//             <p class="card-text">Price: ${price}</p>
+//         </div>
+//     `;
+
+//     // Append the new card to the list
+//     document.getElementById('variantList').appendChild(variantCard);
+
+//     // Clear the inputs in the modal
+//     document.getElementById('variantName').value = '';
+//     document.getElementById('variantDescription').value = '';
+//     document.getElementById('durationSelect').value = ''; // Reset the duration select
+//     document.getElementById('priceTypes').value = 'variation_fixed';
+//     document.getElementById('variation_free').value = '';
+//     document.getElementById('variation_free').style.display = 'block'; // Reset display style
+// });
+
+// const modal = bootstrap.Modal.getInstance(document.getElementById('addVariantModal'));
+// modal.hide();
+
+
+
+
+document.getElementById('saveVariantButton').addEventListener('click', function() {
+    const variantName = document.getElementById('variantName').value;
+    const duration = document.getElementById('durationSelect').value;
+    const priceType = document.getElementById('priceTypes').value;
+    const price = document.getElementById('variation_free').style.display !== 'none' ? document.getElementById('variation_free').value : 'Free';
+    const sku = document.getElementById('sku').value;
+
+    // Create a new card to display the variant
+    // const variantCard = document.createElement('div');
+    // variantCard.className = 'card col-md-4 mb-3';
+    // variantCard.innerHTML = `
+    //     <div class="card-body">
+    //         <h5 class="card-title">${variantName}</h5>
+    //         <p class="card-text">${duration}</p>
+    //         <p class="card-text">Price: ${price}</p>
+    //     </div>
+    // `;
+
+//     const variantCard = document.createElement('div');
+// variantCard.className = 'card col-md-12 mb-3';
+// variantCard.innerHTML = `
+//     <div class="card-body">
+//         <h5 class="card-title">${variantName}</h5>
+//         <div class="row">
+//             <div class="col-md-12">
+//                 <p class="card-text">${duration}</p>
+//             </div>
+//             <div class="col-12 d-flex justify-content-between">
+               
+//                 <p class="card-text mb-0">${price}</p>
+//             </div>
+//         </div>
+//     </div>
+// `;
+
+// const formattedPrice = parseFloat(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
+// const variantCard = document.createElement('div');
+// variantCard.className = 'card col-md-12 mb-3';
+// variantCard.innerHTML = `
+//     <div class="card-body p-3">
+//         <h4 class="card-title">${variantName}</h4>
+//         <div class="row">
+//             <div class="col-12">
+//                 <h6 class="card-text">${duration}</h6>
+//             </div>
+//             <div class="col-12 d-flex justify-content-end">
+//                 <h6 class="card-text mb-0">${formattedPrice}</h6>
+//             </div>
+//         </div>
+//     </div>
+// `;
+
+const formattedPrice = parseFloat(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
+const variantCard = document.createElement('div');
+variantCard.className = 'card col-md-12 mb-3';
+variantCard.innerHTML = `
+    <div class="card-body">
+        <div class="table-responsive table-card">
+            <table class="table table-hover table-centered align-middle table-nowrap mb-0">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <h5 class="mt-2 mx-2">${variantName}</h5>
+                                    <h5 class="mx-2 fs-14 my-1 text-muted">${duration}</h5>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <h4 class="float-end">${formattedPrice}</h4>
+                        </td>
+                        <td>
+                            <div class="dropdown float-end">
+                                <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="ri-more-2-fill"></i> <!-- Use a suitable icon -->
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div><!-- end card-body -->
+`;
+
+// Append the new card to the variant list
+document.getElementById('variantList').appendChild(variantCard);
+
+
+
+
+    // Append the new card to the list
+    document.getElementById('variantList').appendChild(variantCard);
+
+    // Clear the inputs in the modal
+    document.getElementById('variantName').value = '';
+    document.getElementById('variantDescription').value = '';
+    document.getElementById('durationSelect').value = '';
+    document.getElementById('priceTypes').value = 'variation_fixed';
+    document.getElementById('variation_free').value = '';
+    document.getElementById('variation_free').style.display = 'block';
+
+    // Close the modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById('addVariantModal'));
+    modal.hide();
+});
+
+</script>
+    
+    
 @endpush

@@ -12,35 +12,9 @@
     --vz-nav-pills-link-active-bg: #cad3f0;
 }
 
-.team-members-count {
-    font-size: 14px;
-    border: 1px solid #d5d7da;
-    background: #fff;
-    width: 30px; /* Set a fixed width */
-    height: 30px; /* Set a fixed height equal to width */
-    padding: 5px; /* Adjust padding for centering the number */
-    border-radius: 50%; /* Make it fully round */
-    display: flex; /* Use flexbox for centering */
-    align-items: center; /* Vertically center */
-    justify-content: center; /* Horizontally center */
-    margin-left: 10px
-}
 
-.filter-button {
-    display: inline-flex; /* Make it a flex container */
-    align-items: center; /* Center vertically */
-    border: 1px solid; /* Border */
-    padding: 7px 15px; /* Padding for a better look */
-    border-radius: 50px; /* Fully rounded */
-    background: #fff; /* Background color */
-    text-decoration: none; /* Remove underline from link */
-    color: #000; /* Text color */
-    transition: background 0.3s; /* Smooth transition for hover */
-}
 
-.filter-button:hover {
-    background: #f9f9f9; /* Darker background on hover */
-}
+
 
 .user-icon {
     display: flex;
@@ -87,7 +61,7 @@
                     <!-- end page title -->
         
                     <div class="row">
-                        <div class="col-xxl-6 col-lg-12 col-md-12">
+                        <div class="col-xxl-12 col-lg-12 col-md-12">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">

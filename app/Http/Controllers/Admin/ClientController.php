@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use App\Models\ClientAddress;
+use App\Models\ClientEmergencyContact;
+use App\Models\ClientEmergencyContactSecondary;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -62,7 +65,7 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
+        //  dd($request->all());
         $request->validate([
             'fname'=> 'required',
             'lname'=> 'required',
@@ -77,25 +80,67 @@ class ClientController extends Controller
             $file->move('assets/backend/uploads/client',$fileName);
             $image = 'assets/backend/uploads/client/'.$fileName;
         }
-        Client::create([
-            'fname'=>$request->fname,
-            'lname'=>$request->lname,
-            'image'=>$image,
-            'email'=>$request->email,
-            'country_code'=>$request->country_code,
-            'phone'=>$request->phone,
-            'dob'=>$request->dob,
-            'gender'=>$request->gender,
-            'pronouns'=>$request->pronouns,
-            'language'=>$request->preferred_language,
-            'client_source'=>$request->client_source,
-            'occupation'=>$request->occupation,
-            'country'=>$request->country,
-            'additional_email'=>$request->additional_email,
-            'additional_country_code'=>$request->additional_country_code,
-            'additional_phone'=>$request->additional_phone,
-           
-        ]);
+           $client =  Client::create([
+                'fname'=>$request->fname,
+                'lname'=>$request->lname,
+                'image'=>$image,
+                'email'=>$request->email,
+                'country_code'=>$request->country_code,
+                'phone'=>$request->phone,
+                'dob'=>$request->dob,
+                'gender'=>$request->gender,
+                'pronouns'=>$request->pronouns,
+                'language'=>$request->preferred_language,
+                'client_source'=>$request->client_source,
+                'occupation'=>$request->occupation,
+                'country'=>$request->country,
+                'additional_email'=>$request->additional_email,
+                'additional_country_code'=>$request->additional_country_code,
+                'additional_phone'=>$request->additional_phone,
+            
+            ]);
+
+            if($request->has('address')){
+
+            ClientAddress::create([
+                'client_id'=>$client->id,
+                'type'=>$request->address_type  ?? null,
+                'address'=>$request->address,
+                'apt_suite'=>$request->apt_suite,
+                'district'=>$request->district,
+                'district'=>$request->district,
+                'city'=>$request->city,
+                'region'=>$request->region,
+                'postcode'=>$request->postcode,
+                'country'=>$request->country,
+            ]);
+        }
+
+        if($request->has('emergency_fname')  &&  $request->has('relationship') && $request->has('emergency_email') && $request->has('emergency_country_code') && $request->has('emergency_phone') ){
+            
+            ClientEmergencyContact::create([
+                'client_id' =>$client->id,
+                'fullname' =>$request->emergency_fname,
+                'relationship' =>$request->relationship,
+                'email' =>$request->emergency_email,
+                'country_code' =>$request->emergency_country_code,
+                'phone' =>$request->emergency_phone,
+            ]);
+        }
+
+
+        if($request->has('secondary_emergency_fname')  &&  $request->has('secondary_emergency_relationship') && $request->has('secondary_emergency_email') && $request->has('secondary_emergency_country_code') && $request->has('secondary_emergency_phone') ){
+            
+            ClientEmergencyContactSecondary::create([
+                'client_id' =>$client->id,
+                'fullname' =>$request->secondary_emergency_fname,
+                'relationship' =>$request->secondary_emergency_relationship,
+                'email' =>$request->secondary_emergency_email,
+                'country_code' =>$request->secondary_emergency_country_code,
+                'phone' =>$request->secondary_emergency_phone,
+            ]);
+        }
+
 
         toast('Client added successfully','success');
         return redirect()->route('admin.client.index');

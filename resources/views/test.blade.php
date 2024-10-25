@@ -1,54 +1,38 @@
-<div class="row gy-3 mt-4">
-    <div class="col-12">
-        <!-- Select All Checkbox -->
-        <div class="form-check d-flex align-items-center p-4 mb-2">
-            <input class="form-check-input" type="checkbox" id="selectAll" style="transform: scale(1.5);">
-            <label class="form-check-label" for="selectAll" style="margin-left: 10px"> All team members</label>
-        </div>
-       
-        <h4>Team members</h4>
-
-        <div class="col-md-12">
-            <div class="card">
-                
-                <div class="card-body">
-                    <div class="user-list">
-                        <div class="user-item" style="display: flex; align-items: center;">
-                            <input class="form-check-input me-3" type="checkbox" id="johndoe" style="transform: scale(1.5);">
-
-                            <div class="user-icon" style="display: flex; align-items: center;">
-                                <img src="path/to/image.jpg" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
-                                <div class="placeholder rounded-circle" style="width: 40px; height: 40px; background-color: #007bff; color: white; display: none; align-items: center; justify-content: center; font-weight: bold;">
-                                    J
+<div class="card-body">
+    <div class="table-responsive table-card">
+        <table class="table table-hover table-centered align-middle table-nowrap mb-0">
+           
+            <tbody>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <h5 class="mt-2 mx-2">Variant name</h5>
+                                    <h5 class="mx-2 fs-14 my-1 text-muted">5min</h5>
                                 </div>
                             </div>
-                            <span style="margin-left: 10px;">John Doe</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-
-                        <div class="card-body">
-                            <div class="user-list">
-        
-                        <div class="user-item" style="display: flex; align-items: center;">
-                            <input class="form-check-input me-3" type="checkbox" id="willjack" style="transform: scale(1.5);">
+                        </td>
+                        <td>
                             
-                            <div class="user-icon" style="display: flex; align-items: center;">
-                                <img src="path/to/image.jpg" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
-                                <div class="placeholder rounded-circle" style="width: 40px; height: 40px; background-color: #007bff; color: white; display: none; align-items: center; justify-content: center; font-weight: bold;">
-                                    W
-                                </div>
+                            <h4 class="float-end">$12</h4>
+                        </td>
+                        <td>
+                            <div class="dropdown float-end">
+                                <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="ri-more-2-fill"></i> <!-- Use a suitable icon -->
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                                    <li><a class="dropdown-item text-danger" href="#" onclick="deleteService({{ $service->id }})">Delete</a></li>
+                                </ul>
                             </div>
-                            <span style="margin-left: 10px;">Will Jack</span>
-                        </div>
-                        
-                        <!-- More user items can be added here -->
-                    </div>
-                </div><!-- end card-body -->
-            </div><!-- end card -->
-        </div><!-- end col -->
-        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>No Service available</td>
+                    </tr>
+            </tbody>
+            
+        </table>
     </div>
-</div>
+</div><!-- end card-body -->

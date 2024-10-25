@@ -170,7 +170,7 @@ input[type="file"] {
                             <form class="vertical-navs-step" method="POST" action="{{route('admin.team.store')}}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row gy-5">
-                                    <div class="col-lg-4">
+                                    <div class="col-xl-4">
                                         <div class="nav flex-column custom-nav nav-pills" role="tablist" aria-orientation="vertical">
                                             <button class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="true">
                                                 <span class="step-title me-2">
@@ -221,7 +221,7 @@ input[type="file"] {
                                         </div>
                                         <!-- end nav -->
                                     </div> <!-- end col-->
-                                    <div class="col-lg-8">
+                                    <div class="col-xl-8">
                                         <div class="px-lg-4">
                                             <div class="tab-content">
                                                 <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
