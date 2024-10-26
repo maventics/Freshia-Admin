@@ -16,7 +16,7 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
+        $services = Service::where('status','=','1')->get();
         return view('backend.catalog.index',compact('services'));
     }
 

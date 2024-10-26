@@ -20,7 +20,9 @@ class ServiceSeeder extends Seeder
             'description'=>'haircut',
             'duration'=>'15min',
             'price_type'=>'fixed',
-            'price'=>'12.00'
+            'price'=>'12.00',
+            'status'=>'1',
+
         ]);
 
         Service::create([
@@ -30,7 +32,8 @@ class ServiceSeeder extends Seeder
             'description'=>'hair color',
             'duration'=>'20min',
             'price_type'=>'fixed',
-            'price'=>'10.00'
+            'price'=>'10.00',
+            'status'=>'1',
         ]);
     }
 }

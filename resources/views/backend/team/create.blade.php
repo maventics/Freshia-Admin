@@ -320,6 +320,7 @@ input[type="file"] {
                                                                 <label for="email" class="form-label">Job Title</label>
                                                                 <input type="text" name="job_title" class="form-control" placeholder="Visible to client online" value="{{old('job_title')}}">
                                                             </div>
+                                                            <p></p>
                                                             <hr>
                                                             <div class="col-12 mt-4">
                                                             <h3>Employment details</h3>

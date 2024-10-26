@@ -18,8 +18,22 @@ class SettingSeeder extends Seeder
             'value'=>'Freshia',
         ]);
         Setting::create([
+            'key'=>"site_email",
+            'value'=>'info@freshia.com',
+        ]);
+        Setting::create([
             'key'=>"site_logo",
-            'value'=>'/images/logo.jpeg',
+            'value'=>'1729951743.png',
+        ]);
+
+        Setting::create([
+            'key'=>"app_debug",
+            'value'=>'true',
+        ]);
+
+        Setting::create([
+            'key'=>"app_enviroment",
+            'value'=>'local',
         ]);
         
     }

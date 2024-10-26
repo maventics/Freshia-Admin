@@ -14,4 +14,14 @@ class TeamLocation extends Model
         'user_id',
         'location_id'
     ];
+
+    public function userBranch()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(BranchAddress::class,'location_id');
+    }
 }

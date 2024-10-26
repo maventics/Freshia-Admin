@@ -54,4 +54,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function teamLocations()
+    {
+        return $this->hasMany(TeamLocation::class);
+    }
+
+    public function locations()
+    {
+        return $this->hasManyThrough(BranchAddress::class, TeamLocation::class,'user_id','id','id','location_id');
+    }
+
+
+
+
 }

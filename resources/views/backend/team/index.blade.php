@@ -102,7 +102,7 @@
                                                                         <a href="{{route('admin.team.create')}}" class="btn btn-dark">Add</a>
                                                                     </div>
                                                                 </div><!-- end card header -->
-                                                                <div class="card-body">
+                                                                <div class="card-body" style="background: #f8f8fb">
                                                                     <div class="row">
                                                                         <div class="col-md-6">
                                                                             <form action="">
@@ -134,13 +134,10 @@
                                                             <div class="row">
                                                                 <!-- Transaction Summary Card -->
                                                                 <div class="col-md-12">
-                                                                    <div class="card">
-                                                                        <div class="card-header">
-                                                                            <h4>Team members
-                                                                            </h4>
-                                                                        </div>
+                                                                    <div class="card bordered">
+                                                                        
                                                                         <div class="card-body">
-                                                                            <table class="table table-striped">
+                                                                            <table class="table">
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th>Name</th>
@@ -472,7 +469,6 @@ function deleteUser(userId, row) {
                 type: 'DELETE',
                 success: function(response) {
                     // Remove the user row from the table
-                    $(row).remove(); // This removes the row from the table directly
                     Swal.fire('Deleted!', 'Your user has been deleted.', 'success').then(() => {
                         // Reload the page after confirmation
                         window.location.reload();

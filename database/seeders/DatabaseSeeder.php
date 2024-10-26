@@ -28,7 +28,9 @@ class DatabaseSeeder extends Seeder
             DurationHourSeeder::class,
             CategorySeeder::class,
             ServiceSeeder::class,
-            BranchAddressSeeder::class
+            BranchAddressSeeder::class,
+            TeamMemberSeeder::class,
+            TeamLocationSeeder::class
         ]);
     }
 }

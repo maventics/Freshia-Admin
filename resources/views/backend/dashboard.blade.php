@@ -78,8 +78,8 @@
                                     </div><!-- end card header -->
                             
                                     <!-- card body -->
-                                    <div class="card-body d-flex align-items-start justify-content-start">
-                                        <div class="d-flex flex-column align-items-center text-start" style="height: 200px; margin-top:100px; margin-left:40px">
+                                    <div class="card-body d-flex align-items-start justify-content-center">
+                                        <div class="d-flex flex-column align-items-center text-start" style="height: 200px; margin-top:100px;">
                                             <i class="ri-bar-chart-2-line" style="font-size: 2.5rem;"></i>
                                             <h3 class="mt-2 mb-1">Your schedule is empty</h3>
                                             <p class="mb-0">Make some appointments for schedule data to appear</p>
@@ -235,8 +235,8 @@
                                     </div><!-- end card header -->
                             
                                     <!-- card body -->
-                                    <div class="card-body d-flex align-items-start justify-content-start">
-                                        <div class="d-flex flex-column align-items-center text-start" style="height: 200px; margin-top:100px; margin-left:40px">
+                                    <div class="card-body d-flex align-items-start justify-content-center">
+                                        <div class="d-flex flex-column align-items-center text-start" style="height: 200px; margin-top:100px;">
                                             <i class="ri-briefcase-2-fill" style="font-size: 2.5rem;"></i>
                                             <h3 class="mt-2 mb-1">No Appointments Today</h3>
                                             <p class="mb-0">Visit the calendar section to add some appointments</p>

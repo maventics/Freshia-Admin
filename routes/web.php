@@ -43,19 +43,19 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('admin/calendar',[CalendarController::class,'index'])->name('admin.calendar.index');
 
-    Route::controller(SettingController::class)->group(function(){
-    Route::get('admin/settings','index')->name('admin.setting.index');
-    Route::get('admin/general-settings','generalSettings')->name('admin.setting.general');
-    Route::get('admin/privacy-policy','PrivacyPolicy')->name('admin.privacy-policy');
-    Route::post('admin/privacy-policy/store','storePrivacyPolicy')->name('admin.privacy_policy.store');
-    Route::get('admin/terms-and-conditions','TermsAndConditions')->name('admin.terms-and-conditions');
-    Route::post('admin/terms-and-conditions/store','storeTermsAndConditions')->name('admin.terms_and_conditions.store');
-    Route::post('admin/site-setting/store','storeSiteSettings')->name('admin.site-setting.store');
-    Route::post('admin/smtp-setting/store','storeSmtpSettings')->name('admin.smtp-setting.store');
-    Route::get('admin/duration-hours','durationHours')->name('admin.duration-hours.index');
-    Route::post('admin/store/duration-hours','durationHoursStore')->name('admin.duration-hour.store');
-    Route::get('admin/branche-address','brancheAddressIndex')->name('admin.branche-address.index');
-    Route::post('admin/store/branche-address','brancheAddressStore')->name('admin.branche-address.store');
+        Route::controller(SettingController::class)->group(function(){
+        Route::get('admin/settings','index')->name('admin.setting.index');
+        Route::get('admin/general-settings','generalSettings')->name('admin.setting.general');
+        Route::get('admin/privacy-policy','PrivacyPolicy')->name('admin.privacy-policy');
+        Route::post('admin/privacy-policy/store','storePrivacyPolicy')->name('admin.privacy_policy.store');
+        Route::get('admin/terms-and-conditions','TermsAndConditions')->name('admin.terms-and-conditions');
+        Route::post('admin/terms-and-conditions/store','storeTermsAndConditions')->name('admin.terms_and_conditions.store');
+        Route::post('admin/site-setting/store','storeSiteSettings')->name('admin.site-setting.store');
+        Route::post('admin/smtp-setting/store','storeSmtpSettings')->name('admin.smtp-setting.store');
+        Route::get('admin/duration-hours','durationHours')->name('admin.duration-hours.index');
+        Route::post('admin/store/duration-hours','durationHoursStore')->name('admin.duration-hour.store');
+        Route::get('admin/branche-address','brancheAddressIndex')->name('admin.branche-address.index');
+        Route::post('admin/store/branche-address','brancheAddressStore')->name('admin.branche-address.store');
     
     });
 
@@ -63,8 +63,13 @@ Route::middleware(['auth'])->group(function(){
     Route::controller(ServiceController::class)->group(function(){
         Route::post('admin/service/store','ServiceStore')->name('admin.service.store');
         Route::get('admin/create/service','createService')->name('admin.service.create');
+        Route::post('/store-variant', 'storeVariant');
+        Route::post('/store-advance-options', 'storeAdvanceOptions');
+        Route::post('/store-resource', 'storeResource');
 
+        Route::get('/get-resources/{serviceId}', 'getResources');
         Route::delete('/services/{id}',  'destroy');
+
     });
 
 
@@ -74,7 +79,7 @@ Route::middleware(['auth'])->group(function(){
          Route::post('admin/store/service-type','store');
 
           Route::post('admin/store/sub-service-type','SubServiceStore')->name('admin.sub-service.store');
-        });
+    });
         
     
 

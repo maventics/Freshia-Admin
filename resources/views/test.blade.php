@@ -1,38 +1,82 @@
 <div class="card-body">
-    <div class="table-responsive table-card">
-        <table class="table table-hover table-centered align-middle table-nowrap mb-0">
-           
-            <tbody>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <h5 class="mt-2 mx-2">Variant name</h5>
-                                    <h5 class="mx-2 fs-14 my-1 text-muted">5min</h5>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            
-                            <h4 class="float-end">$12</h4>
-                        </td>
-                        <td>
-                            <div class="dropdown float-end">
-                                <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ri-more-2-fill"></i> <!-- Use a suitable icon -->
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                                    <li><a class="dropdown-item text-danger" href="#" onclick="deleteService({{ $service->id }})">Delete</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>No Service available</td>
-                    </tr>
-            </tbody>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Location and team members</th>
+                <th>Duration</th>
+                <th>Price type</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Branch 1 
+                    Address 1
+                </td>
+                <td>
+                    <div class="user-icon" style="display: flex; align-items: center;">
+                        <!-- User Image -->
+                        <img src="path/to/image.jpg" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
+                        <!-- Placeholder for Initial -->
+                        <div class="placeholder rounded-circle" style="width: 40px; height: 40px; background-color: #007bff; color: white; display: none; align-items: center; justify-content: center; font-weight: bold;">
+                            J
+                        </div>
+                    </div>
+                    <span>John Doe</span>
+                   
+                </td>
+              
+                <td>
+                    <select name="duration_hr" class="form-select" id="">
+                        <option value=""  >Duration hours</option>
+                        @forelse ($durationHours as $durationHour)
+                            <option value="{{ $durationHour->duration_hr }}" style="font-size: 15px;" >{{ $durationHour->duration_hr }}</option>
+                        @empty
+                            <option value="">No duration hours available</option>
+                        @endforelse
+                    </select>
+                </td>
+                <td>
+                    <select name="price_type" class="form-select" id="AdvOptpriceType">
+                        <option value="adv_opt_price_type_fixed" selected >Fixed (Default)</option>
+                        <option value="adv_opt_price_type_free">Free</option>
+                        <option value="adv_opt_price_type_from">From</option>
+                    </select>
+                </td>
+                <td>
+                    <div class="col-md-4" id="priceContainer">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="text" class="form-control" name="adv_opt_price_type_free" id="adv_opt_price_type_price" placeholder="USD 0.00">
+                    </div>
+                </td>
+              
+            </tr>
             
-        </table>
-    </div>
-</div><!-- end card-body -->
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+protected $fillable = [
+    'service_id',
+    'user_id',
+    'location_id',
+    'duration',
+    'price_type',
+    'price'
+];
+
+
+
+$table->unsignedBigInteger('service_id')->nullable();
+$table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+$table->unsignedBigInteger('user_id')->nullable();;
+$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+$table->unsignedBigInteger('location_id')->nullable();;
+$table->foreign('location_id')->references('id')->on('branch_addresses')->onDelete('cascade');
+$table->string('duration')->nullable();
+$table->string('price_type')->nullable();
+$table->string('price')->nullable();

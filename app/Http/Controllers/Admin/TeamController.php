@@ -28,7 +28,7 @@ class TeamController extends Controller
     {
         $countries = Country::select('id', 'country')->get();
         $phoneCodes = Country::select('id', 'phone_code')->get();
-        $servicesses = Service::all();
+        $servicesses = Service::where('status','=','1')->get();
         $branchAddresses = BranchAddress::all();
         return view('backend.team.create', compact('countries', 'phoneCodes','servicesses','branchAddresses'));
     }

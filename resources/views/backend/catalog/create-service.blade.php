@@ -162,8 +162,6 @@ input[type="file"] {
 </style>
 @endpush
 
-
-
 @section('content')
 
 <div class="main-content">
@@ -218,18 +216,7 @@ input[type="file"] {
                                             </button>
                                             <hr>
                                             <h4>Settings</h4>
-                                            <button class="nav-link" id="v-pills-online-booking-tab" data-bs-toggle="pill" data-bs-target="#v-pills-online-booking" type="button" role="tab" aria-controls="v-pills-online-booking" aria-selected="false">
-                                                <span class="step-title me-2">
-                                                    <i class="ri-close-circle-fill step-icon me-2"></i>
-                                                </span>
-                                                Online booking
-                                            </button>
-                                            <button class="nav-link" id="v-pills-forms-tab" data-bs-toggle="pill" data-bs-target="#v-pills-forms" type="button" role="tab" aria-controls="v-pills-forms" aria-selected="false">
-                                                <span class="step-title me-2">
-                                                    <i class="ri-close-circle-fill step-icon me-2"></i>
-                                                </span>
-                                                Forms
-                                            </button>
+                                            
                                             <button class="nav-link" id="v-pills-commision-tab" data-bs-toggle="pill" data-bs-target="#v-pills-commision" type="button" role="tab" aria-controls="v-pills-commision" aria-selected="false">
                                                 <span class="step-title me-2">
                                                     <i class="ri-close-circle-fill step-icon me-2"></i>
@@ -242,12 +229,7 @@ input[type="file"] {
                                                 </span>
                                                 Setting
                                             </button>
-                                            <button class="nav-link" id="v-pills-finish-tab" data-bs-toggle="pill" data-bs-target="#v-pills-finish" type="button" role="tab" aria-controls="v-pills-finish" aria-selected="false">
-                                                <span class="step-title me-2">
-                                                    <i class="ri-close-circle-fill step-icon me-2"></i>
-                                                </span>
-                                                Finish
-                                            </button>
+                                            
                                         </div>
                                         <!-- end nav -->
                                     </div> <!-- end col-->
@@ -271,6 +253,7 @@ input[type="file"] {
                                                     </div>
                                                     
                                                     <div>
+                                                        <input type="hidden" name="service_id" value="{{$serviceId}}">
                                                         <div class="row g-3">
                                                             <div class="col-sm-12">
                                                                 <label for="servicename" class="form-label">Service name</label>
@@ -355,14 +338,12 @@ input[type="file"] {
                                                                         <button type="button" style="border: 1px solid; border-radius: 40px" class="p-2 mt-2 add-variant-button" data-bs-toggle="modal" data-bs-target="#addVariantModal">+ Add Variant</button>
                                                                     </div>
                                                                 </div>
-                                                                <h5 class="mb-0 me-2 mt-2 p-2" style="color: #007bff">Advanced Options</h5>
+                                                                <h5 class="mb-0 me-2 mt-2 p-2 advnce_opt" data-bs-toggle="modal" data-bs-target="#AdvancedOptionsModal" >Advanced Options <span id="advancedOptionsCount" style="display: none;">0</span> </h5>
                                                             </div>
                                                             
                                                             <!-- Container to display added variants -->
-                                                            <div class="col-md-12">
 
                                                                 <div id="variantList" class="mt-3"></div>
-                                                            </div>
                                                             
 
                                                             <p></p>
@@ -445,7 +426,7 @@ input[type="file"] {
 
                                                     <div>
     
-                                                        <div class="row gy-3 mt-4">
+                                                        {{-- <div class="row gy-3 mt-4">
                                                             <div class="col-12">
                                                                 <!-- Select All Checkbox -->
                                                                 <div class="form-check d-flex align-items-center p-4 mb-2">
@@ -460,17 +441,18 @@ input[type="file"] {
                                                                         <div class="card-body">
                                                                             <div class="user-list">
                                                                                 @forelse($teamMembers as $member)
-                                                                                    <div class="user-item" style="display: flex; align-items: center;">
+                                                                                    <div class="user-item" style="display: flex; align-items: center; margin:10px;padding:10px">
                                                                                         <input class="form-check-input me-3" type="checkbox" id="member{{ $member->id }}" style="transform: scale(1.5);" value="{{ $member->id }}">
                                                         
                                                                                         <div class="user-icon" style="display: flex; align-items: center;">
-                                                                                            <img src="{{ $member->image ?? 'path/to/default/image.jpg' }}" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
+                                                                                            <img src="{{ $member->image ?? '' }}" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
                                                                                             <div class="placeholder rounded-circle" style="width: 40px; height: 40px; background-color: #007bff; color: white; display: none; align-items: center; justify-content: center; font-weight: bold;">
                                                                                                 {{ strtoupper(substr($member->fname, 0, 1)) }}
                                                                                             </div>
                                                                                         </div>
                                                                                         <span style="margin-left: 10px;">{{ $member->fname }} {{ $member->lname }}</span>
                                                                                     </div>
+                                                                                    <hr>
                                                                                     @empty
                                                                                     <div>
                                                                                         <p>No Team memebr is available</p>
@@ -481,7 +463,46 @@ input[type="file"] {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
+
+                                                        
+                                                            <div class="row gy-3 mt-4">
+                                                                <div class="col-12">
+                                                                    <div class="form-check d-flex align-items-center p-4 mb-2">
+                                                                        <input class="form-check-input" type="checkbox" id="selectAll" style="transform: scale(1.5);">
+                                                                        <label class="form-check-label" for="selectAll" style="margin-left: 10px"> All team members</label>
+                                                                    </div>
+                                                        
+                                                                    <h4>Team members</h4>
+                                                        
+                                                                    <div class="col-md-12">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div class="user-list">
+                                                                                    @forelse($teamMembers as $member)
+                                                                                        <div class="user-item" style="display: flex; align-items: center; margin:10px;padding:10px">
+                                                                                            <input class="form-check-input me-3" type="checkbox" name="member_ids[]" id="member{{ $member->id }}" style="transform: scale(1.5);" value="{{ $member->id }}">
+                                                                                            <div class="user-icon" style="display: flex; align-items: center;">
+                                                                                                <img src="{{ $member->image ?? '' }}" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
+                                                                                                <div class="placeholder rounded-circle" style="width: 40px; height: 40px; background-color: #007bff; color: white; display: none; align-items: center; justify-content: center; font-weight: bold;">
+                                                                                                    {{ strtoupper(substr($member->fname, 0, 1)) }}
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <span style="margin-left: 10px;">{{ $member->fname }} {{ $member->lname }}</span>
+                                                                                        </div>
+                                                                                        <hr>
+                                                                                    @empty
+                                                                                        <div>
+                                                                                            <p>No team member is available</p>
+                                                                                        </div>
+                                                                                    @endforelse
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        
                                                         
                                                     </div>
                                                     <div class="d-flex align-items-start gap-3 mt-4">
@@ -497,7 +518,7 @@ input[type="file"] {
                                                 <!-- end tab pane -->
                                                 <div class="tab-pane fade" id="v-pills-resources" role="tabpanel" aria-labelledby="v-pills-resources-tab">
                                                     <div>
-                                                        <div class="row gy-3">
+                                                        {{-- <div class="row gy-3">
                                                             <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
                                                                 <div class="d-flex flex-column">
                                                                     <div class="d-flex align-items-center">
@@ -512,8 +533,35 @@ input[type="file"] {
                                                                     <input type="checkbox" class="form-check-input" id="customSwitchsizelg">
                                                                 </div>
                                                             </div>
+                                                        </div> --}}
+                                                        <div class="row gy-3">
+                                                            <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
+                                                                <div class="d-flex flex-column">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <h3 class="mb-0 me-2">Resources required</h3>
+                                                                        <span id="resourceSwitchBadge" class="badge bg-dark">Off</span>
+                                                                    </div>
+                                                                    <p class="text-muted mb-0" style="font-size: 14px;">Require specific resources when performing this service</p>
+                                                                </div>
+                                                                <div class="form-check form-switch" style="font-size: x-large">
+                                                                    <input type="checkbox" class="form-check-input" id="resourceSwitch">
+                                                                </div>
+                                                            </div>
+                                                            
+
+                                                            <div class="col-12" id="resourcesSection" style="display: none;">
+                                                                <h4 class="mt-3">Added Resources</h4>
+                                                                <ul id="resourceList" class="list-group">
+                                                                    <!-- Resources will be added here dynamically -->
+                                                                </ul>
+                                                            </div>
                                                             
                                                             
+
+                                                            <!-- Add Resource Button -->
+                                                            <div class="col-12 text-center p-5 d-flex justify-content-center">
+                                                                <button type="button" id="addResourceButton" class="add-rsc-btn" data-bs-toggle="modal" data-bs-target="#ResourceModal" style="display: none;">+ Add Resource</button>
+                                                            </div>
                                                         </div>
                                                         
                                                     </div>
@@ -521,123 +569,13 @@ input[type="file"] {
                                                     <div class="d-flex align-items-start gap-3 mt-4">
                                                         <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-team-members-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Team members</button>
                                                         {{-- <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Continue</button> --}}
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto" onclick="changeTab('v-pills-online-booking-tab')">
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto" onclick="changeTab('v-pills-commision-tab')">
                                                             <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue
                                                         </button>
                                                     </div>
                                                 </div>
                                                 <!-- end tab pane -->
                                                 
-
-                                                <div class="tab-pane fade" id="v-pills-online-booking" role="tabpanel" aria-labelledby="v-pills-online-booking-tab">
-
-                                                    <div>
-
-                                                        <div class="row gy-3">
-                                                            <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
-                                                                <div class="d-flex flex-column">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <h3 class="mb-0 me-2">Online Booking
-
-                                                                        </h3>
-                                                                        <span class="badge bg-success">On</span>
-                                                                    </div>
-                                                                    <p class="text-muted mb-0" style="font-size: 12px;">Allow clients to book this service online via the Fresha Marketplace. <br> socials and your own custom booking links</p>
-                                                                </div>
-                                                                <div class="form-check form-switch" style="font-size: x-large">
-                                                                    <input type="checkbox" class="form-check-input" id="customSwitchsizelg" checked>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-12">
-                                                                <label for="lastName" class="form-label">Available for</label>
-                                                                <select name="menu_category" id="" class="form-select">
-                                                                    <option value=""  >All genders</option>
-                                                                    <option value=""  >Females only</option>
-                                                                    <option value=""  >Males only</option>
-                                                                </select>
-                                                                <span class="text-muted">When gender is specified, a visual indicator will be shown online
-
-                                                                </span>
-                                                            </div>
-                                                            <hr>
-                                                            
-                                                        </div>
-                                                        <div class="mt-4">
-                                                            <h3>Upsellings</h3>
-                                                        <span class="text-muted">Encourage clients to book additional services and buy suitable memberships when booking online.</span>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="form-check d-flex align-items-center p-4">
-                                                                    <input class="form-check-input" type="checkbox" id="selectAll" style="transform: scale(1.5);">
-                                                                    <label class="form-check-label" for="selectAll" style="margin-left: 10px"> Service upselling <br>
-                                                                    <span class="text-muted" >Adds an additional step when booking, where clients can choose additional services</span>
-                                                                        
-                                                                    </label> 
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-12">
-                                                                <div class="form-check d-flex align-items-center p-4">
-                                                                    <input class="form-check-input" type="checkbox" id="selectAll" style="transform: scale(1.5);">
-                                                                    <label class="form-check-label" for="selectAll" style="margin-left: 10px"> Membership upselling <br>
-                                                                    <span class="text-muted" >When selecting a service, a specific membership will be suggested to the client</span>
-                                                                        
-                                                                    </label> 
-                                                                </div>
-                                                            </div>
-                                                            
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex align-items-start gap-3 mt-4">
-                                                        <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-resources-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Resources</button>
-                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Continue</button> --}}
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto" 
-                                                        onclick="changeTab('v-pills-forms-tab')">
-                                                    <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue
-                                                </button>
-                                                    </div>
-                                                </div>
-
-                                                <div class="tab-pane fade" id="v-pills-forms" role="tabpanel" aria-labelledby="v-pills-forms-tab">
-                                                    <div>
-                                                        <h3>Forms</h3>
-                                                        <p class="text-muted">Select the forms that need to be completed for this service and how often they need to be completed.</p>
-                                                    </div>
-
-                                                    <div>
-                                                        <div class="row gy-3">
-                                                            
-                                                            <div class="col-md-12">
-                                                                <table class="table ">
-                                                                    <thead>
-                                                                        <th>Consultation form name</th>
-                                                                        <th>Policy</th>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <td>COVID 19</td>
-                                                                        <td>Every time they book an appointment
-                                                                        </td>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-
-                                                    <div class="d-flex align-items-start gap-3 mt-4">
-                                                        <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-online-booking-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Online booking</button>
-                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="v-pills-finish-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i> Continue</button> --}}
-                                                        <button type="button" class="btn btn-success btn-label right ms-auto" 
-                                                        onclick="changeTab('v-pills-commision-tab')">
-                                                    <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue
-                                                </button>
-                                                    </div>
-                                                </div>
-                                                <!-- end tab pane -->
 
                                                 <div class="tab-pane fade" id="v-pills-commision" role="tabpanel" aria-labelledby="v-pills-commision-tab">
                                                     
@@ -813,73 +751,6 @@ input[type="file"] {
 
 {{-- add varient modal --}}
 
-{{-- <div id="addVariantModal" class="modal fade" tabindex="-1" aria-labelledby="addVariantModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addVariantModalLabel">Add Variant</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12 mb-3">
-                        <label for="variantName" class="form-label">Variant Name</label>
-                        <input type="text" class="form-control" id="variantName" placeholder="Enter Variant Name">
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="variantDescription" class="form-label">Variant Description</label>
-                        <input type="text" class="form-control" id="variantDescription" placeholder="Enter Variant Description">
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="duration" class="form-label">Duration</label>
-                        <select name="duration_hr" class="form-select">
-                            <option value="">Duration hours</option>
-                            @forelse ($durationHours as $durationHour)
-                                <option value="{{ $durationHour->duration_hr }}">{{ $durationHour->duration_hr }}</option>
-                            @empty
-                                <option value="">No duration hours available</option>
-                            @endforelse
-                        </select>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="priceType" class="form-label">Price Type</label>
-                        <select name="price_type" class="form-select" id="priceTypes">
-                            <option value="variation_fixed">Fixed</option>
-                            <option value="variation_free">Free</option>
-                            <option value="variation__from">From</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="price" class="form-label">Price</label>
-                        <input type="text" class="form-control" name="price" id="variation_free" placeholder="USD 0.00">
-                    </div>
-                    <!-- JavaScript to handle price input -->
-                        <script>
-                            document.getElementById('priceTypes').addEventListener('change', function() {
-                                const priceInput = document.getElementById('variation_free');
-
-                                console.log
-                            
-                                if (this.value === 'variation_free') {
-                                    priceInput.style.display = 'none'; // Hide the price input if "Free" is selected
-                                } else {
-                                    priceInput.style.display = 'block'; // Show the price input for other options
-                                }
-                            });
-                            </script>
-                    <div class="col-md-12 mb-3">
-                        <label for="sku" class="form-label">SKU</label>
-                        <input type="text" class="form-control" id="sku" placeholder="Enter SKU">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveVariantButton">Save Changes</button>
-            </div>
-        </div>
-    </div>
-</div> --}}
 
 <div id="addVariantModal" class="modal fade" tabindex="-1" aria-labelledby="addVariantModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -929,7 +800,147 @@ input[type="file"] {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveVariantButton">Save Changes</button>
+                <button type="button" class="btn btn-primary" id="saveVariantButton">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- /////////////// advanced options modal --}}
+
+
+<div id="AdvancedOptionsModal" class="modal fade" tabindex="-1" aria-labelledby="AdvancedOptionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AdvancedOptionsModalLabel">Advanced pricing and duration</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <span class="text-muted tm-span mx-3">Set specific pricing by location and team member.</span>
+            <div class="modal-body">
+                <div class="card card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Location</th>
+                                <th>Team Members</th>
+                                <th>Duration</th>
+                                <th>Price Type</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($teamMembers as $member)
+                                @foreach($member->teamLocations as $location)
+                                    <tr data-location-id="{{ $location->id }}" data-user-id="{{ $member->id }}">
+                                        <td>
+                                            {{ $location->branch->branch_name }}
+                                            <br>
+                                            {{ $location->branch->branch_address }}
+                                        </td>
+                                        <td>
+                                            <div class="user-icon" style="display: flex; align-items: center;">
+                                                <img src="{{ $member->image_path }}" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
+                                                <div class="placeholder rounded-circle" style="width: 40px; height: 40px; background-color: #007bff; color: white; display: none; align-items: center; justify-content: center; font-weight: bold;">
+                                                    {{ strtoupper(substr($member->fname, 0, 1)) }}
+                                                </div>
+                                            </div>
+                                            <span>{{ $member->fname }} {{ $member->lname }}</span>
+                                        </td>
+                                        <td>
+                                            <select name="duration_hr" class="form-select">
+                                                <option value="">Duration hours</option>
+                                                @forelse ($durationHours as $durationHour)
+                                                    <option value="{{ $durationHour->duration_hr }}">{{ $durationHour->duration_hr }}</option>
+                                                @empty
+                                                    <option value="">No duration hours available</option>
+                                                @endforelse
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="price_type" class="form-select" id="AdvOptpriceTypes{{ $loop->parent->index }}{{ $loop->index }}">
+                                                <option value="adv_opt_fixed" selected>Fixed (Default)</option>
+                                                <option value="adv_opt_free">Free</option>
+                                                <option value="adv_opt_from">From</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" id="AdvOptpriceInput{{ $loop->parent->index }}{{ $loop->index }}" name="adv_opt_price_type_free" placeholder="USD 0.00">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveAdvOpt">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{-- ////////////// resource modal --}}
+
+{{-- <div id="ResourceModal" class="modal fade" tabindex="-1" aria-labelledby="ResourceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ResourceModalLabel">Add resource</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="variantName" class="form-label">Name</label>
+                        <input type="text" class="form-control" placeholder="e.g Message room">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="variantDescription" class="form-label">Description <span class="text-muted" >(Optional)</span> </label>
+                        <textarea class="form-control" rows="5" placeholder="Enter Description"></textarea>
+                    </div>
+                    
+                </div>
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark">Save</button>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+
+<div id="ResourceModal" class="modal fade" tabindex="-1" aria-labelledby="ResourceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ResourceModalLabel">Add Resource</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <input type="hidden" id="serviceId" value="{{ $serviceId }}"> <!-- Hidden field -->
+                    <div class="col-md-12 mb-3">
+                        <label for="resourceName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="resourceName" placeholder="e.g. Message room">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="resourceDescription" class="form-label">Description <span class="text-muted">(Optional)</span></label>
+                        <textarea class="form-control" id="resourceDescription" rows="5" placeholder="Enter Description"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark" id="saveResourceButton">Save</button>
             </div>
         </div>
     </div>
@@ -938,16 +949,20 @@ input[type="file"] {
 
 
 @endsection
+<script>
+    const serviceId = {{ $serviceId }};
+</script>
 
 @push('scripts')
 <script src="{{asset('assets/backend/js/pages/form-wizard.init.js')}}"></script>
 
 <script>
-///////// user icon
+ ///////// user icon
+
 document.querySelectorAll('.user-icon').forEach(icon => {
-const name = icon.nextElementSibling.textContent; // Get the name from the span
-const firstLetter = name.charAt(0).toUpperCase(); // Get the first letter
-icon.querySelector('.placeholder').textContent = firstLetter; // Set it to the placeholder
+    const name = icon.nextElementSibling.textContent; // Get the name from the span
+    const firstLetter = name.charAt(0).toUpperCase(); // Get the first letter
+    icon.querySelector('.placeholder').textContent = firstLetter; // Set it to the placeholder
 });
 
 
@@ -961,7 +976,6 @@ document.getElementById('selectAll').addEventListener('change', function() {
         checkbox.checked = checked;
     });
 });
-
 
 
 ///////////////////// nexttab tabs code 
@@ -991,14 +1005,6 @@ $(document).ready(function() {
 
 
 
-document.querySelector('form').addEventListener('submit', function (e) {
-    console.log({
-        service_name: document.querySelector('input[name="service_name"]').value,
-        menu_category: document.querySelector('select[name="menu_category"]').value
-    });
-});
-
-
 
 //////////// disable the price input when free is selected 
 
@@ -1013,284 +1019,355 @@ document.getElementById('priceType').addEventListener('change', function() {
 });
 
 
-//////////show variant form
+//////////// disable the price input when free is selected in advance option modal
 
-// document.getElementById('addVariantButton').addEventListener('click', function() {
-//     const variantFields = document.getElementById('variantFields');
-//     variantFields.classList.toggle('d-none'); // Toggle visibility
-// });
+document.querySelectorAll('select[name="price_type"]').forEach((dropdown, index) => {
+    dropdown.addEventListener('change', function() {
+        const priceInput = document.getElementById(`AdvOptpriceInput${dropdown.id.match(/\d+/)[0]}`);
 
-
-
-
-
-
-document.getElementById('addVariantButton').addEventListener('click', function() {
-    const variantFields = document.getElementById('variantFields');
-    const buttonText = this.textContent.trim(); // Get the current button text
-
-    variantFields.classList.toggle('d-none'); // Toggle visibility
-
-    // Change button text based on visibility
-    if (variantFields.classList.contains('d-none')) {
-        this.textContent = '+ Add Variant'; // Change back to Add Variant
-    } else {
-        this.textContent = '- Close Variant'; // Change to Close Variant
-    }
+        if (this.value === 'adv_opt_free') {
+            priceInput.value = ''; // Clear the input value
+            priceInput.disabled = true; // Disable input
+        } else {
+            priceInput.disabled = false; // Enable input for other options
+        }
+    });
 });
 
 
-</script>
 
-
-
-
-<!-- Modal for Adding Variant -->
-
-
-<script>
-    // document.getElementById('priceTypes').addEventListener('change', function() {
-    //     const priceInput = document.getElementById('variation_free');
-    
-    //     if (this.value === 'variation_free') {
-    //         priceInput.style.display = 'none'; // Hide the price input if "Free" is selected
-    //         priceInput.value = ''; // Clear the value
-    //     } else {
-    //         priceInput.style.display = 'block'; // Show the price input for other options
-    //     }
-    // });
-    
-    // // Handle saving the variant
-    // document.getElementById('saveVariantButton').addEventListener('click', function() {
-    //     const variantName = document.getElementById('variantName').value;
-    //     const variantDescription = document.getElementById('variantDescription').value;
-    //     const duration = document.querySelector('select[name="duration_hr"]').value;
-    //     const priceType = document.getElementById('priceTypes').value;
-    //     const price = document.getElementById('variation_free').style.display !== 'none' ? document.getElementById('variation_free').value : 'Free';
-    //     const sku = document.getElementById('sku').value;
-    
-    //     // Create a new div to display the variant
-    //     const variantDiv = document.createElement('div');
-    //     variantDiv.className = 'variant-item mb-2';
-    //     variantDiv.innerHTML = `
-    //         <strong>${variantName}</strong><br>
-    //         Description: ${variantDescription}<br>
-    //         Duration: ${duration} hours<br>
-    //         Price Type: ${priceType}<br>
-    //         Price: ${price}<br>
-    //         SKU: ${sku}
-    //     `;
-    
-    //     // Append the new variant to the list
-    //     document.getElementById('variantList').appendChild(variantDiv);
-    
-    //     // Clear the inputs in the modal
-    //     document.getElementById('variantName').value = '';
-    //     document.getElementById('variantDescription').value = '';
-    //     document.querySelector('select[name="duration_hr"]').value = '';
-    //     document.getElementById('priceTypes').value = 'variation_fixed';
-    //     document.getElementById('variation_free').value = '';
-    //     document.getElementById('variation_free').style.display = 'block'; // Reset display style
-    // });
-
-
-
+// Handle price type change when free is selected in variant modal
 document.getElementById('priceTypes').addEventListener('change', function() {
     const priceInput = document.getElementById('variation_free');
-
     if (this.value === 'variation_free') {
-        priceInput.style.display = 'none'; // Hide the price input if "Free" is selected
-        priceInput.value = ''; // Clear the value
+        priceInput.style.display = 'none'; // Hide the price input
+        priceInput.value = ''; // Clear the value when "Free" is selected
     } else {
         priceInput.style.display = 'block'; // Show the price input for other options
     }
 });
 
-// Handle saving the variant
+// Save variant button click event
 // document.getElementById('saveVariantButton').addEventListener('click', function() {
 //     const variantName = document.getElementById('variantName').value;
-//     const duration = document.querySelector('select[name="duration_hr"]').value;
+//     const duration = document.getElementById('durationSelect').value;
 //     const priceType = document.getElementById('priceTypes').value;
-//     const price = document.getElementById('variation_free').style.display !== 'none' ? document.getElementById('variation_free').value : 'Free';
-//     const sku = document.getElementById('sku').value; // Assuming you still want to capture SKU for future use
+//     const priceInput = document.getElementById('variation_free');
+//     const price = priceType === 'variation_free' ? 'Free' : parseFloat(priceInput.value).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+//     const sku = document.getElementById('sku').value; // Optional SKU
 
 //     // Create a new card to display the variant
 //     const variantCard = document.createElement('div');
-//     variantCard.className = 'card col-md-4 mb-3'; // Adjust the column size as needed
+//     variantCard.className = 'card col-md-12 mb-3';
 //     variantCard.innerHTML = `
 //         <div class="card-body">
-//             <h5 class="card-title">${variantName}</h5>
-//             <p class="card-text">Duration: ${duration} hours</p>
-//             <p class="card-text">Price: ${price}</p>
-//         </div>
+//             <div class="table-card">
+//                 <table class="table table-hover table-centered align-middle table-nowrap mb-0">
+//                     <tbody>
+//                         <tr>
+//                             <td>
+//                                 <div class="d-flex align-items-center">
+//                                     <div>
+//                                         <h5 class="mt-2 mx-2">${variantName}</h5>
+//                                         <h5 class="mx-2 fs-14 my-1 text-muted">${duration}</h5>
+//                                     </div>
+//                                 </div>
+//                             </td>
+//                             <td>
+//                                 <h4 class="float-end">${price}</h4>
+//                             </td>
+//                             <td>
+//                                 <div class="dropdown float-end">
+//                                     <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+//                                         <i class="ri-more-2-fill"></i>
+//                                     </button>
+//                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+//                                         <li><a class="dropdown-item" href="#">Edit</a></li>
+//                                         <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+//                                     </ul>
+//                                 </div>
+//                             </td>
+//                         </tr>
+//                     </tbody>
+//                 </table>
+//             </div>
+//         </div><!-- end card-body -->
 //     `;
 
-//     // Append the new card to the list
+//     // Append the new card to the variant list
 //     document.getElementById('variantList').appendChild(variantCard);
+
+//     // Close the modal
+//     const modal = bootstrap.Modal.getInstance(document.getElementById('addVariantModal'));
+//     modal.hide();
 
 //     // Clear the inputs in the modal
 //     document.getElementById('variantName').value = '';
-//     document.getElementById('variantDescription').value = '';
-//     document.querySelector('select[name="duration_hr"]').value = '';
+//     document.getElementById('durationSelect').value = '';
 //     document.getElementById('priceTypes').value = 'variation_fixed';
-//     document.getElementById('variation_free').value = '';
-//     document.getElementById('variation_free').style.display = 'block'; // Reset display style
-// });
-
-
-
-
-// document.getElementById('saveVariantButton').addEventListener('click', function() {
-//     const variantName = document.getElementById('variantName').value;
-//     const duration = document.getElementById('durationSelect').value; // Get the value from the select element
-//     const priceType = document.getElementById('priceTypes').value;
-//     const price = document.getElementById('variation_free').style.display !== 'none' ? document.getElementById('variation_free').value : 'Free';
-//     const sku = document.getElementById('sku').value;
-
-//     // Create a new card to display the variant
-//     const variantCard = document.createElement('div');
-//     variantCard.className = 'card col-md-4 mb-3'; // Adjust the column size as needed
-//     variantCard.innerHTML = `
-//         <div class="card-body">
-//             <h5 class="card-title">${variantName}</h5>
-//             <p class="card-text">${duration}</p>
-//             <p class="card-text">Price: ${price}</p>
-//         </div>
-//     `;
-
-//     // Append the new card to the list
-//     document.getElementById('variantList').appendChild(variantCard);
-
-//     // Clear the inputs in the modal
-//     document.getElementById('variantName').value = '';
-//     document.getElementById('variantDescription').value = '';
-//     document.getElementById('durationSelect').value = ''; // Reset the duration select
 //     document.getElementById('priceTypes').value = 'variation_fixed';
-//     document.getElementById('variation_free').value = '';
-//     document.getElementById('variation_free').style.display = 'block'; // Reset display style
+//     priceInput.value = '';
+//     priceInput.style.display = 'block'; // Reset display style
 // });
-
-// const modal = bootstrap.Modal.getInstance(document.getElementById('addVariantModal'));
-// modal.hide();
-
 
 
 
 document.getElementById('saveVariantButton').addEventListener('click', function() {
     const variantName = document.getElementById('variantName').value;
+    const variantDescription = document.getElementById('variantDescription').value; // Get variant description
     const duration = document.getElementById('durationSelect').value;
     const priceType = document.getElementById('priceTypes').value;
-    const price = document.getElementById('variation_free').style.display !== 'none' ? document.getElementById('variation_free').value : 'Free';
+    const priceInput = document.getElementById('variation_free');
+    const price = priceType === 'variation_free' ? 'Free' : parseFloat(priceInput.value).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     const sku = document.getElementById('sku').value;
 
-    // Create a new card to display the variant
-    // const variantCard = document.createElement('div');
-    // variantCard.className = 'card col-md-4 mb-3';
-    // variantCard.innerHTML = `
-    //     <div class="card-body">
-    //         <h5 class="card-title">${variantName}</h5>
-    //         <p class="card-text">${duration}</p>
-    //         <p class="card-text">Price: ${price}</p>
-    //     </div>
-    // `;
+    // Prepare data to send
+    const data = {
+        serviceId: "{{$serviceId}}",
+        variantName: variantName,
+        variantDescription: variantDescription, // Add variant description
+        duration: duration,
+        priceType: priceType,
+        price: price,
+        sku: sku,
+    };
 
-//     const variantCard = document.createElement('div');
-// variantCard.className = 'card col-md-12 mb-3';
-// variantCard.innerHTML = `
-//     <div class="card-body">
-//         <h5 class="card-title">${variantName}</h5>
-//         <div class="row">
-//             <div class="col-md-12">
-//                 <p class="card-text">${duration}</p>
-//             </div>
-//             <div class="col-12 d-flex justify-content-between">
-               
-//                 <p class="card-text mb-0">${price}</p>
-//             </div>
-//         </div>
-//     </div>
-// `;
+    // Send AJAX request
+    fetch('/store-variant', { 
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // CSRF token for Laravel
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Check if the save was successful
+        if (data.success) {
+            // Create a new card to display the variant
+            const variantCard = document.createElement('div');
+            variantCard.className = 'card col-md-12 mb-3';
+            variantCard.innerHTML = `
+                <div class="card-body">
+                    <div class="table-card">
+                        <table class="table table-hover table-centered align-middle table-nowrap mb-0">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                <h5 class="mt-2 mx-2">${variantName}</h5>
+                                                <h5 class="mx-2 fs-14 my-1 text-muted">${duration} hours</h5>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h4 class="float-end">${price}</h4>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown float-end">
+                                            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                                <i class="ri-more-2-fill"></i>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <li><a class="dropdown-item" href="#">Edit</a></li>
+                                                <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!-- end card-body -->
+            `;
 
-// const formattedPrice = parseFloat(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            // Append the new card to the variant list
+            document.getElementById('variantList').appendChild(variantCard);
 
-// const variantCard = document.createElement('div');
-// variantCard.className = 'card col-md-12 mb-3';
-// variantCard.innerHTML = `
-//     <div class="card-body p-3">
-//         <h4 class="card-title">${variantName}</h4>
-//         <div class="row">
-//             <div class="col-12">
-//                 <h6 class="card-text">${duration}</h6>
-//             </div>
-//             <div class="col-12 d-flex justify-content-end">
-//                 <h6 class="card-text mb-0">${formattedPrice}</h6>
-//             </div>
-//         </div>
-//     </div>
-// `;
+            // Close the modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addVariantModal'));
+            modal.hide();
 
-const formattedPrice = parseFloat(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-
-const variantCard = document.createElement('div');
-variantCard.className = 'card col-md-12 mb-3';
-variantCard.innerHTML = `
-    <div class="card-body">
-        <div class="table-responsive table-card">
-            <table class="table table-hover table-centered align-middle table-nowrap mb-0">
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <h5 class="mt-2 mx-2">${variantName}</h5>
-                                    <h5 class="mx-2 fs-14 my-1 text-muted">${duration}</h5>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <h4 class="float-end">${formattedPrice}</h4>
-                        </td>
-                        <td>
-                            <div class="dropdown float-end">
-                                <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ri-more-2-fill"></i> <!-- Use a suitable icon -->
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                </tbody>
-            </table>
-        </div>
-    </div><!-- end card-body -->
-`;
-
-// Append the new card to the variant list
-document.getElementById('variantList').appendChild(variantCard);
-
-
-
-
-    // Append the new card to the list
-    document.getElementById('variantList').appendChild(variantCard);
-
-    // Clear the inputs in the modal
-    document.getElementById('variantName').value = '';
-    document.getElementById('variantDescription').value = '';
-    document.getElementById('durationSelect').value = '';
-    document.getElementById('priceTypes').value = 'variation_fixed';
-    document.getElementById('variation_free').value = '';
-    document.getElementById('variation_free').style.display = 'block';
-
-    // Close the modal
-    const modal = bootstrap.Modal.getInstance(document.getElementById('addVariantModal'));
-    modal.hide();
+            // Clear the inputs in the modal
+            document.getElementById('variantName').value = '';
+            document.getElementById('variantDescription').value = ''; // Clear variant description
+            document.getElementById('durationSelect').value = '';
+            document.getElementById('priceTypes').value = 'variation_fixed';
+            priceInput.value = '';
+            priceInput.style.display = 'block'; // Reset display style
+        } else {
+            alert('Error saving variant: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('There was an error saving the variant.');
+    });
 });
 
+
+
+
+/////////////////// save advance options data code 
+
+
+document.getElementById('saveAdvOpt').addEventListener('click', function() {
+    const dataToSend = [];
+
+    document.querySelectorAll('tbody tr').forEach((row) => {
+        const duration = row.querySelector('select[name="duration_hr"]').value;
+        const priceType = row.querySelector('select[name="price_type"]').value;
+        const priceInput = row.querySelector(`input[id^="AdvOptpriceInput"]`).value;
+
+        // Get the location_id and user_id from the row or hidden fields
+        const locationId = row.getAttribute('data-location-id'); // Assuming you set this attribute
+        const userId = row.getAttribute('data-user-id'); // Assuming you set this attribute
+
+        dataToSend.push({
+            service_id: '{{ $serviceId }}',
+            location_id: locationId, // Capture location ID
+            user_id: userId, // Capture user ID
+            duration: duration,
+            price_type: priceType,
+            price: priceType === 'adv_opt_free' ? 'Free' : priceInput
+        });
+
+            const durations = row.querySelector('select[name="duration_hr"]').value = '';
+            const priceTypes = row.querySelector('select[name="price_type"]').value = '';
+            const priceInputs = row.querySelector(`input[id^="AdvOptpriceInput"]`).value = '';
+    });
+
+    fetch('/store-advance-options', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify(dataToSend)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // alert('Data saved successfully!');
+            const countElement = document.getElementById('advancedOptionsCount');
+            const currentCount = parseInt(countElement.innerText) || 0;
+
+            // Show the count element if it's the first addition
+            if (currentCount === 0) {
+                countElement.style.display = 'inline'; // Show the counter
+            }
+
+            // Update the counter
+            countElement.innerText = currentCount + 1;
+            
+            $('#AdvancedOptionsModal').modal('hide');
+        } else {
+            alert('Error saving data: ' + data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+///////////// add resource code 
+
+document.getElementById('resourceSwitch').addEventListener('change', function() {
+    const addResourceButton = document.getElementById('addResourceButton');
+    const badge = document.getElementById('resourceSwitchBadge');
+
+    if (this.checked) {
+        addResourceButton.style.display = 'block'; // Show the button
+        badge.textContent = 'On'; // Change badge text to 'On'
+        badge.classList.remove('bg-dark'); // Optionally change the badge color
+        badge.classList.add('bg-success'); // Change to green for 'On'
+    } else {
+        addResourceButton.style.display = 'none'; // Hide the button
+        badge.textContent = 'Off'; // Change badge text to 'Off'
+        badge.classList.remove('bg-success'); // Optionally change back to dark
+        badge.classList.add('bg-dark'); // Change back to original color
+    }
+});
+
+
+
+///////////////// save resouce to database code
+
+
+document.getElementById('saveResourceButton').addEventListener('click', function() {
+    const serviceId = document.getElementById('serviceId').value;
+    const name = document.getElementById('resourceName').value;
+    const description = document.getElementById('resourceDescription').value;
+
+    fetch('/store-resource', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ serviceId, name, description })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            $('#ResourceModal').modal('hide');
+            updateResourceList(data.resource); // Use the returned resource
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     fetch(`/get-resources/${serviceId}`)
+//         .then(response => response.json())
+//         .then(resources => {
+//             resources.forEach(resource => {
+//                 updateResourceList(resource);
+//             });
+//         });
+// });
+
+
+function updateResourceList(resource) {
+    const resourceList = document.getElementById('resourceList');
+    
+    // Create a list item
+    const listItem = document.createElement('li');
+    listItem.className = 'list-group-item';
+
+    // Create a div for the resource content
+    const resourceContent = document.createElement('div');
+
+    // Create an h5 for the resource name
+    const resourceName = document.createElement('h5');
+    resourceName.className = 'mb-1'; // Margin bottom
+    resourceName.textContent = resource.name;
+
+    // Create a span for the resource description
+    const resourceDescription = document.createElement('span');
+    resourceDescription.className = 'text-muted'; // Muted text style
+    resourceDescription.textContent = resource.description || 'No description';
+
+    // Append the name and description to the content div
+    resourceContent.appendChild(resourceName);
+    resourceContent.appendChild(resourceDescription);
+    
+    // Append the content div to the list item
+    listItem.appendChild(resourceContent);
+    
+    // Append the list item to the resource list
+    resourceList.appendChild(listItem);
+    
+    // Show the resources section if it has items
+    if (resourceList.children.length > 0) {
+        document.getElementById('resourcesSection').style.display = 'block';
+    }
+}
 </script>
     
     
