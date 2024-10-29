@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('advanced_options', function (Blueprint $table) {
+        Schema::create('service_commissions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('service_id')->nullable();
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('location_id')->nullable();;
-            $table->foreign('location_id')->references('id')->on('branch_addresses')->onDelete('cascade');
-            $table->string('duration')->nullable();
-            $table->string('price_type')->nullable();
-            $table->string('price')->nullable();
+            $table->string('commission_rate')->nullable();
+            $table->string('commission_type')->nullable();
+            $table->decimal('commission_value', 10, 2)->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('advanced_options');
+        Schema::dropIfExists('service_commissions');
     }
 };

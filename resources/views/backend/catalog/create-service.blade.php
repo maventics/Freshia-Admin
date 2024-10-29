@@ -578,8 +578,6 @@ input[type="file"] {
                                                 
 
                                                 <div class="tab-pane fade" id="v-pills-commision" role="tabpanel" aria-labelledby="v-pills-commision-tab">
-                                                    
-
                                                     <div class="row gy-3">
                                                         <div class="col-12 d-flex justify-content-between align-items-start mt-3 mb-3">
                                                             <div class="d-flex flex-column">
@@ -587,44 +585,42 @@ input[type="file"] {
                                                                     <h4 class="mb-0 me-2">Team member commission
 
                                                                     </h4>
-                                                                    <span class="badge bg-success">On</span>
+                                                                    <span class="badge bg-success" id="ShowTeamMemberBadge">On</span>
                                                                 </div>
                                                                 <p class="text-muted mb-0" style="font-size: 12px;">Calculate team member commission when the service is sold</p>
                                                             </div>
                                                             <div class="form-check form-switch" style="font-size: x-large">
-                                                                <input type="checkbox" class="form-check-input" id="customSwitchsizelg" checked>
+                                                                <input type="checkbox" class="form-check-input" id="ShowTeamMemberSwitch" checked>
                                                             </div>
                                                         </div>
-                                                        
-                                                        <div class="col-md-12 bg-light p-4 rounded">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <form action="">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-text"><i class="ri-search-line"></i></span>
-                                                                            <input type="search" class="form-control" name="search" placeholder="Search">
+                                                        <div id="contentSection">
+                                                            <div class="col-md-12 bg-light p-3 pill-rounded" style="background: #d3d3d3">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <form action="">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text"><i class="ri-search-line"></i></span>
+                                                                                <input type="search" class="form-control" name="search" placeholder="Search">
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="filters">
+                                                                            <a href="" class="filter-button"><i class="ri-sound-module-line" ></i></a>
                                                                         </div>
-                                                                        
-                                                                    </form>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <div class="filters">
-                                                                        <a href="" class="filter-button"><i class="ri-sound-module-line" ></i></a>
                                                                     </div>
                                                                 </div>
-                                                                
-                                                                
-
+                                                            </div>
+                                                            <div class="col-md-12 d-flex align-items-center justify-content-center" style="margin-top: 50px;">
+                                                                <div class="text-center">
+                                                                    <h3>No team member found</h3>
+                                                                    <p>Try adjusting your search criteria</p>
+                                                                    <div class="col-12 text-center p-5 d-flex justify-content-center">
+                                                                        <button type="button" id="showAllTeamMember" class="add-rsc-btn" data-bs-toggle="modal" data-bs-target="#showAllTeamMemberModal">Show All</button>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-12 d-flex align-items-center justify-content-center" style="margin-top: 50px;">
-                                                            <div class="text-center">
-                                                                <h3>No team member found</h3>
-                                                                <p>Try adjusting your search criteria</p>
-                                                                <a class="btn btn-light text-dark" href="">Show all</a>
-                                                            </div>
-                                                        </div>
-                                                        
                                                     </div>
                                                     <div class="d-flex align-items-start gap-3 mt-4">
                                                         <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-forms-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Resources</button>
@@ -644,8 +640,8 @@ input[type="file"] {
                                                        
                                                         <div class="col-md-12">
                                                             <div class="form-check d-flex align-items-center p-4">
-                                                                <input class="form-check-input" type="checkbox" id="selectAll" style="transform: scale(1.8);">
-                                                                <label class="form-check-label" for="selectAll" style="margin-left: 10px;"> Require patch test <br>
+                                                                <input class="form-check-input" type="checkbox" style="transform: scale(1.8);" name="patch_test">
+                                                                <label class="form-check-label" style="margin-left: 10px; margin-top:11px"> Require patch test <br>
                                                                 <span class="text-muted font-size:10px" >Show a patch test requirement when creating appointments with this service. </span>
                                                                     
                                                                 </label> 
@@ -653,68 +649,230 @@ input[type="file"] {
                                                         </div>
                                                         <hr>
                                                         <h3>Notifications</h3>
-                                                        <div class="col-md-12">
+                                                        <div class="col-md-12" style="margin-left: 13px">
                                                             <div class="form-check d-flex align-items-center p-2">
-                                                                <input class="form-check-input" type="checkbox" id="selectAll" style="transform: scale(1.8);">
-                                                                <label class="form-check-label" for="selectAll" style="margin-left: 10px;"> Aftercare instructions <br>
-                                                                <span class="text-muted font-size:10px" >Provide aftercare instructions to clients in thank you notifications</span>
-                                                                    
-                                                                </label> 
+                                                                <input class="form-check-input" type="checkbox" id="selectAll" style="transform: scale(1.8);" onchange="toggleTextarea(this)">
+                                                                <label class="form-check-label" style="margin-left: 10px; margin-top:11px">
+                                                                    Aftercare instructions <br>
+                                                                    <span class="text-muted font-size:10px">Provide aftercare instructions to clients in thank you notifications</span>
+                                                                </label>
                                                             </div>
+                                                            
                                                         </div>
                                                         <div class="col-md-12">
-                                                            <div class="form-check d-flex align-items-center p-2">
-                                                                <input class="form-check-input" type="checkbox" id="selectAll" style="transform: scale(1.8);">
-                                                                <label class="form-check-label" for="selectAll" style="margin-left: 10px;"> Reminder to rebook notifications <br>
-                                                                <span class="text-muted font-size:10px" >Provide aftercare instructions to clients in thank you notifications</span>
-                                                                    
-                                                                </label> 
-                                                            </div>
+
+                                                        <textarea id="aftercareTextarea" name="after_care_description" class="form-control" style="display: none;" rows="4" placeholder="Enter your aftercare instructions..."></textarea>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <div class="col-sm-12">
-                                                                <input type="number" class="form-control" id="firstName" name="service_name" placeholder="4" value="4">
+
+
+                                                            {{-- <div class="col-md-12" style="margin-left: 13px">
+                                                                <div class="form-check d-flex align-items-center p-2">
+                                                                    <input class="form-check-input" type="checkbox" style="transform: scale(1.8);" onchange="ToggleRebookNotifications(this)">
+                                                                    <label class="form-check-label" style="margin-left: 10px; margin-top:11px"> Reminder to rebook notifications <br>
+                                                                    <span class="text-muted font-size:10px" >Provide aftercare instructions to clients in thank you notifications</span>
+                                                                    </label> 
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <select name="" class="form-select" id="">
-                                                                <option value="" >Weeks after</option>
-                                                                <option value="" >Days after</option>
-                                                            </select>
+                                                        
+                                                            <div class="col-md-6">
+                                                                <div class="col-sm-12">
+                                                                    <input type="number" class="form-control" name="days" placeholder="4" value="4">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <select name="days_after" class="form-select" id="">
+                                                                    <option value="" >Weeks after</option>
+                                                                    <option value="" >Days after</option>
+                                                                </select>
+                                                            </div> --}}
+
+                                                            <div class="col-md-12" style="margin-left: 13px">
+                                                                <div class="form-check d-flex align-items-center p-2">
+                                                                    <input class="form-check-input" type="checkbox" style="transform: scale(1.8);" onchange="toggleRebookNotifications(this)">
+                                                                    <label class="form-check-label" style="margin-left: 10px; margin-top:11px">
+                                                                        Reminder to rebook notifications <br>
+                                                                        <span class="text-muted font-size:10px">Provide aftercare instructions to clients in thank you notifications</span>
+                                                                    </label> 
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="row" id="rebookFields" style="display: none;">
+                                                                <div class="col-md-6">
+                                                                    <div class="col-sm-12">
+                                                                        <input type="number" class="form-control" name="notification_reminder_days" placeholder="4" value="4">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <select name="notification_reminder_after" class="form-select">
+                                                                        <option value="week_after">Weeks after</option>
+                                                                        <option value="days_after">Days after</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            
                                                         </div>
                                                         <hr>
                                                         <h3 class="mt-3">Advance settings</h3>
 
-                                                        <div class="col-md-12">
-                                                            <label for="firstName" class="form-label">Sales tax <span class="text-muted"> (Included in price)</span></label>
-                                                            <input type="number" class="form-control" id="firstName" name="service_name" placeholder="Use location defaults" value="Use location defaults">
+                                                        <div class="col-md-12 mb-3 mt-3">
+                                                            <label for="sales_tax" class="form-label">Sales tax <span class="text-muted"> (Included in price)</span></label>
+                                                            <select name="sales_tax" id="" class="form-select">
+                                                                <option value="no_tax">No tax</option>
+                                                            </select>
                                                             <span class="text-muted" style="font-size: 10px" >Configure sales tax settings for each of your locations</span>
                                                         </div>
 
-                                                        <div class="col-md-12">
-                                                            <label for="firstName" class="form-label">Cost of service</label>
-                                                            <input type="number" class="form-control" id="firstName" name="service_name" placeholder="Use location defaults" value="Use location defaults">
+                                                        {{-- <div class="col-md-12 mb-3">
+                                                            <label for="cost_of_service" class="form-label">Cost of service</label>
+                                                            <input type="number" class="form-control" name="cost_of_service" placeholder="Use location defaults">
                                                             <span class="text-muted" style="font-size: 10px" >Set the cost to your business for delivering this service</span>
-                                                        </div>
+                                                        </div> --}}
+
+                                                        {{-- <div class="col-md-12 mb-3">
+                                                            <label for="cost_of_service" class="form-label">Cost of service</label>
+                                                            <div class="input-group">
+                                                                <input type="number" id="cost_of_service" class="form-control" name="cost_of_service" placeholder="Use location defaults">
+                                                                <div class="input-group-text radio-option" onclick="setServiceCostType('fixed')">
+                                                                    <input type="radio" name="service_cost" value="fixed" checked style="display: none;">
+                                                                    <i class="ri-coin-fill" style="cursor: pointer;"></i>
+                                                                </div>
+                                                                <div class="input-group-text radio-option" onclick="setServiceCostType('percentage')">
+                                                                    <input type="radio" name="service_cost" value="percentage" style="display: none;">
+                                                                    <i class="ri-percent-line" style="cursor: pointer;"></i>
+                                                                </div>
+                                                            </div>
+                                                            <span class="text-muted" style="font-size: 10px">Set the cost to your business for delivering this service</span>
+                                                        </div> --}}
+
+                                                        {{-- <div class="col-md-12 mb-3">
+                                                            <label for="cost_of_service" class="form-label">Cost of service</label>
+                                                            <div class="input-group">
+                                                                <input type="number" id="cost_of_service" class="form-control" name="cost_of_service" placeholder="Use location defaults">
+                                                                <div class="input-group-text radio-option" onclick="setServiceCostType('fixed')">
+                                                                    <input type="radio" name="service_cost" value="fixed" checked style="display: none;">
+                                                                    <i class="ri-coin-fill" style="cursor: pointer;"></i>
+                                                                </div>
+                                                                <div class="input-group-text radio-option" onclick="setServiceCostType('percentage')">
+                                                                    <input type="radio" name="service_cost" value="percentage" style="display: none;">
+                                                                    <i class="ri-percent-line" style="cursor: pointer;"></i>
+                                                                </div>
+                                                            </div>
+                                                            <span class="text-muted" style="font-size: 10px">Set the cost to your business for delivering this service</span>
+                                                        </div> --}}
+                                                        
+                                                        
+                                                        
+                                                        {{-- <script>
+                                                        function setServiceCostType(type) {
+                                                            const costInput = document.getElementById('cost_of_service');
+                                                            
+                                                            if (type === 'percentage') {
+                                                                costInput.placeholder = "percentage %";
+                                                                costInput.value = ""; // Optionally clear the input
+                                                            } else {
+                                                                costInput.placeholder = "USD 0.00";
+                                                                costInput.value = ""; // Optionally clear the input
+                                                            }
+                                                        }
+                                                        </script> --}}
+
+                                                        {{-- <style>
+                                                            .input-group-text {
+                                                                transition: background-color 0.3s ease;
+                                                                cursor: pointer; /* Change cursor to pointer */
+                                                            }
+                                                            
+                                                            .input-group-text.radio-option.active {
+                                                                background-color: white; /* Background color when checked */
+                                                            }
+                                                            
+                                                            .input-group-text.radio-option:hover {
+                                                                background-color: #f8f9fa; /* Background color on hover */
+                                                            }
+                                                            </style>
+                                                            
+                                                            <div class="col-md-12 mb-3">
+                                                                <label for="cost_of_service" class="form-label">Cost of service</label>
+                                                                <div class="input-group">
+                                                                    <input type="number" id="cost_of_service" class="form-control" name="cost_of_service" placeholder="Use location defaults">
+                                                                    <div class="input-group-text radio-option" onclick="setServiceCostType('fixed', this)">
+                                                                        <input type="radio" name="service_cost" value="fixed" checked style="display: none;">
+                                                                        <i class="ri-coin-fill" style="cursor: pointer;"></i>
+                                                                    </div>
+                                                                    <div class="input-group-text radio-option" onclick="setServiceCostType('percentage', this)">
+                                                                        <input type="radio" name="service_cost" value="percentage" style="display: none;">
+                                                                        <i class="ri-percent-line" style="cursor: pointer;"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <span class="text-muted" style="font-size: 10px">Set the cost to your business for delivering this service</span>
+                                                            </div>
+                                                            
+                                                            <script>
+                                                            function setServiceCostType(type, element) {
+                                                                const radioButtons = document.querySelectorAll('input[name="service_cost"]');
+                                                                const inputGroupText = document.querySelectorAll('.radio-option');
+                                                            
+                                                                // Uncheck all radio buttons and remove active class
+                                                                radioButtons.forEach((radio) => {
+                                                                    radio.checked = false;
+                                                                });
+                                                                inputGroupText.forEach((group) => {
+                                                                    group.classList.remove('active');
+                                                                });
+                                                            
+                                                                // Check the selected radio button and add active class to the clicked element
+                                                                const selectedRadio = element.querySelector('input[type="radio"]');
+                                                                selectedRadio.checked = true;
+                                                                element.classList.add('active');
+                                                            
+                                                                // Update input placeholder based on selection
+                                                                const costInput = document.getElementById('cost_of_service');
+                                                                if (type === 'percentage') {
+                                                                    costInput.placeholder = "Enter percentage (e.g., 20)";
+                                                                } else {
+                                                                    costInput.placeholder = "Use location defaults";
+                                                                }
+                                                            }
+                                                        </script> --}}
+
+                                                        
+                                                            
+                                                            <div class="col-md-12 mb-3">
+                                                                <label for="cost_of_service" class="form-label">Cost of service</label>
+                                                                <div class="input-group">
+                                                                    <input type="number" id="cost_of_service" class="form-control" name="service_cost" placeholder="UDS 0.00">
+                                                                    <div class="input-group-text radio-option active" onclick="setServiceCostType('fixed', this)">
+                                                                        <input type="radio" name="service_cost_type" value="fixed" checked style="display: none;">
+                                                                        <i class="ri-coin-fill" style="cursor: pointer;"></i>
+                                                                    </div>
+                                                                    <div class="input-group-text radio-option" onclick="setServiceCostType('percentage', this)">
+                                                                        <input type="radio" name="service_cost_type" value="percentage" style="display: none;">
+                                                                        <i class="ri-percent-line" style="cursor: pointer;"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <span class="text-muted" style="font-size: 10px">Set the cost to your business for delivering this service</span>
+                                                            </div>
+                                                           
 
                                                         <div class="col-md-12">
-                                                            <label for="firstName" class="form-label">SKU</label>
-                                                            <input type="number" class="form-control" id="firstName" name="service_name" placeholder="ABC-12345-H-SH" value="Use location defaults">
+                                                            <label for="service_sku" class="form-label">SKU</label>
+                                                            <input type="text" class="form-control" name="service_sku" placeholder="ABC-12345-H-SH">
                                                             <span class="text-muted" style="font-size: 10px" >Assign a SKU to help identify this service in reports and exports</span>
                                                         </div>
 
+                                                        <div class="d-flex align-items-start gap-3 mt-4">
+                                                            <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-commision-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Commision</button>
+                                                            <button type="submit" class="btn btn-success right ms-auto"> Finish</button>
+                                                            {{-- <button type="button" class="btn btn-success btn-label right ms-auto" 
+                                                                onclick="changeTab('v-pills-finish-tab')">
+                                                                <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Finish
+                                                        </button> --}}
+                                                        </div>
 
 
                                                     </div>
                                                     
-                                                    <div class="d-flex align-items-start gap-3 mt-4">
-                                                        <button type="button" class="btn btn-light btn-label previestab" data-previous="v-pills-commision-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to Commision</button>
-                                                        <button type="submit" class="btn btn-success right ms-auto"> Finish</button>
-                                                        {{-- <button type="button" class="btn btn-success btn-label right ms-auto" 
-                                                            onclick="changeTab('v-pills-finish-tab')">
-                                                            <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Finish
-                                                    </button> --}}
-                                                    </div>
+                                                    
                                                 </div>
 
                                                 <div class="tab-pane fade" id="v-pills-finish" role="tabpanel" aria-labelledby="v-pills-finish-tab">
@@ -945,6 +1103,116 @@ input[type="file"] {
         </div>
     </div>
 </div>
+
+
+{{-- ///////////show all team members set commissions --}}
+
+
+
+<div id="showAllTeamMemberModal" class="modal fade" tabindex="-1" aria-labelledby="showAllTeamMemberModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="showAllTeamMemberModalLabel">Team member commission</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Team Members</th>
+                                <th>Commission Rate</th>
+                                <th>Commission Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($teamMembers as $member)
+                                <tr data-user-id="{{ $member->id }}" data-service-id="{{ $serviceId }}">
+                                    <td>
+                                        <div class="user-icon" style="display: flex; align-items: center;">
+                                            <img src="{{ $member->image_path }}" alt="Member Image" class="rounded-circle" style="width: 40px; height: 40px;" onerror="this.style.display='none'; this.parentNode.querySelector('.placeholder').style.display='flex';">
+                                            <div class="placeholder rounded-circle" style="width: 40px; height: 40px; background-color: #007bff; color: white; display: none; align-items: center; justify-content: center; font-weight: bold;">
+                                                {{ strtoupper(substr($member->fname, 0, 1)) }}
+                                            </div>
+                                        </div>
+                                        <span>{{ $member->fname }} {{ $member->lname }}</span>
+                                    </td>
+                                    <td>
+                                        <div class="col-md-12">
+                                            <select name="commission_rate" class="form-select" id="CommissionRate{{ $loop->index }}" onchange="toggleCommissionInput(this, {{ $loop->index }})">
+                                                <option value="no_commission" selected>No Commission</option>
+                                                <option value="fixed">Fixed (custom)</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-md-12">
+
+                                            {{-- <div class="input-group" id="commissionInputGroup{{ $loop->index }}" style="display: none;">
+                                                <input type="text" class="form-control commission-input" id="CommissionInput{{ $loop->index }}" name="commission_value" placeholder="USD 0.00" style="display: block;">
+                                                <div class="input-group-text" id="fixedIcon{{ $loop->index }}" onclick="selectCommissionType('fixed', {{ $loop->index }})">
+                                                    <input type="radio" name="commission_type{{ $loop->index }}" value="fixed" checked style="display: none;">
+                                                    <i class="ri-coin-fill" style="cursor: pointer;"></i>
+                                                </div>
+                                                <div class="input-group-text" id="percentageIcon{{ $loop->index }}" onclick="selectCommissionType('percentage', {{ $loop->index }})">
+                                                    <input type="radio" name="commission_type{{ $loop->index }}" value="percentage" style="display: none;">
+                                                    <i class="ri-percent-line" style="cursor: pointer;"></i>
+                                                </div>
+                                            </div> --}}
+
+                                            {{-- <div class="input-group" id="commissionInputGroup{{ $loop->index }}" style="display: none;">
+                                                <input type="text" class="form-control commission-input" id="CommissionInput{{ $loop->index }}" name="commission_value" placeholder="USD 0.00" style="display: block;">
+                                                
+                                                <div class="input-group-text" id="fixedIcon{{ $loop->index }}" onclick="selectCommissionType('fixed', {{ $loop->index }})">
+                                                    <input type="radio" name="commission_type{{ $loop->index }}" value="fixed" checked style="display: none;" onchange="updateInputType(this, {{ $loop->index }})">
+                                                    <i class="ri-coin-fill" style="cursor: pointer;"></i>
+                                                </div>
+                                                
+                                                <div class="input-group-text" id="percentageIcon{{ $loop->index }}" onclick="selectCommissionType('percentage', {{ $loop->index }})">
+                                                    <input type="radio" name="commission_type{{ $loop->index }}" value="percentage" style="display: none;" onchange="updateInputType(this, {{ $loop->index }})">
+                                                    <i class="ri-percent-line" style="cursor: pointer;"></i>
+                                                </div>
+                                            </div> --}}
+
+
+                                            <div class="input-group" id="commissionInputGroup{{ $loop->index }}" style="display: none;">
+                                                <input type="text" class="form-control commission-input" id="CommissionInput{{ $loop->index }}" name="commission_value" placeholder="USD 0.00" style="display: block;">
+                                            
+                                                <div class="input-group-text" id="fixedIcon{{ $loop->index }}" onclick="selectCommissionType('fixed', {{ $loop->index }})">
+                                                    <input type="radio" name="commission_type{{ $loop->index }}" value="fixed" checked style="display: none;">
+                                                    <i class="ri-coin-fill" style="cursor: pointer;"></i>
+                                                </div>
+                                            
+                                                <div class="input-group-text" id="percentageIcon{{ $loop->index }}" onclick="selectCommissionType('percentage', {{ $loop->index }})">
+                                                    <input type="radio" name="commission_type{{ $loop->index }}" value="percentage" style="display: none;">
+                                                    <i class="ri-percent-line" style="cursor: pointer;"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            
+                                            
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="saveCommissionData()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 
 
 
@@ -1368,7 +1636,435 @@ function updateResourceList(resource) {
         document.getElementById('resourcesSection').style.display = 'block';
     }
 }
-</script>
+
+
+
+
+
+////////////// show team member switch condition code
+
+document.getElementById('ShowTeamMemberSwitch').addEventListener('change', function() {
+    const contentSection = document.getElementById('contentSection');
+    const badge = document.getElementById('ShowTeamMemberBadge');
+
+    if (this.checked) {
+        contentSection.style.display = 'block'; // Show the button
+        badge.textContent = 'On'; // Change badge text to 'On'
+        badge.classList.remove('bg-dark'); // Optionally change the badge color
+        badge.classList.add('bg-success'); // Change to green for 'On'
+    } else {
+        contentSection.style.display = 'none'; // Hide the button
+        badge.textContent = 'Off'; // Change badge text to 'Off'
+        badge.classList.remove('bg-success'); // Optionally change back to dark
+        badge.classList.add('bg-dark'); // Change back to original color
+    }
+});
+
+
+
+// function toggleCommissionInput(selectElement, index) {
+//     const commissionInputGroup = document.getElementById(`commissionInputGroup${index}`);
     
+//     // Show/hide the input group based on the selected option
+//     if (selectElement.value === 'fixed') {
+//         commissionInputGroup.style.display = 'flex';
+//         selectCommissionType('fixed', index); // Set default to fixed
+//     } else {
+//         commissionInputGroup.style.display = 'none';
+//     }
+// }
+
+// function selectCommissionType(type, index) {
+//     const commissionInput = document.getElementById(`CommissionInput${index}`);
+//     const fixedIcon = document.getElementById(`fixedIcon${index}`);
+//     const percentageIcon = document.getElementById(`percentageIcon${index}`);
+
+//     // Update the placeholder and input type based on selection
+//     if (type === 'fixed') {
+//         commissionInput.placeholder = 'USD 0.00';
+//         commissionInput.type = 'text'; // Fixed type
+//         fixedIcon.classList.add('active');
+//         percentageIcon.classList.remove('active');
+//     } else if (type === 'percentage') {
+//         commissionInput.placeholder = 'Percentage %';
+//         commissionInput.type = 'number'; // Percentage type
+//         percentageIcon.classList.add('active');
+//         fixedIcon.classList.remove('active');
+//     }
+// }
+
+// function updateInputType(radio, index) {
+//     selectCommissionType(radio.value, index); // Call to update the input based on selection
+// }
+
+
+function toggleCommissionInput(selectElement, index) {
+    const commissionInputGroup = document.getElementById(`commissionInputGroup${index}`);
+    
+    // Show/hide the input group based on the selected option
+    if (selectElement.value === 'fixed') {
+        commissionInputGroup.style.display = 'flex';
+        selectCommissionType('fixed', index); // Set default to fixed
+    } else {
+        commissionInputGroup.style.display = 'none';
+    }
+}
+
+// function selectCommissionType(type, index) {
+//     const commissionInput = document.getElementById(`CommissionInput${index}`);
+//     const fixedIcon = document.getElementById(`fixedIcon${index}`);
+//     const percentageIcon = document.getElementById(`percentageIcon${index}`);
+
+//     // Update the placeholder and input type based on selection
+//     if (type === 'fixed') {
+//         commissionInput.placeholder = 'USD 0.00';
+//         commissionInput.type = 'text'; // Fixed type
+//         fixedIcon.classList.add('active');
+//         percentageIcon.classList.remove('active');
+//     } else if (type === 'percentage') {
+//         commissionInput.placeholder = 'Percentage %';
+//         commissionInput.type = 'number'; // Percentage type
+//         percentageIcon.classList.add('active');
+//         fixedIcon.classList.remove('active');
+//     }
+// }
+
+function selectCommissionType(type, index) {
+    const commissionInput = document.getElementById(`CommissionInput${index}`);
+    const fixedIcon = document.getElementById(`fixedIcon${index}`);
+    const percentageIcon = document.getElementById(`percentageIcon${index}`);
+
+
+    // Update the placeholder and input type based on selection
+    if (type === 'fixed') {
+        commissionInput.placeholder = 'USD 0.00';
+        commissionInput.type = 'text'; // Fixed type
+        fixedIcon.querySelector('input[type="radio"]').checked = true; // Select the radio button
+        fixedIcon.classList.add('active');
+        percentageIcon.classList.remove('active');
+    } else if (type === 'percentage') {
+        commissionInput.placeholder = 'Percentage %';
+        commissionInput.type = 'number'; // Percentage type
+        percentageIcon.querySelector('input[type="radio"]').checked = true; // Select the radio button
+        percentageIcon.classList.add('active');
+        fixedIcon.classList.remove('active');
+    }
+}
+
+
+// Add this function to handle radio button changes
+function updateInputType(radio, index) {
+    selectCommissionType(radio.value, index); // Call to update the input based on selection
+}
+
+
+
+
+
+
+
+// function saveCommissionData() {
+//     const serviceId = {{ $serviceId }};
+//     const commissionData = [];
+
+//     console.log(serviceId);
+
+//     // Loop through each team member row
+//     document.querySelectorAll('tr[data-user-id]').forEach((row) => {
+//         const userId = row.dataset.userId;
+
+//         // Get the commission rate
+//         const commissionRateSelect = row.querySelector('select[name="commission_rate"]');
+//         const commissionRate = commissionRateSelect ? commissionRateSelect.value : null;
+
+//         let commissionValue = '';
+//         let commissionType = '';
+
+//         // Check if the commission rate select was found
+//         if (!commissionRateSelect) {
+//             console.error(`Commission rate select not found for user ID: ${userId}`);
+//             return; // Skip this user if no select
+//         }
+
+//         // Get the commission input value
+//         const commissionInput = row.querySelector('input[name="commission_value"]');
+//         if (commissionRate === 'fixed' && commissionInput) {
+//             commissionValue = commissionInput.value;
+//         }
+
+//         const index = Array.from(row.parentNode.children).indexOf(row); // Get the index of the current row
+//         const commissionTypeInput = row.querySelector(`input[name='commission_type${index}']:checked`);
+//         console.log(commissionTypeInput)
+//         if (commissionRate === 'fixed') {
+//             if (commissionTypeInput) {
+//                 commissionType = commissionTypeInput.value;
+//             } else {
+//                 console.error(`No commission type selected for user ID: ${userId}`);
+//                 return; // Skip this user if there's no commission type
+//             }
+//         } else if (commissionRate === 'no_commission') {
+//             commissionType = 'no_commission';
+//         }
+
+//          if (commissionRate === 'fixed') {
+//             if (commissionTypeInput) {
+//                 commissionType = commissionTypeInput.value;
+//             } else {
+//                 console.error(`No commission type selected for user ID: ${userId}`);
+//                 return; // Skip this user if there's no commission type
+//             }
+//         } else if (commissionRate === 'no_commission') {
+//             commissionType = 'no_commission';
+//         }
+
+//         // Ensure that we have a valid commission type before pushing to the array
+//         if (commissionType) {
+//             commissionData.push({
+//                 user_id: userId,
+//                 service_id: serviceId,
+//                 commission_rate: commissionRate,
+//                 commission_value: commissionValue,
+//                 commission_type: commissionType
+//             });
+//         }
+//     });
+
+//     // Send the data using AJAX if there are commissions to save
+//     if (commissionData.length > 0) {
+//         fetch('/store-commission', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token for Laravel
+//             },
+//             body: JSON.stringify(commissionData)
+//         })
+//         .then(response => response.json())
+//         .then(data => {
+//             if (data.success) {
+//                 alert('Commission data saved successfully!');
+//             } else {
+//                 alert('Error saving data: ' + data.message);
+//             }
+//         })
+//         .catch(error => console.error('Error:', error));
+//     } else {
+//         alert('No commission data to save.');
+//     }
+// }
+
+
+
+
+// function saveCommissionData() {
+//     const serviceId = {{ $serviceId }};
+//     const commissionData = [];
+
+//     // Loop through each team member row
+//     document.querySelectorAll('tr[data-user-id]').forEach((row) => {
+//         const userId = row.dataset.userId;
+
+//         // Get the commission rate
+//         const commissionRateSelect = row.querySelector('select[name="commission_rate"]');
+//         const commissionRate = commissionRateSelect ? commissionRateSelect.value : null;
+
+//         let commissionValue = '';
+//         let commissionType = '';
+
+//         // Check if the commission rate select was found
+//         if (!commissionRateSelect) {
+//             console.error(`Commission rate select not found for user ID: ${userId}`);
+//             return; // Skip this user if no select
+//         }
+
+//         // Get the commission input value
+//         const commissionInput = row.querySelector('input[name="commission_value"]');
+//         if (commissionRate === 'fixed' && commissionInput) {
+//             commissionValue = commissionInput.value;
+//         }
+
+//         // Adjusted selection for the commission type based on the loop index
+//         const index = Array.from(row.parentNode.children).indexOf(row); // Get the index of the current row
+//         const commissionTypeInput = row.querySelector(`input[name='commission_type${index}']:checked`);
+
+//         if (commissionTypeInput) {
+//             commissionType = commissionTypeInput.value;
+//             console.log(`User ID: ${userId}, Commission Type: ${commissionType}`); // Debugging log
+//         } else if (commissionRate === 'no_commission') {
+//             commissionType = 'no_commission';
+//         } else {
+//             console.error(`No commission type selected for user ID: ${userId}`);
+//             return; // Skip this user if there's no commission type
+//         }
+
+//         // Ensure that we have a valid commission type before pushing to the array
+//         if (commissionType) {
+//             commissionData.push({
+//                 user_id: userId,
+//                 service_id: serviceId,
+//                 commission_rate: commissionRate,
+//                 commission_value: commissionValue,
+//                 commission_type: commissionType
+//             });
+//         }
+//     });
+
+//     // Send the data using AJAX if there are commissions to save
+//     if (commissionData.length > 0) {
+//         fetch('/store-commission', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token for Laravel
+//             },
+//             body: JSON.stringify(commissionData)
+//         })
+//         .then(response => response.json())
+//         .then(data => {
+//             if (data.success) {
+//                 alert('Commission data saved successfully!');
+//                 $('#showAllTeamMemberModal').modal('hide');
+//             } else {
+//                 alert('Error saving data: ' + data.message);
+//             }
+//         })
+//         .catch(error => console.error('Error:', error));
+//     } else {
+//         alert('No commission data to save.');
+//     }
+// }
+
+
+function saveCommissionData() {
+    const serviceId = {{ $serviceId }};
+    const commissionData = [];
+
+    // Loop through each team member row
+    document.querySelectorAll('tr[data-user-id]').forEach((row) => {
+        const userId = row.dataset.userId;
+
+        // Get the commission rate
+        const commissionRateSelect = row.querySelector('select[name="commission_rate"]');
+        const commissionRate = commissionRateSelect ? commissionRateSelect.value : null;
+
+        let commissionValue = '';
+        let commissionType = null; // Initialize commissionType to null
+
+        // Check if the commission rate select was found
+        if (!commissionRateSelect) {
+            console.error(`Commission rate select not found for user ID: ${userId}`);
+            return; // Skip this user if no select
+        }
+
+        // Get the commission input value
+        const commissionInput = row.querySelector('input[name="commission_value"]');
+        if (commissionRate === 'fixed' && commissionInput) {
+            commissionValue = commissionInput.value;
+        }
+
+        // Adjusted selection for the commission type based on the loop index
+        const index = Array.from(row.parentNode.children).indexOf(row); // Get the index of the current row
+        const commissionTypeInput = row.querySelector(`input[name='commission_type${index}']:checked`);
+
+        if (commissionRate === 'no_commission') {
+            commissionType = null; // Set to null for no commission
+        } else if (commissionTypeInput) {
+            commissionType = commissionTypeInput.value;
+            console.log(`User ID: ${userId}, Commission Type: ${commissionType}`); // Debugging log
+        } else {
+            console.error(`No commission type selected for user ID: ${userId}`);
+            return; // Skip this user if there's no commission type
+        }
+
+        // Ensure that we have a valid commission type before pushing to the array
+        commissionData.push({
+            user_id: userId,
+            service_id: serviceId,
+            commission_rate: commissionRate,
+            commission_value: commissionValue,
+            commission_type: commissionType // This will now be null if no commission is selected
+        });
+    });
+
+    // Send the data using AJAX if there are commissions to save
+    if (commissionData.length > 0) {
+        fetch('/store-commission', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token for Laravel
+            },
+            body: JSON.stringify(commissionData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Commission data saved successfully!');
+                $('#showAllTeamMemberModal').modal('hide');
+            } else {
+                alert('Error saving data: ' + data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    } else {
+        alert('No commission data to save.');
+    }
+}
+
+
+
+/////////// after care open description
+function toggleTextarea(checkbox) {
+    const textarea = document.getElementById('aftercareTextarea');
+    if (checkbox.checked) {
+        textarea.style.display = 'block'; // Show textarea
+    } else {
+        textarea.style.display = 'none'; // Hide textarea
+    }
+}
+
+
+
+function toggleRebookNotifications(checkbox) {
+    const rebookFields = document.getElementById('rebookFields');
+    if (checkbox.checked) {
+        rebookFields.style.display = 'flex'; // Show fields
+    } else {
+        rebookFields.style.display = 'none'; // Hide fields
+    }
+}
+
+
+
+//////////cost of service code 
+
+function setServiceCostType(type, element) {
+    const radioButtons = document.querySelectorAll('input[name="service_cost"]');
+    const inputGroupText = document.querySelectorAll('.radio-option');
+
+    // Uncheck all radio buttons and remove active class
+    radioButtons.forEach((radio) => {
+        radio.checked = false;
+    });
+    inputGroupText.forEach((group) => {
+        group.classList.remove('active');
+    });
+
+    // Check the selected radio button and add active class to the clicked element
+    const selectedRadio = element.querySelector('input[type="radio"]');
+    selectedRadio.checked = true;
+    element.classList.add('active');
+
+    // Update input placeholder based on selection
+    const costInput = document.getElementById('cost_of_service');
+    if (type === 'percentage') {
+        costInput.placeholder = "percentage %";
+    } else {
+        costInput.placeholder = "USD 0.00";
+    }
+}
+
+
+</script>
     
 @endpush

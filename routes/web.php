@@ -68,6 +68,8 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/store-resource', 'storeResource');
 
         Route::get('/get-resources/{serviceId}', 'getResources');
+        Route::post('/store-commission', 'storeCommission');
+
         Route::delete('/services/{id}',  'destroy');
 
     });

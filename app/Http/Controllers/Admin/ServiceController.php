@@ -13,7 +13,9 @@ use App\Models\DurationHour;
 use App\Models\ServiceVariant;
 use App\Models\User;
 use App\Models\AdvancedOption;
+use App\Models\ServiceCommission;
 use App\Models\ServiceResource;
+use App\Models\ServiceSetting;
 
 class ServiceController extends Controller
 {
@@ -38,7 +40,6 @@ class ServiceController extends Controller
 
     public function ServiceStore(Request $request)
     {
-        // dd($request->all());
         $request->validate([
            'servicename' =>'required',
             'service_type' =>'required',
@@ -50,7 +51,9 @@ class ServiceController extends Controller
             
         ]);
 
-       $service = Service::create([
+        $service = Service::find($request->service_id);
+
+       $service->update([
             'service_name' =>$request->servicename,
             'service_type_id'  =>$request->service_type,
             'category_id' =>$request->menucategory,
@@ -67,12 +70,24 @@ class ServiceController extends Controller
             foreach($request->member_ids as $ids)
             {
                 TeamService::create([
-                    'service_id'=>$service->id,
+                    'service_id'=>$request->service_id,
                     'user_id' => $ids
                 ]);
             }
             
         }
+
+        ServiceSetting::create([
+            'service_id' => $request->service_id,
+            'patch_test' => $request->patch_test ? 'yes' : 'no',
+            'after_care_description'=>$request->after_care_description,
+            'notification_reminder_days'=>$request->notification_reminder_days,
+            'notification_reminder_after'=>$request->notification_reminder_after,
+            'sales_tax'=>$request->sales_tax,
+            'service_cost'=>$request->service_cost,
+            'service_cost_type'=>$request->service_cost_type,
+            'service_sku'=>$request->service_sku,
+        ]);
 
         
 
@@ -151,6 +166,59 @@ class ServiceController extends Controller
     {
         $resources = ServiceResource::where('service_id', $serviceId)->get();
         return response()->json($resources);
+    }
+
+
+    // public function storeCommission(Request $request)
+    // {
+    //     dd($request->all());
+    //     $validatedData = $request->validate([
+    //         'service_id' => 'required|integer',
+    //         'user_id' => 'required|integer',
+    //         'commission_type' => 'required|string',
+    //         'commission_value' => 'nullable|numeric',
+    //     ]);
+
+    //     // Store the commission data in the database
+    //     // Assuming you have a Commission model
+    //     ServiceCommission::create([
+    //         'service_id' => $validatedData['service_id'],
+    //         'user_id' => $validatedData['user_id'],
+    //         'commission_type' => $validatedData['commission_type'],
+    //         'commission_value' => $validatedData['commission_value'],
+    //     ]);
+
+    //     return response()->json(['success' => true, 'message' => 'Commission stored successfully.']);
+    // }
+
+    public function storeCommission(Request $request)
+    {
+        // dd($request->all());
+        $data = $request->validate([
+            '*.user_id' => 'required|exists:users,id',
+            '*.service_id' => 'required|exists:services,id',
+            '*.commission_rate' => 'nullable|string',
+            '*.commission_value' => 'nullable|numeric', // Only validate if present
+            '*.commission_type' => 'nullable|string', // Validate commission type
+        ]);
+
+
+        // Loop through the data and store it
+        foreach ($data as $commission) {
+            ServiceCommission::updateOrCreate(
+                [
+                    'user_id' => $commission['user_id'],
+                    'service_id' => $commission['service_id']
+                ],
+                [
+                    'commission_rate' => $commission['commission_rate'],
+                    'commission_value' => $commission['commission_value'],
+                    'commission_type' => $commission['commission_type'] // Save commission type
+                ]
+            );
+        }
+
+        return response()->json(['success' => true]);
     }
 
 
