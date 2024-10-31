@@ -87,7 +87,14 @@ Route::middleware(['auth'])->group(function(){
 
     // Catalog Route
     Route::get('admin/catalogs',[CatalogController::class,'index'])->name('admin.catelog.index');
-    Route::get('admin/create/package',[PackageController::class,'create'])->name('admin.package.create');
+
+    Route::controller(PackageController::class)->group(function(){
+
+        Route::get('admin/create/package','create')->name('admin.package.create');
+        Route::post('/store/service-package','StoreServicePackage');
+
+    });
+
 
 
     Route::get('admin/create/category',[CategoryController::class,'create'])->name('admin.category.create');
