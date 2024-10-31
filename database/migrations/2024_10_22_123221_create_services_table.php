@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('service_type_id')->nullable();
             $table->string('category_id')->nullable();
             $table->string('description')->nullable();
-            $table->string('duration')->nullable();
+            $table->integer('duration')->nullable();
             $table->string('price_type')->nullable();
             $table->decimal('price', 10, 2)->nullable();
             $table->string('extra_time_type')->nullable();

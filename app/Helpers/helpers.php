@@ -26,4 +26,24 @@ if (!function_exists('get_setting')) {
 
         return $setting ? $setting->value : $default;
     }
+
+
+    // In a suitable location (e.g., app/Helpers/DurationHelper.php)
+    if (!function_exists('formatDuration')) {
+        function formatDuration($minutes) {
+            $hours = floor($minutes / 60);
+            $remainingMinutes = $minutes % 60;
+
+            $result = '';
+            if ($hours > 0) {
+                $result .= $hours . 'hr ';
+            }
+            if ($remainingMinutes > 0 || $hours === 0) {
+                $result .= $remainingMinutes . 'min';
+            }
+
+            return trim($result);
+        }
+    }
+
 }

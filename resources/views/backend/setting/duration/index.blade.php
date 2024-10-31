@@ -53,7 +53,7 @@
                                                 <div class="col-xxl-12 col-md-12">
                                                     <div class="">
                                                         <label for="title" class="form-label">Duration Hour</label>
-                                                        <input type="text" class="form-control" name="duration_hour" id="duration_hour" placeholder="Enter Duration Hour. e.g. 5min, 1hr, 1hr 10min " value="{{ session('lastService') ?? old('service') }}">
+                                                        <input type="number" class="form-control" name="duration_hour" id="duration_hour" placeholder="Enter Duration. in minutes only " value="{{ session('lastService') ?? old('service') }}">
                                                         @error('duration_hour')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror

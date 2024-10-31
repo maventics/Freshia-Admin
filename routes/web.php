@@ -91,6 +91,7 @@ Route::middleware(['auth'])->group(function(){
     Route::controller(PackageController::class)->group(function(){
 
         Route::get('admin/create/package','create')->name('admin.package.create');
+        Route::post('admin/store/package','store')->name('admin.package.store');
         Route::post('/store/service-package','StoreServicePackage');
 
     });
