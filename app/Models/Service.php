@@ -20,5 +20,6 @@ class Service extends Model
         'extra_time_type',
         'extra_time_duration',
         'status',
+        'image'
     ];
 }

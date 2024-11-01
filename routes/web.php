@@ -16,10 +16,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Frontend\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[HomeController::class,'index'])->name('index');
+Route::get('/services',[HomeController::class,'service'])->name('service');
+Route::get('/contact',[HomeController::class,'contact'])->name('contact');
+Route::get('/about-us',[HomeController::class,'about'])->name('about');
 
 Auth::routes();
 

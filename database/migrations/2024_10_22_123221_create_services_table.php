@@ -22,7 +22,8 @@ return new class extends Migration
             $table->decimal('price', 10, 2)->nullable();
             $table->string('extra_time_type')->nullable();
             $table->string('extra_time_duration')->nullable();
-            $table->string('status')->default(0);
+            $table->tinyInteger('status')->default(0);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

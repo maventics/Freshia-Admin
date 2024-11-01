@@ -22,6 +22,8 @@ class ServiceSeeder extends Seeder
             'price_type'=>'fixed',
             'price'=>'12.00',
             'status'=>'1',
+            'image'=>'assets/backend/uploads/service/1.jpg',
+
 
         ]);
 
@@ -34,6 +36,20 @@ class ServiceSeeder extends Seeder
             'price_type'=>'fixed',
             'price'=>'10.00',
             'status'=>'1',
+            'image'=>'assets/backend/uploads/service/2.jpg',
+
+        ]);
+
+        Service::create([
+            'service_name' => "Men's Shaving",
+            'service_type_id'=>'2',
+            'category_id'=>'1',
+            'description'=>'men shaving',
+            'duration'=>'20',
+            'price_type'=>'fixed',
+            'price'=>'15.00',
+            'status'=>'1',
+            'image'=>'assets/backend/uploads/service/3.jpg',
         ]);
     }
 }
