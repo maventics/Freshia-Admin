@@ -22,4 +22,10 @@ class Service extends Model
         'status',
         'image'
     ];
+
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

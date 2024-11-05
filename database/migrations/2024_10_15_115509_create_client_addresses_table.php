@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
-            $table->text('address');
+            $table->text('address')->nullable();
             $table->string('type')->nullable();
             $table->string('apt_suite')->nullable();
             $table->string('district')->nullable();

@@ -65,7 +65,9 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
-        //  dd($request->all());
+        // dd($request->input('redirect_to'));
+        // dd($request->all(), $request->input('redirect_to'), $request->query());
+
         $request->validate([
             'fname'=> 'required',
             'lname'=> 'required',
@@ -100,23 +102,24 @@ class ClientController extends Controller
             
             ]);
 
-            if($request->has('address')){
+        if($request->has('address') && !empty($request->address)){
 
-            ClientAddress::create([
-                'client_id'=>$client->id,
-                'type'=>$request->address_type  ?? null,
-                'address'=>$request->address,
-                'apt_suite'=>$request->apt_suite,
-                'district'=>$request->district,
-                'district'=>$request->district,
-                'city'=>$request->city,
-                'region'=>$request->region,
-                'postcode'=>$request->postcode,
-                'country'=>$request->country,
-            ]);
+                ClientAddress::create([
+                    'client_id'=>$client->id,
+                    'type'=>$request->address_type  ?? null,
+                    'address'=>$request->address,
+                    'apt_suite'=>$request->apt_suite,
+                    'district'=>$request->district,
+                    'district'=>$request->district,
+                    'city'=>$request->city,
+                    'region'=>$request->region,
+                    'postcode'=>$request->postcode,
+                    'country'=>$request->country,
+                ]);
         }
 
-        if($request->has('emergency_fname')  &&  $request->has('relationship') && $request->has('emergency_email') && $request->has('emergency_country_code') && $request->has('emergency_phone') ){
+        if ($request->has(['emergency_fname', 'relationship', 'emergency_email', 'emergency_country_code', 'emergency_phone']) &&
+            !empty($request->emergency_fname)) {
             
             ClientEmergencyContact::create([
                 'client_id' =>$client->id,
@@ -129,7 +132,8 @@ class ClientController extends Controller
         }
 
 
-        if($request->has('secondary_emergency_fname')  &&  $request->has('secondary_emergency_relationship') && $request->has('secondary_emergency_email') && $request->has('secondary_emergency_country_code') && $request->has('secondary_emergency_phone') ){
+        if ($request->has(['secondary_emergency_fname', 'secondary_emergency_relationship', 'secondary_emergency_email', 'secondary_emergency_country_code', 'secondary_emergency_phone']) &&
+            !empty($request->secondary_emergency_fname)) {
             
             ClientEmergencyContactSecondary::create([
                 'client_id' =>$client->id,
@@ -140,10 +144,24 @@ class ClientController extends Controller
                 'phone' =>$request->secondary_emergency_phone,
             ]);
         }
+        toast('Client added successfully', 'success');
+        if ($request->input('redirect_to')) {
+            // If the `redirect_to` parameter is present, redirect to that URL
+            return redirect()->to($request->input('redirect_to'))->with('client_added', true);
+        } else {
+            // If the `redirect_to` parameter is not present, default to the client index page
+            return redirect()->route('admin.client.index');
+        }
+        
 
+        
 
-        toast('Client added successfully','success');
-        return redirect()->route('admin.client.index');
+        // You can show a success toast here if you like
+        
+    
+        // Redirect back to the correct page (either calendar or client index)
+        // return redirect()->to($redirectUrl)->with('client_added', true);
+        // return redirect()->route('admin.client.index');
     }
 
     public function edit($id)

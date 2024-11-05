@@ -211,6 +211,7 @@ input[type="file"] {
                                                     </div>
                                                     <div>
                                                         <div class="row g-3">
+                                                            <input type="hidden" name="redirect_to" value="{{ request('redirect_to') }}">
                                                             <div class="col-sm-6">
                                                                 <label for="fname" class="form-label">First name</label>
                                                                 <input type="text" class="form-control" name="fname" placeholder="Enter First Name" value="{{old('fname')}}">
@@ -238,7 +239,7 @@ input[type="file"] {
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label for="phone" class="form-label">Phone</label>
-                                                                <input type="text" class="form-control" name="phone" placeholder="1234567890" value="{{old('phone')}}">
+                                                                <input type="number" class="form-control" name="phone" placeholder="1234567890" value="{{old('phone')}}">
                                                             </div>
 
                                                             <div class="col-12">

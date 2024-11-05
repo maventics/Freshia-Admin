@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\CalendarController;
 use App\Http\Controllers\Admin\CatalogController;
 use App\Http\Controllers\Admin\CategoriesController;
@@ -47,6 +48,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/api/calendar/events', [CalendarController::class, 'fetchEvents']);
     Route::get('/api/calendar/resources', [CalendarController::class, 'fetchResources']);
 
+    Route::controller(BookingController::class)->group(function(){
+        Route::post('admin/booking/store','storeBooking')->name('admin.booking.store');
+    });
 
 
         Route::controller(SettingController::class)->group(function(){

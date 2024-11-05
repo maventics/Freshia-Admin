@@ -53,10 +53,10 @@
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                             <p class="waitlist"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="ri-calendar-todo-fill" style="font-size: 17px" ></i> <span style="font-size: 16px" >Waitlist</span> </p>
-                                             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                                             <p class="waitlist"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasWaitlist" aria-controls="offcanvasRight"><i class="ri-calendar-todo-fill" style="font-size: 17px" ></i> <span style="font-size: 16px" >Waitlist</span> </p>
+                                             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasWaitlist" aria-labelledby="offcanvasWaitlistLabel">
                                                 <div class="offcanvas-header">
-                                                    <h5 id="offcanvasRightLabel">Offcanvas Right</h5>
+                                                    <h5 id="offcanvasWaitlistLabel">Top</h5>
                                                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                                 </div>
                                                 <div class="offcanvas-body">
@@ -65,7 +65,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <button class="btn btn-dark float-end w-100 add-button" style="border-radius: 40px;" >Add</button>
+                                            <button class="btn btn-dark float-end w-100 add-button" style="border-radius: 40px;"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" >Add</button>
                                         </div>
                                     </div>
                                 </div>
@@ -270,62 +270,6 @@
                             </div> <!-- end modal-content-->
                         </div> <!-- end modal dialog-->
                     </div> <!-- end modal-->
-
-                    
-
-                    <div class="modal fade" id="exampleModalgrid" tabindex="-1" aria-labelledby="exampleModalgridLabel" aria-modal="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalgridLabel">Select Service</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body" id="serviceSelection">
-                                    <form action="javascript:void(0);">
-                                        <div class="row g-3">
-                                            <div>
-                                                <h4>Hair and Styling <span style="font-size:12px; padding:2px;border-radius-40px" >2</span></h4>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="service-item" data-service="Haircut" data-duration="1 Hour" data-price="12">
-                                                    <h4>Haircut</h4>
-                                                    <span class="text-muted">1 Hour</span>
-                                                    <h3 class="float-end">PKR 12</h3>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="service-item" data-service="Facial" data-duration="1 Hour" data-price="12">
-                                                    <h4>Facial</h4>
-                                                    <span class="text-muted">1 Hour</span>
-                                                    <h3 class="float-end">PKR 12</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-body d-none" id="serviceDetails">
-                                    <h4 id="serviceName" class="fw-bold"></h4>
-                                    <span id="serviceDuration" class="text-muted"></span>
-                                    <h3 id="servicePrice" class="float-end fw-bold"></h3>
-                                    <p id="serviceDescription" class="mt-2">Service description goes here.</p>
-                                    <hr>
-                                    
-                                    <h5>Total: <span id="totalPrice" class="text-success fw-bold float-end">PKR 0</span></h5>
-                                    <hr>
-
-                                    <div class="hstack gap-2 justify-content-end">
-                                        <button type="button" class="btn btn-light" id="backToSelection">Back</button>
-                                        <button type="button" class="btn btn-primary" id="confirmSelection">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-
-
-                    <!-- end modal-->
                 </div>
             </div> <!-- end row-->
         </div>
@@ -334,50 +278,178 @@
     <!-- End Page-content -->
 
 </div>
+
+
+{{-- <div id="exampleModalgrid" class="modal fade" tabindex="-1" aria-labelledby="exampleModalgridLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalgridLabel">Select Service</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <form action="">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="ri-search-line"></i></span>
+                            <input type="search" class="form-control" name="search" placeholder="Search service name">
+                        </div>
+                    </form>
+                    <div class="table-responsive table-card mt-3">
+                        <table class="table table-hover table-centered align-middle table-nowrap mb-0">
+                            <tbody>
+                                @forelse ($services as $service)
+                                    <tr onclick="selectService('{{ $service->service_name }}', '{{ $service->duration }}', '{{ $service->price }}', '{{ $service->id }}')" id="service-row-{{ $service->id }}">
+
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <h5 class="mt-2 mx-2">{{ $service->service_name }}</h5>
+                                                    <h5 class="mx-2 fs-14 my-1 text-muted">{{ formatDuration($service->duration) }}</h5>
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h4 class="float-end">${{ $service->price }}</h4>
+                                        </td>
+                                    </tr>
+                                    @empty
+                                        <tr>
+                                            <td>No Service available</td>
+                                        </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!-- end card-body -->
+            </div>
+            <div class="modal-footer mt-4">
+                
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div> --}}
+
+
+<!-- right offcanvas -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="width:40%">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel">Select Service</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body" style="margin-top:-39px">
+        <div class="card-body">
+           
+            <div>
+                <form action="{{route('admin.booking.store')}}" method="POST">
+                    @csrf
+                    <div class="mt-3">
+                        <label for="team_member" class="form-label">Select a team member</label>
+                        <select name="booking_team_member" id="" class="form-select" required>
+                            <option value="" disabled selected>Select a team memeber</option>
+                            @foreach ($users as $user)
+                                <option value="{{$user->id}}">{{$user->fname}} {{$user->lname}}  </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <label for="booking_client" class="form-label mr-3 mt-3">Select a Client</label>
+                    <div class="d-flex align-items-center mb-3">
+                        
+                        <select name="booking_client" id="booking_client" class="form-select" required>
+                            <option value="" disabled selected >Select a client</option>
+                            @forelse ($clients as $client)
+                                <option value="{{ $client->id }}">{{ $client->fname }} {{ $client->lname }}</option>
+                            @empty
+                                <option value="">No client available</option>
+                            @endforelse
+                        </select>
+                    
+                        <!-- Add a + button next to the select -->
+                        <a href="{{ route('admin.client.create', ['redirect_to' => url()->current()]) }}" class="btn btn-outline-dark ml-2" id="addClientBtn" data-bs-toggle="tooltip" data-bs-placement="top" title="Add a Client">
+                            <i class="bi bi-plus"></i> <!-- Bootstrap Icons for the plus sign -->
+                        </a>
+                    </div>
+                    
+                    <div class="input-group mt-3">
+                        <span class="input-group-text"><i class="ri-search-line"></i></span>
+                        <input type="search" class="form-control" name="search" placeholder="Search service name">
+                    </div>
+
+                    <div class="table-responsive table-card mt-3 mb-3">
+                        <table class="table table-hover table-centered align-middle table-nowrap mb-0">
+                            <tbody>
+                                @foreach($services as $categoryName => $categoryServices)
+                                    <!-- Category Header as a Row -->
+                                    <tr>
+                                        <td colspan="2">
+                                            <h3 class="mx-2 d-flex align-items-center flex-grow-1">
+                                                {{ $categoryName }}
+                                                <span class="team-members-count">
+                                                    {{ $categoryServices->count() }}
+                                                </span>
+                                            </h3>
+                                        </td>
+                                    </tr>
+                    
+                                    <!-- Services for Each Category -->
+                                    @foreach($categoryServices as $service)
+                                        <tr id="service-row" class="service-row ml-3 mb-3 mt-3" data-service-id="{{ $service->id }}">
+                                            <td class="service-name-cell">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="service-info">
+                                                        <h5 class="mt-2 mx-2">{{ $service->service_name }}</h5>
+                                                        <h5 class="mx-2 fs-14 my-1 text-muted">{{ $service->duration }} min</h5>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5 class="float-end">${{ $service->price }}</h5>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    
+                    
+                
+                    <!-- Hidden input to store selected service IDs -->
+                    <input type="hidden" name="services[]" id="selected-services" value="">
+        
+                    
+                    <div class="mb-3 mt-3 float-end" style="margin-top: 10px">
+                        <button type="button" class="btn btn-light mx-2" data-bs-dismiss="offcanvas" aria-label="Close">Checkout</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- end card-body -->
+        
+    </div>
+</div>
+
+
+
+
+
+
 @endsection
 
 @push('scripts')
-    <script>
+<script>
         var btn = document.getElementsByClassName('add-button')[0]; // Access the first element with the class 'add-button'
         btn.addEventListener('click', function() {
             var modalElement = new bootstrap.Modal(document.getElementById('exampleModalgrid'));
             modalElement.show();
         });
         
-    </script>
+</script>
+
 <script>
-
-// $(document).ready(function() {
-//     // Handle service selection
-//     $('.service-item').on('click', function() {
-//         const serviceName = $(this).data('service');
-//         const serviceDuration = $(this).data('duration');
-//         const servicePrice = $(this).data('price');
-
-//         // Fill in the details
-//         $('#serviceName').text(serviceName);
-//         $('#serviceDuration').text(serviceDuration);
-//         $('#servicePrice').text(servicePrice);
-
-//         // Switch to details view
-//         $('#serviceSelection').addClass('d-none');
-//         $('#serviceDetails').removeClass('d-none');
-//     });
-
-//     // Back button functionality
-//     $('#backToSelection').on('click', function() {
-//         $('#serviceDetails').addClass('d-none');
-//         $('#serviceSelection').removeClass('d-none');
-//     });
-
-//     // Confirm selection functionality
-//     $('#confirmSelection').on('click', function() {
-//         alert('Service confirmed: ' + $('#serviceName').text());
-//         // You can add further logic here to handle the confirmation.
-//     });
-// });
-
-
 $(document).ready(function() {
     // Handle service selection
     $('.service-item').on('click', function() {
@@ -411,14 +483,6 @@ $(document).ready(function() {
 
 
 
-// document.addEventListener('DOMContentLoaded', function() {
-//         var calendarEl = document.getElementById('calendar');
-//         var calendar = new FullCalendar.Calendar(calendarEl, {
-//           initialView: 'dayGridMonth'
-//         });
-//         calendar.render();
-//       });
-
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -451,6 +515,125 @@ document.addEventListener('DOMContentLoaded', function() {
 
         calendar.render();
 });
+
+
+
+////////////open offcanvas when admin added client from this page
+
+document.addEventListener('DOMContentLoaded', function () {
+        // Check if the client_added session flag exists
+    @if(session('client_added'))
+        var offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasRight'));
+        offcanvas.show();  // Show the offcanvas
+    @endif
+});
+
+
+
+
+
+
+////////////selects the service 
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     const checkboxes = document.querySelectorAll('.service-checkbox');
+
+//     checkboxes.forEach(checkbox => {
+//         checkbox.addEventListener('change', function() {
+//             const row = this.closest('tr');
+//             row.classList.toggle('table-active', this.checked); // Highlight the row
+//         });
+//     });
+// });
+
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     const checkboxes = document.querySelectorAll('.service-checkbox');
+
+//     checkboxes.forEach(checkbox => {
+//         checkbox.addEventListener('change', function() {
+//             // If the checkbox is checked, uncheck all other checkboxes
+//             if (this.checked) {
+//                 checkboxes.forEach(checkbox => {
+//                     if (checkbox !== this) {
+//                         checkbox.checked = false; // Uncheck other checkboxes
+//                         const row = checkbox.closest('tr');
+//                         row.classList.remove('table-active'); // Remove highlight from other rows
+//                     }
+//                 });
+//             }
+
+//             // Highlight the row of the selected checkbox
+//             const row = this.closest('tr');
+//             row.classList.toggle('table-active', this.checked);
+//         });
+//     });
+// });
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     const checkboxes = document.querySelectorAll('.service-checkbox');
+
+//     checkboxes.forEach(checkbox => {
+//         checkbox.addEventListener('change', function() {
+//             const row = this.closest('tr');
+//             const serviceId = this.value;  // Get the ID of the selected service
+
+//             // If the checkbox is checked, hide all other services and show the "Add Service" button
+//             if (this.checked) {
+//                 // Hide all other rows except the selected one
+//                 document.querySelectorAll('.service-checkbox').forEach(otherCheckbox => {
+//                     const otherRow = otherCheckbox.closest('tr');
+//                     if (otherCheckbox !== this) {
+//                         otherRow.classList.add('d-none');  // Hide other rows
+//                     }
+//                 });
+
+//                 // Show the Add Service button for the selected service
+//                 document.querySelector(`.service-button-${serviceId}`).classList.remove('d-none');
+//             } else {
+//                 // If unchecked, show all rows and hide the "Add Service" button
+//                 document.querySelectorAll('.service-checkbox').forEach(otherCheckbox => {
+//                     const otherRow = otherCheckbox.closest('tr');
+//                     otherRow.classList.remove('d-none');  // Show all rows
+//                 });
+
+//                 // Hide the Add Service button when the checkbox is unchecked
+//                 document.querySelector(`.service-button-${serviceId}`).classList.add('d-none');
+//             }
+//         });
+//     });
+// });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const rows = document.querySelectorAll('.service-row');
+
+    rows.forEach(row => {
+        row.addEventListener('click', function() {
+            const serviceId = this.getAttribute('data-service-id');
+            const selectedServicesInput = document.getElementById('selected-services');
+
+            // Toggle the selection state
+            if (this.classList.contains('table-active')) {
+                // Unselect
+                this.classList.remove('table-active');
+                const services = selectedServicesInput.value.split(',');
+                const index = services.indexOf(serviceId);
+                if (index > -1) {
+                    services.splice(index, 1); // Remove from the list
+                }
+                selectedServicesInput.value = services.join(',');
+            } else {
+                // Select
+                this.classList.add('table-active');
+                const services = selectedServicesInput.value ? selectedServicesInput.value.split(',') : [];
+                services.push(serviceId); // Add the service ID
+                selectedServicesInput.value = services.join(',');
+            }
+        });
+    });
+});
+
 
 
 </script>

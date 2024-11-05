@@ -7,8 +7,8 @@
 
     <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/backend/uploads/site_favicon/' . get_setting('site_favicon')) }}">
@@ -50,14 +50,12 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-    @include('backend.layouts.inc.header')
+        @include('backend.layouts.inc.header')
         <!-- ========== App Menu ========== -->
         @include('backend.layouts.inc.sidebar')
         <!-- Left Sidebar End -->
         <!-- Vertical Overlay-->
         <div class="vertical-overlay"></div>
-
-       
        @yield('content')
         <!-- end main content-->
 

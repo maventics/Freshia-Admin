@@ -254,6 +254,8 @@ input[type="file"] {
                                                     
                                                     <div>
                                                         <input type="hidden" name="service_id" value="{{$serviceId}}">
+                                                       
+
                                                         <div class="row g-3">
                                                             <div class="col-sm-12">
                                                                 <label for="servicename" class="form-label">Service name</label>
@@ -275,8 +277,6 @@ input[type="file"] {
                                                                 </select>
                                                             </div>
                                                             
-                                                            
-
                                                             <div class="col-sm-6">
                                                                 <label for="lastName" class="form-label">Menu category</label>
                                                                 <select name="menucategory"  class="form-select">
