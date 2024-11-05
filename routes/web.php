@@ -44,6 +44,10 @@ Route::middleware(['auth'])->group(function(){
     });
 
     Route::get('admin/calendar',[CalendarController::class,'index'])->name('admin.calendar.index');
+    Route::get('/api/calendar/events', [CalendarController::class, 'fetchEvents']);
+    Route::get('/api/calendar/resources', [CalendarController::class, 'fetchResources']);
+
+
 
         Route::controller(SettingController::class)->group(function(){
         Route::get('admin/settings','index')->name('admin.setting.index');

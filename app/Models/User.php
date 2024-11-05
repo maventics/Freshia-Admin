@@ -65,6 +65,11 @@ class User extends Authenticatable
         return $this->hasManyThrough(BranchAddress::class, TeamLocation::class,'user_id','id','id','location_id');
     }
 
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
 
 
 

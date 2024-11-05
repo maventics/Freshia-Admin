@@ -28,6 +28,18 @@
     <!-- custom Css-->
     <link href="{{asset('assets/backend/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.3/css/dataTables.dataTables.css" />
+
+
+
+
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' rel='stylesheet' />
+
+
+
+
+
+
+
     @stack('styles')
 
 
@@ -66,8 +78,31 @@
     <script src="{{asset('assets/backend/libs/node-waves/waves.min.js')}}"></script>
     <script src="{{asset('assets/backend/libs/feather-icons/feather.min.js')}}"></script>
     <script src="{{asset('assets/backend/js/pages/plugins/lord-icon-2.1.0.js')}}"></script>
-    <script src="{{asset('assets/backend/js/pages/calendar.init.js')}}"></script>
-    <script src="{{asset('assets/backend/js/plugins.js')}}"></script>
+    {{-- <script src="{{asset('assets/backend/js/pages/calendar.init.js')}}"></script> --}}
+    {{-- <script src="{{asset('assets/backend/js/plugins.js')}}"></script> --}}
+
+
+
+
+
+
+
+    {{-- <script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.15/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.15/index.global.min.js'></script> --}}
+
+     {{-- <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.15/index.global.min.js'></script> --}}
+
+
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
+
+<!-- Include the Timeline Plugin -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar-timeline@5.10.1/main.global.min.js'></script>
+
+
+
+
+
 
     <!-- apexcharts -->
     <script src="{{asset('assets/backend/libs/apexcharts/apexcharts.min.js')}}"></script>
@@ -83,14 +118,16 @@
     <script src="{{asset('assets/backend/js/pages/dashboard-ecommerce.init.js')}}"></script>
     <script src="https://cdn.datatables.net/2.1.3/js/dataTables.js"></script>
 
-    <script src="https://themesbrand.com/velzon/html/default/assets/libs/flatpickr/flatpickr.min.js" > </script>
-    <script src="https://themesbrand.com/velzon/html/default/assets/libs/fullcalendar/index.global.min.js"></script>
+    {{-- <script src="https://themesbrand.com/velzon/html/default/assets/libs/flatpickr/flatpickr.min.js"></script> --}}
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}}
+    {{-- <script src="https://themesbrand.com/velzon/html/default/assets/libs/fullcalendar/index.global.min.js"></script> --}}
     <!-- App js -->
     <script src="https://themesbrand.com/velzon/html/default/assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
     <script src="{{asset('assets/backend/libs/simonwep/pickr/pickr.min.js')}}"></script>
 
     <!-- init js -->
-    <script src="{{asset('assets/backend/js/app.js')}}"></script>
+    {{-- <script src="{{asset('assets/backend/js/app.js')}}"></script> --}}
     <script src="{{asset('assets/backend/js/pages/form-pickers.init.js')}}"></script>
     
 

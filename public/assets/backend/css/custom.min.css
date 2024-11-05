@@ -95,3 +95,47 @@
 }
 
 
+/* .form-select{
+    border-radius: 40px !important;
+} */
+.waitlist{
+    border: 1px solid #cccccc;
+    border-radius: 40px;
+    padding: 4px;
+    text-align: center;
+
+
+}
+.waitlist:hover{
+    background: #f9f8f8ec
+}
+                        
+.service-item {
+background-color: #f8f9fa; /* Light background */
+border: 1px solid #dee2e6; /* Border color */
+border-radius: 5px;
+padding: 15px;
+position: relative;
+transition: background-color 0.3s;
+}
+
+.service-item:hover {
+background-color: #e2e6ea; /* Darker background on hover */
+cursor: pointer; /* Change cursor to pointer */
+}
+
+.service-item h4 {
+margin: 0;
+}
+
+.service-item .float-end {
+position: absolute;
+right: 15px;
+top: 15px;
+font-weight: bold;
+}
+
+.product-form .form-label{
+    color: #1a1a1a;
+    font-size: 15px;
+}

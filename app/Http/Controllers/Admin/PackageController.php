@@ -42,14 +42,14 @@ class PackageController extends Controller
             'menu_category'=> 'required'
         ]);
 
-        $package = Package::find($request->package_id);
+         $package = Package::find($request->package_id);
 
-        $checkServiceExistsWithPackage =  PackageService::where('package_id',$package->id)->get();
+        // $checkServiceExistsWithPackage =  PackageService::where('package_id',$package->id)->get();
 
-        if($checkServiceExistsWithPackage){
-            toast('Select serice','error');
-            return redirect()->back()->withInput();
-        }
+        // if($checkServiceExistsWithPackage){
+        //     toast('Select serice','error');
+        //     return redirect()->back()->withInput();
+        // }
 
         $package->update([
             'category_id' =>$request->menu_category,

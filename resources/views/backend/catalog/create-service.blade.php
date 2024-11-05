@@ -398,7 +398,7 @@ input[type="file"] {
                                                                     <select name="extra_time_duration" class="form-select" id="">
                                                                         <option value=""  >Duration hours</option>
                                                                         @forelse ($durationHours as $durationHour)
-                                                                            <option value="{{ $durationHour->duration_hr }}" style="font-size: 15px;" >{{ $durationHour->duration_hr }}</option>
+                                                                            <option value="{{ $durationHour->duration_hr }}" style="font-size: 15px;" >{{ formatDuration( $durationHour->duration_hr) }}</option>
                                                                         @empty
                                                                         <option value="">No duration hours available</option>
                                                                         @endforelse

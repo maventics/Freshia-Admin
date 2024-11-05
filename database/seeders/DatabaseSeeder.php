@@ -30,7 +30,8 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             BranchAddressSeeder::class,
             TeamMemberSeeder::class,
-            TeamLocationSeeder::class
+            TeamLocationSeeder::class,
+            BookingSeeder::class
         ]);
     }
 }

@@ -1,48 +1,5 @@
 @extends('backend.layouts.admin-master')
 @section('title','Calender')
-@push('scripts')
-    <style>
-        .form-select{
-            border-radius: 40px !important;
-        }
-        .waitlist{
-            border: 1px solid #cccccc;
-            border-radius: 40px;
-            padding: 4px;
-            text-align: center;
-
-
-        }
-        .waitlist:hover{
-            background: #f9f8f8ec
-        }
-                                
-        .service-item {
-        background-color: #f8f9fa; /* Light background */
-        border: 1px solid #dee2e6; /* Border color */
-        border-radius: 5px;
-        padding: 15px;
-        position: relative;
-        transition: background-color 0.3s;
-        }
-
-        .service-item:hover {
-        background-color: #e2e6ea; /* Darker background on hover */
-        cursor: pointer; /* Change cursor to pointer */
-        }
-
-        .service-item h4 {
-        margin: 0;
-        }
-
-        .service-item .float-end {
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        font-weight: bold;
-        }
-</style>
-@endpush
 @section('content')
 <div class="main-content">
 
@@ -96,16 +53,16 @@
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                    <p class="waitlist"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="ri-calendar-todo-fill" style="font-size: 17px" ></i> <span style="font-size: 16px" >Waitlist</span> </p>
+                                             <p class="waitlist"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="ri-calendar-todo-fill" style="font-size: 17px" ></i> <span style="font-size: 16px" >Waitlist</span> </p>
                                              <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                                            <div class="offcanvas-header">
-                                                <h5 id="offcanvasRightLabel">Offcanvas Right</h5>
-                                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                <div class="offcanvas-header">
+                                                    <h5 id="offcanvasRightLabel">Offcanvas Right</h5>
+                                                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                </div>
+                                                <div class="offcanvas-body">
+                                                    ...
+                                                </div>
                                             </div>
-                                            <div class="offcanvas-body">
-                                                ...
-                                            </div>
-                                        </div>
                                         </div>
                                         <div class="col-md-2">
                                             <button class="btn btn-dark float-end w-100 add-button" style="border-radius: 40px;" >Add</button>
@@ -113,7 +70,16 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    <div id="user-info">
+                                        <h3>Users and Their Bookings</h3>
+                                        <ul>
+                                            @foreach ($users as $user)
+                                                <li>{{ $user->fname }}: {{ $user->bookings->count() }} booking(s)</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                     <div id="calendar"></div>
+                                    
                                 </div>
                             </div>
                         </div><!-- end col -->
@@ -305,93 +271,7 @@
                         </div> <!-- end modal dialog-->
                     </div> <!-- end modal-->
 
-                    {{-- /////////appiontmetn modal --}}
-                    <!-- Grids in modals -->
-
-                    {{-- <div class="modal fade" id="exampleModalgrid" tabindex="-1" aria-labelledby="exampleModalgridLabel" aria-modal="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalgridLabel">Select Service</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="javascript:void(0);">
-                                        <div class="row g-3">
-                                            <div>
-                                                <h4>Hair and Styling <span>2</span></h4>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="service-item">
-                                                    <h4>Haircut</h4>
-                                                    <span class="text-muted">1 Hour</span>
-                                                    <h3 class="float-end">PKR 12</h3>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="service-item">
-                                                    <h4>Facial</h4>
-                                                    <span class="text-muted">1 Hour</span>
-                                                    <h3 class="float-end">PKR 12</h3>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="hstack gap-2 justify-content-end">
-                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                </div>
-                                            </div><!--end col-->
-                                        </div><!--end row-->
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-
-                    {{-- <div class="modal fade" id="exampleModalgrid" tabindex="-1" aria-labelledby="exampleModalgridLabel" aria-modal="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalgridLabel">Select Service</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body" id="serviceSelection">
-                                    <form action="javascript:void(0);">
-                                        <div class="row g-3">
-                                            <div>
-                                                <h4>Hair and Styling <span>2</span></h4>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="service-item" data-service="Haircut" data-duration="1 Hour" data-price="PKR 12">
-                                                    <h4>Haircut</h4>
-                                                    <span class="text-muted">1 Hour</span>
-                                                    <h3 class="float-end">PKR 12</h3>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="service-item" data-service="Facial" data-duration="1 Hour" data-price="PKR 12">
-                                                    <h4>Facial</h4>
-                                                    <span class="text-muted">1 Hour</span>
-                                                    <h3 class="float-end">PKR 12</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-body d-none" id="serviceDetails">
-                                    <h4 id="serviceName"></h4>
-                                    <span id="serviceDuration" class="text-muted"></span>
-                                    <h3 id="servicePrice" class="float-end"></h3>
-                                    <p id="serviceDescription"></p>
-                                    <div class="hstack gap-2 justify-content-end">
-                                        <button type="button" class="btn btn-light" id="backToSelection">Back</button>
-                                        <button type="button" class="btn btn-primary" id="confirmSelection">Confirm</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-
+                    
 
                     <div class="modal fade" id="exampleModalgrid" tabindex="-1" aria-labelledby="exampleModalgridLabel" aria-modal="true">
                         <div class="modal-dialog">
@@ -528,6 +408,50 @@ $(document).ready(function() {
         // Add further logic here to handle the confirmation.
     });
 });
+
+
+
+// document.addEventListener('DOMContentLoaded', function() {
+//         var calendarEl = document.getElementById('calendar');
+//         var calendar = new FullCalendar.Calendar(calendarEl, {
+//           initialView: 'dayGridMonth'
+//         });
+//         calendar.render();
+//       });
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'timeGridDay', // Set the initial view to timeline
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'timeGridWeek,timeGridDay'
+            },
+            events: [
+                // Sample events
+                {
+                    title: 'Event 1',
+                    start: '2024-11-01T10:00:00',
+                    end: '2024-11-01T12:00:00'
+                },
+                {
+                    title: 'Event 2',
+                    start: '2024-11-01T13:00:00',
+                    end: '2024-11-01T14:00:00'
+                }
+            ],
+            // Specify timeline settings
+            slotDuration: '00:15:00', // Duration for each slot
+            allDaySlot: false, // Disable all-day slot if you only want a timeline
+        });
+
+        calendar.render();
+});
+
 
 </script>
 @endpush

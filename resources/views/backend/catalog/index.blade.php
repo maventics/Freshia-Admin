@@ -43,9 +43,12 @@
     border-radius: 50%; /* Ensures it stays round */
 }
 
-
-
 </style>
+<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
+
+
+<link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+    rel="stylesheet">
 @endpush
 @section('content')
 
@@ -327,31 +330,221 @@
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="v-pills-memberships" role="tabpanel" aria-labelledby="v-pills-memberships-tab">
-                                                <div class="d-flex mb-2">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="assets/images/small/img-5.jpg" alt="" width="150" class="rounded">
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <p class="mb-0"> I also decreased the transparency in the text so that the mountains come through the text, bringing the quote truly to life. Make sure that the placement of your text is pleasing to look at, and you try to achieve symmetry for this effect.</p>
-                                                    </div>
-                                                </div>
-                                                <p class="mb-0">
-                                                    You've probably heard that opposites attract. The same is true for fonts. Don't be afraid to combine font styles that are different but complementary. You can always play around with the text that is overlaid on an image.
-                                                </p>
+                                                
                                             </div>
 
                                             <div class="tab-pane fade" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab">
-                                                <div class="d-flex mb-2">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="assets/images/small/img-5.jpg" alt="" width="150" class="rounded">
+                                                <div class="row  product-form">
+                                                    
+                                                    <h3 class="text-center" >Add new product</h3>
+                                                    <div class="col-xl-8">
+                                                        <div>
+                                                            <div class="row g-3">
+                                                            <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h4>Basic info</h4>
+                                                                    </div>
+                                                                   
+                                                                <div class="card-body">
+                                                                <div class="col-cl-12 mb-3">
+                                                                    <label for="servicename" class="form-label">Product name</label>
+                                                                    <input type="text" name="servicename" class="form-control" placeholder="Product name">
+                                                                </div>
+
+                                                                <div class="col-xl-12 mb-3">
+                                                                    <label for="servicename" class="form-label">Product barcode <span class="text-mutes" >(Optional)</span> </label>
+                                                                    <input type="text" name="servicename" class="form-control" placeholder="UPC, EIN, GTIN">
+                                                                </div>
+
+                                                                
+                                                                <div class="col-xl-12 mb-3">
+                                                                    <label for="servicename" class="form-label">Product brand <span class="text-mutes"></span> </label>
+                                                                    <br>
+                                                                    <a href=""> <strong class="text-primary" >Select Brand</strong> </a>
+                                                                </div>
+    
+                                                                <div class="col-xl-6">
+                                                                    <label for="service_type" class="form-label">Measure</label>
+                                                                    <select name="service_type" class="form-select" style="margin-bottom: 20px;">
+                                                                        <option value="">Millimeters (ml)</option>
+                                                                        <option value="">Liters (l)</option>
+                                                                        <option value="">Fluid Ounces (Fl,Oz)</option>
+                                                                        <option value="grams">Grams (g)</option>
+                                                                        <option value="grams">Kilgrams (kg)</option>
+                                                                        <option value="grams">Gallons (gal)</option>
+                                                                        <option value="grams">Ounces (oz)</option>
+                                                                        <option value="grams">Pounds (lb)</option>
+                                                                        <option value="grams">Centimeters (cm)</option>
+                                                                        <option value="grams">Feet (ft)</option>
+                                                                        <option value="grams">Inches (in)</option>
+                                                                        <option value="grams">A whole Product</option>
+                                                                        
+                                                                    </select>
+                                                                </div>
+                                                                
+                                                                <div class="col-xl-6 mb-3">
+                                                                    <label for="lastName" class="form-label">Amount</label>
+                                                                    <input type="text" name="amount" class="form-control" placeholder="ml 0.00">
+                                                                </div>
+
+                                                                <div class="col-xl-12 mb-3">
+                                                                    <label for="lastName" class="form-label">Short description</label>
+                                                                    <input type="text" name="amount" class="form-control" placeholder="short description">
+                                                                </div>
+                                                                
+                                                                <div class="col-xl-12 mb-3">
+                                                                    <label for="email" class="form-label">Product description <span class="text-muted" >(Optional)</span> </label>
+                                                                    <textarea class="form-control" id="description" rows="6" name="description" placeholder="Add a short description"></textarea>
+                                                                </div>
+                                                                <div class="col-xl-12 mb-3">
+                                                                    <label for="servicename" class="form-label">Product Category <span class="text-mutes" >(Optional)</span> </label>
+                                                                    <br>
+                                                                    <a href=""> <strong class="text-primary" > Select a category </strong> </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                     <h3>Pricing</h3>
+
+                                                                    </div>
+                                                            <div class="card-body">
+                                                                
+                                                                <div class="col-xl-12 mt-3">
+                                                                    <label for="phone" class="form-label">Supply price</label>
+                                                                    <input type="text" name="supply_price" class="form-control" placeholder="USD 0.00">
+                                                                </div>
+                                                                
+
+                                                                <div class="col-xl-12 mt-3">
+                                                                    <label for="phone" class="form-label">Retail sales</label>
+                                                                    <br>
+                                                                    <span class="text-muted">Allow sales of this product at checkout.</span>
+                                                                    <input type="text" name="supply_price" class="form-control">
+                                                                
+                                                                    <div class="form-check form-switch mt-3" style="font-size: x-large">
+                                                                        <input type="checkbox" name="extra_time" class="form-check-input" id="RetailSalesSwitchsizelg">
+                                                                        <span style="font-size:13px !important; margin-top:-4px !important">Enable retail sales</span>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div id="retailFields" style="display: none;">
+                                                                    <div class="col-xl-12">
+                                                                        <label for="retail_price" class="form-label">Retail price</label>
+                                                                        <input type="text" name="retail_price" class="form-control" placeholder="USD 0.00">
+                                                                    </div>
+                                                                
+                                                                    <div class="col-xl-12">
+                                                                        <label for="markup" class="form-label">Markup</label>
+                                                                        <input type="text" name="markup" class="form-control" placeholder="% 0.00">
+                                                                    </div>
+                                                                
+                                                                    <div class="col-xl-12">
+                                                                        <label for="tax" class="form-label">Tax</label>
+                                                                        <select name="tax" id="tax" class="form-select">
+                                                                            <option value="">Default: No tax</option>
+                                                                            <option value="">No tax</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                
+
+                                                                <div class="col-xl-12 mt-3">
+                                                                    <label for="phone" class="form-label">Team member commission</label>
+                                                                    <br>
+                                                                    <span class="text-muted" >Calculate team member commission when the product is sold.</span>
+
+                                                                    <div class="form-check form-switch mt-3" style="font-size: x-large">
+                                                                        <input type="checkbox" name="extra_time" class="form-check-input" id="customSwitchsizelg"> 
+                                                                        <span style="font-size:13px !important; margin-top:-4px !important" >enable team member commission</span> 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <h3>Inventory</h3>
+                                                                <span class="text-muted">Manage stock levels of this product through Fresha.</span>
+
+                                                            </div>
+                                                            <div class="card-body">
+
+                                                            
+
+                                                                <div class="col-xl-12 mt-3 mb-3">
+                                                                    <label for="phone" class="form-label">SKU (Stock Keeping Unit)</label>
+                                                                    <input type="text" class="form-control">
+                                                                </div>
+
+
+                                                                <div class="col-xl-12 mb-3">
+                                                                    <a href=""> <strong class="text-primary" >Generate SKU automatically</strong> </a>
+                                                                </div>
+
+                                                                <div class="col-xl-12 mb-3">
+                                                                    <a href=""> <strong class="text-primary" >Add another SKU code</strong> </a>
+                                                                </div>
+
+                                                                <div class="col-xl-12 mb-3">
+                                                                    <label for="" class="form-label">Supplier</label>
+                                                                    <br>
+                                                                    <a href=""> <strong class="text-primary" >Select Supplier</strong> </a>
+                                                                </div>
+                                                                <hr>
+                                                                <div class="col-xl-12 mt-3 mb-3">
+                                                                    <label for="phone" class="form-label">Stock quantity</label>
+                                                                    <br>
+                                                                    <span class="text-muted" >Track stock quantity.</span>
+                                                                    <div class="form-check form-switch mt-3" style="font-size: x-large">
+                                                                        <input type="checkbox" name="extra_time" class="form-check-input" id="StockQuantitySwitchsizelg"> 
+                                                                        <span style="font-size:13px !important; margin-top:-4px !important" >enable team member commission</span> 
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="StocksInputs" style="display: none;">
+
+                                                                <div class="col-xl-12 mt-3 mb-3">
+                                                                    <label for="" class="form-label" >Current stock quantity</label>
+                                                                    <input type="text" class="form-control" placeholder="0">
+                                                                </div>
+
+                                                                <div class="col-xl-12 mt-3 mb-3">
+                                                                    <label for="phone" class="form-label">Low stock and reordering</label>
+                                                                    <br>
+                                                                    <span class="text-muted" >Fresha will automatically notify you and pre-fill the reorder quantity set for future stock orders..</span>
+                                                                </div>
+                                                                <div class="col-xl-6 mb-3">
+                                                                    <label for="" class="form-label">Low stock level</label>
+                                                                    <input type="text" class="form-control" placeholder="0">
+                                                                    <span class="text-muted">The level to get notified to reorder</span>
+                                                                </div>
+                                                                <div class="col-xl-6">
+                                                                    <label for="" class="form-label">Reorder quantity</label>
+                                                                    <input type="text" class="form-control" placeholder="0">
+                                                                    <span class="text-muted">The default amount to order</span>
+                                                                </div>
+
+                                                                <div class="col-xl-12 mb-3">
+                                                                    <div class="form-check form-switch mt-3" style="font-size: x-large">
+                                                                        <input type="checkbox" name="extra_time" class="form-check-input" id="customSwitchsizelg"> 
+                                                                        <span style="font-size:13px !important; margin-top:-4px !important" >Receive low stock notifications</span> 
+                                                                    </div>    
+                                                                </div>    
+                                                            </div>
+
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <p class="mb-0"> I also decreased the transparency in the text so that the mountains come through the text, bringing the quote truly to life. Make sure that the placement of your text is pleasing to look at, and you try to achieve symmetry for this effect.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-4">
+                                                        
+                                                        <input type="file" class="filepond" />
+                                                      
                                                     </div>
                                                 </div>
-                                                <p class="mb-0">
-                                                    You've probably heard that opposites attract. The same is true for fonts. Don't be afraid to combine font styles that are different but complementary. You can always play around with the text that is overlaid on an image.
-                                                </p>
                                             </div>
 
                                             <div class="tab-pane fade" id="v-pills-stocktakes" role="tabpanel" aria-labelledby="v-pills-stocktakes-tab">
@@ -404,12 +597,7 @@
                         </div><!-- end card -->
                     </div>
                     <!--end col-->
-                    
-                    <!--end col-->
                 </div>
-
-
-
             </div><!-- container-fluid -->
         </div><!-- End Page-content -->
     </div><!-- end main content -->
@@ -418,7 +606,15 @@
     
 
 @push('scripts')
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+
 <script>
+     FilePond.parse(document.body);
+    // Register the plugin
+    FilePond.registerPlugin(FilePondPluginImagePreview);
+
+    // ... FilePond initialisation code here
     // $(document).ready(function() {
     //     $('.category-table').DataTable({
     //         processing: true,
@@ -530,6 +726,31 @@ function deleteService(serviceId) {
         }
     });
 }
+
+
+
+
+
+$(document).ready(function() {
+    $('#RetailSalesSwitchsizelg').change(function() {
+        if ($(this).is(':checked')) {
+            $('#retailFields').show(); // Show fields when checked
+        } else {
+            $('#retailFields').hide(); // Hide fields when unchecked
+        }
+    });
+});
+
+$(document).ready(function() {
+    $('#StockQuantitySwitchsizelg').change(function() {
+        if ($(this).is(':checked')) {
+            $('.StocksInputs').show(); 
+            $('.StocksInputs').style = 'display flex'; 
+        } else {
+            $('.StocksInputs').hide(); // Hide fields when unchecked
+        }
+    });
+});
 
 
 </script>
